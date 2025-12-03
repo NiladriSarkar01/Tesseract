@@ -6,77 +6,6 @@ import { 
 
 import EventCard from '../components/EventCard.jsx';
 
-/**
- * Snowfall Background Component
- */
-const Snowfall = () => {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    let particles = [];
-
-    const resize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      initParticles();
-    };
-
-    const initParticles = () => {
-      particles = [];
-      const count = Math.floor((width * height) / 10000);
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          radius: Math.random() * 2 + 0.5,
-          speedY: Math.random() * 1 + 0.2,
-          speedX: (Math.random() - 0.5) * 0.5,
-          opacity: Math.random() * 0.5 + 0.2,
-        });
-      }
-    };
-
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = 'white';
-
-      particles.forEach((p) => {
-        p.y += p.speedY;
-        p.x += p.speedX;
-
-        if (p.y > height) {
-          p.y = 0;
-          p.x = Math.random() * width;
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.globalAlpha = p.opacity;
-        ctx.fill();
-      });
-      requestAnimationFrame(animate);
-    };
-
-    resize();
-    window.addEventListener('resize', resize);
-    animate();
-
-    return () => window.removeEventListener('resize', resize);
-  }, []);
-
-  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
-};
-
-/**
- * Event Card Component
- */
-
 
 /**
  * Main Page Component
@@ -178,8 +107,7 @@ const EventsPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#020617] text-white font-sans selection:bg-cyan-500 selection:text-black">
-      <Snowfall />
+    <div className="min-h-screen bg-transparent text-white font-sans selection:bg-cyan-500 selection:text-black">
       
       {/* Background Gradients */}
       <div className="fixed top-0 left-0 w-full h-[50vh] bg-linear-to-b from-[#0f172a] to-transparent pointer-events-none z-0"></div>
