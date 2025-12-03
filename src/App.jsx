@@ -14,7 +14,6 @@ import Team from "./pages/Team.jsx"
 import Background from "./components/Background.jsx"
 import GalleryPage from "./pages/GalleryPage.jsx"
 import AdminDashboard from "./pages/DashBoardPage.jsx"
-import Test from "./pages/test.jsx"
 import VideoTeaser from "./components/VideoTeaser.jsx"
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
     <Background/>
       <Navbar/>
       <Routes>
-        <Route path="/test" element = {<Test/>} />
         <Route path="/" element = {<LandingPage/>} />
         <Route path="/teaser" element = {<VideoTeaser/>} />
         <Route path="/events" element = {<EventsPage/>} />
