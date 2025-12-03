@@ -13,11 +13,9 @@ import Navbar from "./components/Navbar.jsx"
 import Team from "./pages/Team.jsx"
 import Background from "./components/Background.jsx"
 import GalleryPage from "./pages/GalleryPage.jsx"
-import AdminLogin from "./pages/LoginPage.jsx"
 import AdminDashboard from "./pages/DashBoardPage.jsx"
 import Test from "./pages/test.jsx"
 import VideoTeaser from "./components/VideoTeaser.jsx"
-import Test2 from "./pages/Test2.jsx"
 
 function App() {
 
