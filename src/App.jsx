@@ -1,5 +1,5 @@
-import React from "react"
-import { Routes, Route } from "react-router-dom"
+import React, {useEffect} from "react"
+import { Routes, Route, useLocation, Router } from "react-router-dom"
 
 import LandingPage from "./pages/LandingPage.jsx"
 
@@ -18,8 +18,28 @@ import VideoTeaser from "./components/VideoTeaser.jsx"
 
 function App() {
 
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Force browser to scroll AFTER page render
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+
   return (
     <div>
+      <ScrollToTop/>
     <Background/>
       <Navbar/>
       <Routes>
