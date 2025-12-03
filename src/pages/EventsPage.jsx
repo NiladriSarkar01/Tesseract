@@ -19,10 +19,10 @@ const Snowfall = () => {
     let height = window.innerHeight;
     let particles = [];
 
-    const resize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
       canvas.height = height;
       initParticles();
     };
