@@ -194,7 +194,7 @@ const Navbar = () => {
         {/* --- DROPDOWN MENU CONTAINER (Holographic Data Stack) --- */}
         {/* UPDATED WIDTH: Increased to w-[400px] */}
         <div
-          className={`absolute top-full left-0 w-full md:w-[400px] md:h-[400px] md:left-6 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+          className={`absolute top-full left-0 w-full md:w-[400px] md:h-auto md:left-6 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
             isOpen
               ? "max-h-[800px] opacity-100 translate-y-2"
               : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
