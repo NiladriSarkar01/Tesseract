@@ -1,127 +1,285 @@
-import React, { useState } from 'react';
-import { Menu, X, Zap, ChevronRight, Terminal } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import TeaserTriggerButton from './TeaserTriggerButton';
-import logo from '../assets/logo.png'
+import React, { useState, useEffect } from "react";
+import {
+  Menu,
+  X,
+  Zap,
+  ChevronRight,
+  Terminal,
+  Play,
+  Globe,
+  Shield,
+  Cpu,
+} from "lucide-react";
+import TeaserTriggerButton from "./TeaserTriggerButton";
+
+import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
+
+// Placeholder for logo
+
+// --- UTILS: Scramble Text Hook ---
+const useScramble = (text, speed = 40) => {
+  const [displayText, setDisplayText] = useState(text);
+  const [isHovered, setIsHovered] = useState(false);
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
+
+  useEffect(() => {
+    if (!isHovered) {
+      setDisplayText(text);
+      return;
+    }
+
+    let iteration = 0;
+    const interval = setInterval(() => {
+      setDisplayText(
+        text
+          .split("")
+          .map((letter, index) => {
+            if (index < iteration) return text[index];
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("")
+      );
+
+      if (iteration >= text.length) clearInterval(interval);
+      iteration += 1 / 3;
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, [isHovered, text, speed]);
+
+  return { displayText, setIsHovered };
+};
+
+// --- COMPONENT: Animated Dropdown Link ---
+const AnimatedDropdownLink = ({ link, index, onClick }) => {
+  const { displayText, setIsHovered } = useScramble(link.name);
+
+  return (
+    <Link
+      to={link.to}
+      onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative flex items-center justify-between p-3 rounded-lg border border-transparent hover:border-cyan-500/30 bg-white/5 hover:bg-cyan-900/20 transition-all duration-300 overflow-hidden"
+    >
+      {/* Hover Scan Sweep */}
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-transparent to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out pointer-events-none"></div>
+
+      <div className="flex items-center gap-3 relative z-10">
+        <div className="p-2 rounded-md bg-black/40 text-gray-500 group-hover:text-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-all duration-300">
+          <link.icon size={18} />
+        </div>
+        <div className="flex flex-col">
+          <span className="text-sm font-bold text-gray-300 group-hover:text-white tracking-widest transition-colors uppercase">
+            {displayText}
+          </span>
+          <span className="text-[8px] font-mono text-gray-600 group-hover:text-cyan-500/70 transition-colors">
+            COORD_0{index + 1}
+          </span>
+        </div>
+      </div>
+
+      {/* Animated Chevron */}
+      <ChevronRight
+        size={14}
+        className="ml-auto text-gray-600 group-hover:text-cyan-400 opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all duration-300"
+      />
+    </Link>
+  );
+};
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isOpen]);
 
   const navLinks = [
-    { name: 'HOME', href: '/' },
-    { name: 'EVENTS', href: '/events' },
-    { name: 'TEAM', href: '/team' },
-    { name: 'GALLERY', href: '/gallery' },
-    { name: 'BROCHURE', href: '' },
+    { name: "HOME", to: "/", icon: Globe },
+    { name: "EVENTS", to: "/events", icon: Zap },
+    { name: "TEAM", to: "/team", icon: Shield },
+    { name: "GALLERY", to: "/gallery", icon: Cpu },
+    { name: "CONTACT", to: "/contact", icon: Cpu },
+    { name: "BROCHURE", to: "#", icon: Terminal },
   ];
 
   return (
     <>
       {/* 1. Fixed Navbar Header */}
-      <header 
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b 'bg-[#020408]/90 backdrop-blur-md py-3 border-cyan-900/30 shadow-lg shadow-cyan-900/10`}
+      <header
+        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 border-b ${
+          scrolled
+            ? "bg-[#182924]/80 backdrop-blur-xl py-3 border-cyan-900/30 shadow-lg shadow-cyan-900/10"
+            : "bg-transparent py-5 border-transparent"
+        }`}
       >
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          
-          {/* --- BRAND LOGO --- */}
-          <div className="flex items-center gap-3 group cursor-pointer">
-            <div className="relative w-9 h-9 flex items-center justify-center bg-cyan-600/10 border border-cyan-500/50 rounded group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
-              <div className="absolute inset-0 bg-cyan-500 blur-md opacity-20 group-hover:opacity-40 animate-pulse"></div>
-              <img
-                src={logo}
-                alt="Tesseract Logo"
-                className="w-50 h-50 relative z-10 group-hover:scale-110 transition-transform object-contain"
-              />
-            </div>
-            <div className="flex flex-col">
-              <Link to="/">
-                <span className="text-lg font-black tracking-tighter text-white leading-none">
-                  TESSERACT<span className="text-blue-500">.IO</span>
-                </span>
+        <div className="container mx-auto px-6 flex justify-between items-center relative">
+          {/* 1. LEFT: MENU TOGGLE BUTTON */}
+          <div className="flex items-center justify-start flex-1 md:flex-none">
+            <button
+              className={`relative hidden md:flex z-[110] p-2 rounded-lg border transition-all duration-300 ${
+                isOpen
+                  ? "bg-red-600 border-red-500 text-white rotate-90"
+                  : "bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:text-white"
+              }`}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+            {/* 2. LEFT: LOGO  */}
+            <div className="flex md:hidden items-center justify-start flex-1 md:flex-none ">
+              <Link to="/" className="flex items-center gap-3 group">
+                <div className="relative w-15 h-15 flex items-center justify-center bg-transparent  rounded-lg group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
+                  <div className="absolute inset-0 bg-cyan-400 blur-md opacity-20 group-hover:opacity-40 animate-pulse"></div>
+                  <img
+                    src={logo}
+                    alt="Logo"
+                    className="w-full h-full relative z-10 object-contain p-1"
+                  />
+                </div>
               </Link>
-              <span className="text-[9px] font-mono text-gray-500 tracking-[0.2em] group-hover:text-green-400/80 transition-colors">
-                SYSTEM_ONLINE
-              </span>
             </div>
           </div>
 
-          {/* --- DESKTOP NAVIGATION --- */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.href}
-                className="text-xs font-mono text-gray-400 hover:text-white transition-colors tracking-widest relative group/link"
-              >
-                <span className="relative z-10">{link.name}</span>
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-cyan-500 transition-all duration-300 group-hover/link:w-full"></span>
-                <span className="absolute -top-3 -right-2 text-[8px] text-blue-500 opacity-0 group-hover/link:opacity-100 transition-opacity font-sans transform group-hover/link:translate-y-1">0{navLinks.indexOf(link) + 1}</span>
+          {/* 2. CENTER: LOGO (Absolutely Centered) */}
+          <div className="absolute hidden md:flex  left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="relative w-15 h-15 flex items-center justify-center bg-transparent  rounded-lg group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
+                <div className="absolute inset-0 bg-cyan-400 blur-md opacity-20 group-hover:opacity-40 animate-pulse"></div>
+                <img
+                  src={logo}
+                  alt="Logo"
+                  className="w-full h-full relative z-10 object-contain p-1"
+                />
+              </div>
+            </Link>
+          </div>
+
+          {/* 3. RIGHT: ACTIONS (Teaser Only) */}
+          <div className="flex items-center justify-end flex-1 md:flex-none gap-4">
+            {/* Desktop Actions - Removed Register Button here as requested */}
+            <div className="hidden md:flex items-center gap-3">
+              <Link to="/teaser">
+                <TeaserTriggerButton />
               </Link>
-            ))}
-            
-            <div className="w-[1px] h-6 bg-white/10 mx-2"></div>
-
-            {/* --- TEASER --- */}
-            <Link to='/teaser'>
-              <TeaserTriggerButton/>
-            </Link>
-
-            {/* --- GET PASSES LINK --- */}
-            <Link 
-              to="/register"
-              state={{ eventId: null }} // Reset selection
-              className="relative px-6 py-2 bg-transparent overflow-hidden group cursor-pointer block"
+            </div>
+            <button
+              className={`relative md:hidden z-[110] p-2 rounded-lg border transition-all duration-300 ${
+                isOpen
+                  ? "bg-red-600 border-red-500 text-white rotate-90"
+                  : "bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:text-white"
+              }`}
+              onClick={() => setIsOpen(!isOpen)}
             >
-              <div className="absolute inset-0 border border-white/20 rounded-sm group-hover:border-cyan-500/50 transition-colors"></div>
-              <div className="absolute inset-0 bg-cyan-600/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              <span className="relative text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2 group-hover:gap-3 transition-all">
-                Registration <ChevronRight size={14} className="text-blue-500 group-hover:text-white transition-colors" />
-              </span>
-            </Link>
-          </nav>
-
-          {/* --- MOBILE TOGGLE --- */}
-          <button 
-            className="md:hidden text-gray-300 hover:text-white p-2"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
-        {/* --- MOBILE MENU OVERLAY --- */}
-        <div className={`absolute top-full left-0 w-full bg-[#020408] border-b border-cyan-900/30 overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="p-6 flex flex-col gap-4">
-            <div className="flex items-center gap-2 text-xs font-mono text-blue-500/50 mb-2">
-              <Terminal size={12} /> NAVIGATION_PROTOCOL
+        {/* --- DROPDOWN MENU CONTAINER (Holographic Data Stack) --- */}
+        {/* UPDATED WIDTH: Increased to w-[400px] */}
+        <div
+          className={`absolute top-full left-0 w-full md:w-[400px] md:h-[400px] md:left-6 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+            isOpen
+              ? "max-h-[800px] opacity-100 translate-y-2"
+              : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
+          }`}
+        >
+          {/* The Card Body */}
+          <div className="bg-[#081414]/95 backdrop-blur-2xl border border-cyan-500/30 border-t-0 rounded-b-2xl shadow-2xl shadow-black overflow-hidden mx-4 md:mx-0 relative">
+            {/* Decorative Background Grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+
+            <div className="p-6 relative z-10 flex flex-col gap-1">
+              <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
+                <p className="text-[10px] font-mono text-cyan-500/70 uppercase tracking-widest animate-pulse">
+                  // System_Nav_Active
+                </p>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="flex flex-col gap-2">
+                {navLinks.map((link, idx) => (
+                  <AnimatedDropdownLink
+                    key={link.name}
+                    link={link}
+                    index={idx}
+                    onClick={() => setIsOpen(false)}
+                  />
+                ))}
+              </div>
+
+              {/* Actions Section */}
+              <div className="mt-6 pt-6 border-t border-white/10 flex flex-col gap-3">
+                {/* Register Button - Now in Dropdown for both Mobile & Desktop */}
+                <Link
+                  to="/register"
+                  className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-center uppercase text-xs tracking-wider rounded transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Initialize Registration
+                </Link>
+
+                {/* Teaser Button - Visible ONLY on Mobile (md:hidden) to avoid duplicate on Desktop */}
+                <Link
+                  to="/teaser"
+                  onClick={() => setIsOpen(false)}
+                  className="md:hidden w-full py-3 border border-white/10 text-gray-400 font-bold text-center uppercase text-xs tracking-wider hover:text-white hover:border-cyan-500/50 transition-colors flex items-center justify-center gap-2 rounded bg-black/40"
+                >
+                  <Play size={10} /> View Trailer
+                </Link>
+              </div>
             </div>
-            
-            {navLinks.map((link, idx) => (
-              <Link 
-                key={link.name} 
-                to={link.href}
-                className="flex items-center justify-between text-sm font-bold text-gray-300 hover:text-white hover:pl-4 transition-all tracking-widest py-3 border-b border-white/5 group"
-                onClick={() => setIsOpen(false)}
-              >
-                <span>{link.name}</span>
-                <span className="text-[10px] font-mono text-gray-600 group-hover:text-cyan-500">0{idx + 1}</span>
-              </Link>
-            ))}
-            
-            <Link 
-              to="/register"
-              state={{ eventId: null }}
-              onClick={() => setIsOpen(false)}
-              className="w-full mt-4 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold uppercase tracking-wider text-xs rounded-sm transition-colors shadow-[0_0_20px_rgba(220,38,38,0.3)] block text-center"
-            >
-              Initialize Access
-            </Link>
+
+            {/* Footer Decor */}
+            <div className="bg-black/60 p-2 flex justify-center items-center border-t border-white/5">
+              <div className="flex items-center gap-2 text-[8px] font-mono text-gray-600 uppercase tracking-widest">
+                <div className="w-1 h-1 bg-emerald-500 rounded-full animate-ping"></div>
+                Secure_Connection_Established
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
       {/* 2. Spacer Div */}
-      <div className="h-[60px] w-full" aria-hidden="true"></div>
+      <div className="h-[80px] w-full" aria-hidden="true"></div>
+
+      <style>{`
+        @keyframes scan-horizontal {
+          0% { transform: translateX(0); opacity: 0; }
+          50% { opacity: 1; }
+          100% { transform: translateX(100%); opacity: 0; }
+        }
+        @keyframes scan-down {
+          0% { top: -10%; opacity: 0; }
+          50% { opacity: 1; }
+          100% { top: 110%; opacity: 0; }
+        }
+        @keyframes scan-fast {
+           0% { transform: translateX(-100%); }
+           100% { transform: translateX(100%); }
+        }
+        @keyframes shimmer {
+           0% { background-position: 200% 0; }
+           100% { background-position: -200% 0; }
+        }
+      `}</style>
     </>
   );
 };
