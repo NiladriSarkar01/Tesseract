@@ -81,7 +81,7 @@ const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
               <Database size={12} /> Details
             </button>
             <button
-              onClick={() => onRegisterClick(event.id)}
+              onClick={() => onRegisterClick && onRegisterClick(event.id)}
               className="py-3 bg-white text-black hover:bg-cyan-400 hover:text-black font-black text-[10px] uppercase tracking-wider transition-all flex items-center justify-center gap-1 group/btn shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.6)]"
             >
               Join{" "}

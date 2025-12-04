@@ -51,7 +51,7 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
-    eventId: eventId,
+    eventId: String(eventId),
     paymentMode: "online",
     paymentProof: null,
     registrationType: "solo", // 'solo' or 'team'
