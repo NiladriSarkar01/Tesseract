@@ -170,9 +170,6 @@ const HoloProfile = ({ member, onNext, onPrev }) => {
           <h1 className="text-3xl md:text-5xl font-black text-white uppercase leading-none tracking-tight mb-1 md:mb-2">
             {member.name}
           </h1>
-          <p className="text-blue-500 font-mono text-xs md:text-sm uppercase tracking-widest">
-            // {member.role}
-          </p>
         </div>
 
         <div className="p-4 md:p-5 bg-white/5 border-l-2 border-cyan-500 rounded-r-xl mb-6">

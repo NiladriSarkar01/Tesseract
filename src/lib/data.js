@@ -837,7 +837,6 @@ export const TEAM_DATA = [
   {
     id: 1,
     name: "Aritra Chowdhury",
-    role: "Convenor",
     dept: "Convenor",
     img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000",
     level: "L5",
@@ -846,7 +845,6 @@ export const TEAM_DATA = [
   {
     id: 2,
     name: "Arna Saha",
-    role: "Convenor",
     dept: "Convenor",
     img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=1000",
     level: "L4",
@@ -855,7 +853,6 @@ export const TEAM_DATA = [
   {
     id: 3,
     name: "Zishan Khan Chowdhury",
-    role: "Convenor",
     dept: "Convenor",
     img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=1000",
     level: "L4",
@@ -864,7 +861,6 @@ export const TEAM_DATA = [
   {
     id: 4,
     name: "Smarta Das",
-    role: "SPOC",
     dept: "SPOC",
     img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000",
     level: "L4",
@@ -873,7 +869,6 @@ export const TEAM_DATA = [
   {
     id: 5,
     name: "Ankur Vaibhav",
-    role: "SPOC",
     dept: "SPOC",
     img: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -882,7 +877,6 @@ export const TEAM_DATA = [
   {
     id: 6,
     name: "Aniket Das",
-    role: "Student Coordinator",
     dept: "Student Coordinator",
     img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -891,7 +885,6 @@ export const TEAM_DATA = [
   {
     id: 7,
     name: "Ramesh Biswas",
-    role: "Student Coordinator",
     dept: "Student Coordinator",
     img: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -900,7 +893,6 @@ export const TEAM_DATA = [
   {
     id: 8,
     name: "Debtanu Roy",
-    role: "Student Coordinator",
     dept: "Student Coordinator",
     img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -909,7 +901,6 @@ export const TEAM_DATA = [
   {
     id: 9,
     name: "Champak Kundu",
-    role: "UI/UX Lead",
     dept: "Finance Advisor",
     img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -918,7 +909,6 @@ export const TEAM_DATA = [
   {
     id: 10,
     name: "Dewan Habib",
-    role: "Frontend Dev",
     dept: "Finance",
     img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=1000",
     level: "L2",
@@ -927,7 +917,6 @@ export const TEAM_DATA = [
   {
     id: 11,
     name: "Akash Dey",
-    role: "Convenor",
     dept: "Finance",
     img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000",
     level: "L5",
@@ -936,7 +925,6 @@ export const TEAM_DATA = [
   {
     id: 12,
     name: "Rudrojyoti Manna",
-    role: "Convenor",
     dept: "Management Coordinator",
     img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=1000",
     level: "L4",
@@ -945,7 +933,6 @@ export const TEAM_DATA = [
   {
     id: 13,
     name: "Satyam Kundu",
-    role: "Convenor",
     dept: "Media Head",
     img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=1000",
     level: "L4",
@@ -954,7 +941,6 @@ export const TEAM_DATA = [
   {
     id: 14,
     name: "Subhradeep Dey",
-    role: "SPOC",
     dept: "Marketing Head",
     img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000",
     level: "L4",
@@ -963,7 +949,6 @@ export const TEAM_DATA = [
   {
     id: 15,
     name: "Nanda Lal Das",
-    role: "SPOC",
     dept: "Tech Advisor",
     img: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -972,7 +957,6 @@ export const TEAM_DATA = [
   {
     id: 16,
     name: "Anurag Bhattacharjee",
-    role: "Student Coordinator",
     dept: "Tech Advisor",
     img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -981,7 +965,6 @@ export const TEAM_DATA = [
   {
     id: 17,
     name: "Niladri Sarkar",
-    role: "Student Coordinator",
     dept: "Tech Team",
     img: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -990,7 +973,6 @@ export const TEAM_DATA = [
   {
     id: 18,
     name: "Argha Chakraborty",
-    role: "Student Coordinator",
     dept: "Tech Team",
     img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -999,7 +981,6 @@ export const TEAM_DATA = [
   {
     id: 19,
     name: "Aikik Patra",
-    role: "UI/UX Lead",
     dept: "Tech Team",
     img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
@@ -1008,7 +989,6 @@ export const TEAM_DATA = [
   {
     id: 20,
     name: "Aritra Chattopadhyay",
-    role: "Frontend Dev",
     dept: "Tech Team",
     img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=1000",
     level: "L2",
@@ -1017,7 +997,6 @@ export const TEAM_DATA = [
   {
     id: 21,
     name: "Anwesa Ghosh",
-    role: "Frontend Dev",
     dept: "Decoration Head",
     img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=1000",
     level: "L2",
