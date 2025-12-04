@@ -972,7 +972,7 @@ export const TEAM_DATA = [
   },
   {
     id: 18,
-    name: "Argha Chakraborty",
+    name: "Arghya Chakraborty",
     dept: "Tech Team",
     img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=1000",
     level: "L3",
