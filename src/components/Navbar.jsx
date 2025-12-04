@@ -172,7 +172,6 @@ const Navbar = () => {
 
           {/* 3. RIGHT: ACTIONS (Teaser Only) */}
           <div className="flex items-center justify-end flex-1 md:flex-none gap-4">
-            {/* Desktop Actions - Removed Register Button here as requested */}
             <div className="hidden md:flex items-center gap-3">
               <Link to="/teaser">
                 <TeaserTriggerButton />
@@ -196,7 +195,7 @@ const Navbar = () => {
         <div
           className={`absolute top-full left-0 w-full md:w-[400px] md:h-auto md:left-6 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
             isOpen
-              ? "max-h-[800px] opacity-100 translate-y-2"
+              ? "max-h-[75dvh] overflow-y-auto opacity-100 translate-y-2"
               : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
           }`}
         >
