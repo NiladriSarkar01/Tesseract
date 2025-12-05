@@ -15,8 +15,6 @@ import TeaserTriggerButton from "./TeaserTriggerButton";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
-// Placeholder for logo
-
 // --- UTILS: Scramble Text Hook ---
 const useScramble = (text, speed = 40) => {
   const [displayText, setDisplayText] = useState(text);
@@ -121,6 +119,7 @@ const Navbar = () => {
   return (
     <>
       {/* 1. Fixed Navbar Header */}
+      {/* FIX: Removed hardcoded h-[60px] to allow padding transition to work smoothly */}
       <header
         className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 border-b ${
           scrolled
@@ -143,8 +142,9 @@ const Navbar = () => {
             </button>
             {/* 2. LEFT: LOGO  */}
             <div className="flex md:hidden items-center justify-start flex-1 md:flex-none ">
-              <Link to="/" className="flex items-center gap-3 group">
-                <div className="relative w-15 h-15 flex items-center justify-center bg-transparent  rounded-lg group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
+              <Link to="/" className="flex items-center  gap-3 group">
+                {/* FIX: Changed w-13 h-13 to w-12 h-12 (standard tailwind) */}
+                <div className="relative w-12 h-12 flex items-center justify-center bg-transparent  rounded-lg group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
                   <div className="absolute inset-0 bg-cyan-400 blur-md opacity-20 group-hover:opacity-40 animate-pulse"></div>
                   <img
                     src={logo}
@@ -159,7 +159,8 @@ const Navbar = () => {
           {/* 2. CENTER: LOGO (Absolutely Centered) */}
           <div className="absolute hidden md:flex  left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Link to="/" className="flex items-center gap-3 group">
-              <div className="relative w-15 h-15 flex items-center justify-center bg-transparent  rounded-lg group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
+              {/* FIX: Changed w-13 h-13 to w-12 h-12 (standard tailwind) */}
+              <div className="relative w-12 h-12 flex items-center justify-center bg-transparent  rounded-lg group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
                 <div className="absolute inset-0 bg-cyan-400 blur-md opacity-20 group-hover:opacity-40 animate-pulse"></div>
                 <img
                   src={logo}
@@ -192,8 +193,9 @@ const Navbar = () => {
 
         {/* --- DROPDOWN MENU CONTAINER (Holographic Data Stack) --- */}
         {/* UPDATED WIDTH: Increased to w-[400px] */}
+        {/* FIX: Added origin-top for better animation physics */}
         <div
-          className={`absolute top-full left-0 w-full md:w-[400px] md:h-auto md:left-6 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+          className={`absolute top-full left-0 w-full md:w-[400px] md:h-auto md:left-6 overflow-hidden origin-top transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
             isOpen
               ? "max-h-[75dvh] overflow-y-auto opacity-100 translate-y-2"
               : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
