@@ -149,7 +149,7 @@ const Footer = () => {
       <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-cyan-600/50 to-transparent"></div>
       <div className="absolute top-0 left-0 w-1/4 h-0.5 bg-cyan-500 blur-xs animate-scan-line"></div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative">
         {/* --- TOP ROW: COMPACT HEADER CARD --- */}
         <Reveal>
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-[#0a0a0a] border border-white/10 p-4 rounded-xl relative overflow-hidden group shadow-xl">
