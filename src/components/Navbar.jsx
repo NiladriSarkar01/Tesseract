@@ -1,21 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 import {
-  Menu,
-  X,
-  Zap,
-  ChevronRight,
-  Terminal,
-  Play,
-  Globe,
-  Shield,
-  Cpu,
-} from "lucide-react";
-import TeaserTriggerButton from "./TeaserTriggerButton";
-
-import logo from "../assets/logo.png";
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 import { Link } from "react-router-dom";
+import { Menu, X, Play, ChevronRight } from "lucide-react";
 
-// --- UTILS: Scramble Text Hook ---
+// --- UTILITY: CN ---
+export function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+
+// --- CONFIGURATION: Navigation Items ---
+const navItems = [
+  { name: "Home", link: "/" },
+  { name: "Events", link: "/events" },
+  { name: "Team", link: "/team" },
+  { name: "Gallery", link: "/gallery" },
+  { name: "Contact", link: "/contact" },
+];
+
+// --- COMPONENTS ---
 const useScramble = (text, speed = 40) => {
   const [displayText, setDisplayText] = useState(text);
   const [isHovered, setIsHovered] = useState(false);
@@ -49,13 +58,12 @@ const useScramble = (text, speed = 40) => {
   return { displayText, setIsHovered };
 };
 
-// --- COMPONENT: Animated Dropdown Link ---
 const AnimatedDropdownLink = ({ link, index, onClick }) => {
   const { displayText, setIsHovered } = useScramble(link.name);
 
   return (
     <Link
-      to={link.to}
+      to={link.link}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -66,7 +74,7 @@ const AnimatedDropdownLink = ({ link, index, onClick }) => {
 
       <div className="flex items-center gap-3 relative z-10">
         <div className="p-2 rounded-md bg-black/40 text-gray-500 group-hover:text-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-all duration-300">
-          <link.icon size={18} />
+          <ChevronRight size={18} className="opacity-50" />
         </div>
         <div className="flex flex-col">
           <span className="text-sm font-bold text-gray-300 group-hover:text-white tracking-widest transition-colors uppercase">
@@ -87,122 +95,274 @@ const AnimatedDropdownLink = ({ link, index, onClick }) => {
   );
 };
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+export const Navbar = ({ children, className }) => {
+  const { scrollY } = useScroll(); // Track window scroll, not element ref
+  const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    // Optimization: Only update state if the value actually changes
+    const isVisible = latest > 50;
+    if (isVisible !== visible) {
+      setVisible(isVisible);
     }
-  }, [isOpen]);
-
-  const navLinks = [
-    { name: "HOME", to: "/", icon: Globe },
-    { name: "EVENTS", to: "/events", icon: Zap },
-    { name: "TEAM", to: "/team", icon: Shield },
-    { name: "GALLERY", to: "/gallery", icon: Cpu },
-    { name: "CONTACT", to: "/contact", icon: Cpu },
-    { name: "BROCHURE", to: "#", icon: Terminal },
-  ];
+  });
 
   return (
-    <>
-      {/* 1. Fixed Navbar Header */}
-      {/* FIX: Removed hardcoded h-[60px] to allow padding transition to work smoothly */}
-      <header
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 border-b ${
-          scrolled
-            ? "bg-[#182924]/80 backdrop-blur-xl py-3 border-cyan-900/30 shadow-lg shadow-cyan-900/10"
-            : "bg-transparent py-5 border-transparent"
-        }`}
-      >
-        <div className="container mx-auto px-6 flex justify-between items-center relative">
-          {/* 1. LEFT: MENU TOGGLE BUTTON */}
-          <div className="flex items-center justify-start flex-1 md:flex-none">
-            <button
-              className={`relative hidden md:flex z-[110] p-2 rounded-lg border transition-all duration-300 ${
-                isOpen
-                  ? "bg-red-600 border-red-500 text-white rotate-90"
-                  : "bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:text-white"
-              }`}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-            {/* 2. LEFT: LOGO  */}
-            <div className="flex md:hidden items-center justify-start flex-1 md:flex-none ">
-              <Link to="/" className="flex items-center  gap-3 group">
-                {/* FIX: Changed w-13 h-13 to w-12 h-12 (standard tailwind) */}
-                <div className="relative w-12 h-12 flex items-center justify-center bg-transparent  rounded-lg group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
-                  <div className="absolute inset-0 bg-cyan-400 blur-md opacity-20 group-hover:opacity-40 animate-pulse"></div>
-                  <img
-                    src={logo}
-                    alt="Logo"
-                    className="w-full h-full relative z-10 object-contain p-1"
-                  />
-                </div>
-              </Link>
-            </div>
-          </div>
+    <motion.div
+      className={cn(
+        "fixed inset-x-0 top-0 z-[100] w-full pointer-events-none",
+        className
+      )}
+    >
+      <div className="pointer-events-auto">
+        {React.Children.map(children, (child) =>
+          React.isValidElement(child)
+            ? React.cloneElement(child, { visible })
+            : child
+        )}
+      </div>
+    </motion.div>
+  );
+};
 
-          {/* 2. CENTER: LOGO (Absolutely Centered) */}
-          <div className="absolute hidden md:flex  left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Link to="/" className="flex items-center gap-3 group">
-              {/* FIX: Changed w-13 h-13 to w-12 h-12 (standard tailwind) */}
-              <div className="relative w-12 h-12 flex items-center justify-center bg-transparent  rounded-lg group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
-                <div className="absolute inset-0 bg-cyan-400 blur-md opacity-20 group-hover:opacity-40 animate-pulse"></div>
-                <img
-                  src={logo}
-                  alt="Logo"
-                  className="w-full h-full relative z-10 object-contain p-1"
-                />
-              </div>
-            </Link>
-          </div>
+export const NavBody = ({ children, className, visible }) => {
+  return (
+    <motion.div
+      layout
+      animate={{
+        backdropFilter: visible ? "blur(16px)" : "blur(4px)",
+        backgroundColor: visible ? "rgba(5, 5, 10, 0.9)" : "rgba(0, 0, 0, 0.2)",
+        width: visible ? "60%" : "100%",
+        minWidth: visible ? "700px" : "100%",
+        y: visible ? 20 : 0,
+        borderRadius: visible ? "100px" : "0px",
+        border: visible
+          ? "1px solid rgba(34, 211, 238, 0.15)"
+          : "1px solid rgba(255, 255, 255, 0.05)",
+        boxShadow: visible ? "0px 10px 40px -10px rgba(0,0,0,0.5)" : "none",
+        paddingLeft: visible ? "32px" : "32px",
+        paddingRight: visible ? "32px" : "32px",
+      }}
+      // Changed from spring to easeInOut for a predictable, smooth glide
+      transition={{
+        duration: 0.45,
+        ease: [0.25, 0.1, 0.25, 1], // smooth cubic-bezier
+      }}
+      style={{ willChange: "transform, backdrop-filter" }}
+      className={cn(
+        "relative z-[60] mx-auto mb-17 hidden w-full max-w-7xl flex-row items-center justify-between self-start px-8 py-4 lg:flex",
+        className
+      )}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
-          {/* 3. RIGHT: ACTIONS (Teaser Only) */}
-          <div className="flex items-center justify-end flex-1 md:flex-none gap-4">
-            <div className="hidden md:flex items-center gap-3">
-              <Link to="/teaser">
-                <TeaserTriggerButton />
-              </Link>
-            </div>
-            <button
-              className={`relative md:hidden z-[110] p-2 rounded-lg border transition-all duration-300 ${
-                isOpen
-                  ? "bg-red-600 border-red-500 text-white rotate-90"
-                  : "bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:text-white"
-              }`}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
+export const NavItems = ({ items, className }) => {
+  const [hovered, setHovered] = useState(null);
 
-        {/* --- DROPDOWN MENU CONTAINER (Holographic Data Stack) --- */}
-        {/* UPDATED WIDTH: Increased to w-[400px] */}
-        {/* FIX: Added origin-top for better animation physics */}
-        <div
-          className={`absolute top-full left-0 w-full md:w-[400px] md:h-auto md:left-6 overflow-hidden origin-top transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
-            isOpen
-              ? "max-h-[75dvh] overflow-y-auto opacity-100 translate-y-2"
-              : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
-          }`}
+  return (
+    <motion.div
+      onMouseLeave={() => setHovered(null)}
+      className={cn(
+        "flex flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium lg:space-x-4",
+        className
+      )}
+    >
+      {items.map((item, idx) => (
+        <Link
+          onMouseEnter={() => setHovered(idx)}
+          className="relative px-4 py-2 text-neutral-300 transition-colors hover:text-white"
+          key={`link-${idx}`}
+          to={item.link}
         >
-          {/* The Card Body */}
-          <div className="bg-[#081414]/95 backdrop-blur-2xl border border-cyan-500/30 border-t-0 rounded-b-2xl shadow-2xl shadow-black overflow-hidden mx-4 md:mx-0 relative">
+          {hovered === idx && (
+            <motion.div
+              layoutId="hovered"
+              className="absolute inset-0 h-full w-full rounded-full bg-white/10"
+              transition={{ duration: 0.35, ease: "easeOut" }} // no jitter
+            />
+          )}
+          <span className="relative z-20">{item.name}</span>
+        </Link>
+      ))}
+    </motion.div>
+  );
+};
+
+export const NavbarLogo = () => {
+  return (
+    <Link
+      to="/"
+      className="relative z-20 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-white"
+    >
+      {/* Placeholder Logo Icon */}
+      <div className="h-6 w-6 rounded bg-gradient-to-br from-cyan-500 to-blue-600 shadow-[0_0_15px_rgba(6,182,212,0.5)]"></div>
+      <span className="font-bold tracking-wider text-white">TESSERACT</span>
+    </Link>
+  );
+};
+
+// Updated NavbarButton to support 'to' prop for Link
+export const NavbarButton = ({
+  children,
+  className,
+  to,
+  onClick,
+  ...props
+}) => {
+  const Component = to ? Link : "button";
+
+  return (
+    <Component
+      to={to}
+      onClick={onClick}
+      className={cn(
+        "relative inline-flex h-9 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900",
+        className
+      )}
+      {...props}
+    >
+      <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+      <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-4 py-1 text-xs font-medium text-white backdrop-blur-3xl transition-colors hover:bg-slate-900">
+        {children}
+      </span>
+    </Component>
+  );
+};
+
+// New Teaser Button Component - Highlighted
+export const TeaserButton = ({ className }) => {
+  return (
+    <Link
+      to="/teaser"
+      className={cn(
+        "flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-cyan-300 bg-cyan-950/40 border border-cyan-500/30 hover:bg-cyan-900/60 hover:border-cyan-400 hover:text-cyan-100 transition-all shadow-[0_0_10px_rgba(6,182,212,0.1)] hover:shadow-[0_0_15px_rgba(6,182,212,0.3)]",
+        className
+      )}
+    >
+      <Play size={10} className="fill-current" />
+      <span>Teaser</span>
+    </Link>
+  );
+};
+
+// --- MOBILE COMPONENTS ---
+
+export const MobileNav = ({ children, className, visible }) => {
+  return (
+    <motion.div
+      animate={{
+        backdropFilter: visible ? "blur(10px)" : "blur(4px)",
+        backgroundColor: visible ? "rgba(5, 5, 10, 0.9)" : "rgba(0, 0, 0, 0.2)",
+        width: visible ? "90%" : "100%",
+        paddingRight: visible ? "12px" : "16px",
+        paddingLeft: visible ? "12px" : "16px",
+        borderRadius: visible ? "16px" : "0px",
+        y: visible ? 20 : 0,
+        border: visible
+          ? "1px solid rgba(34, 211, 238, 0.1)"
+          : "1px solid rgba(255, 255, 255, 0.05)",
+      }}
+      // Changed from spring to easeInOut
+      transition={{
+        duration: 0.45,
+        ease: [0.25, 0.1, 0.25, 1],
+      }}
+      style={{ willChange: "transform, backdrop-filter" }}
+      className={cn(
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between py-4 lg:hidden",
+        className
+      )}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+export const MobileNavHeader = ({ children, className }) => {
+  return (
+    <div
+      className={cn(
+        "flex w-full flex-row items-center justify-between",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const MobileNavMenu = ({ children, isOpen, onClose }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, height: 0, y: -12 }}
+          animate={{ opacity: 1, height: "auto", y: 0 }}
+          exit={{ opacity: 0, height: 0, y: -12 }}
+          transition={{
+            duration: 0.35,
+            ease: [0.25, 0.1, 0.25, 1], // soft, silky animation
+          }}
+          className="absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-2xl bg-[#080808] border border-white/10 shadow-2xl"
+        >
+          {children}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export const MobileNavToggle = ({ isOpen, onClick }) => {
+  return (
+    <button onClick={onClick} className="p-2 text-white">
+      <motion.div
+        key={isOpen ? "open" : "closed"}
+        initial={{ rotate: 0, opacity: 0 }}
+        animate={{ rotate: isOpen ? 0 : 0, opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+      >
+        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+      </motion.div>
+    </button>
+  );
+};
+
+// --- MAIN EXPORT ---
+
+const ResizableNavbar = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <Navbar>
+      {/* DESKTOP VIEW */}
+      <NavBody>
+        <NavbarLogo />
+        <NavItems items={navItems} />
+        <div className="flex items-center gap-3">
+          <TeaserButton />
+          <NavbarButton to="/register">Register Now</NavbarButton>
+        </div>
+      </NavBody>
+
+      {/* MOBILE VIEW */}
+      <MobileNav>
+        <MobileNavHeader>
+          <NavbarLogo />
+          <MobileNavToggle
+            isOpen={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          />
+        </MobileNavHeader>
+
+        <MobileNavMenu
+          isOpen={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+        >
+          <div className="bg-[#081414]/95 w-full backdrop-blur-2xl border border-cyan-500/30 border-t-0 rounded-b-2xl shadow-2xl shadow-black overflow-hidden md:mx-0 relative">
             {/* Decorative Background Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
 
@@ -215,12 +375,12 @@ const Navbar = () => {
 
               {/* Navigation Links */}
               <div className="flex flex-col gap-2">
-                {navLinks.map((link, idx) => (
+                {navItems.map((link, idx) => (
                   <AnimatedDropdownLink
                     key={link.name}
                     link={link}
                     index={idx}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setMobileMenuOpen(false)}
                   />
                 ))}
               </div>
@@ -231,7 +391,7 @@ const Navbar = () => {
                 <Link
                   to="/register"
                   className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-center uppercase text-xs tracking-wider rounded transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   Initialize Registration
                 </Link>
@@ -239,7 +399,7 @@ const Navbar = () => {
                 {/* Teaser Button - Visible ONLY on Mobile (md:hidden) to avoid duplicate on Desktop */}
                 <Link
                   to="/teaser"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="md:hidden w-full py-3 border border-white/10 text-gray-400 font-bold text-center uppercase text-xs tracking-wider hover:text-white hover:border-cyan-500/50 transition-colors flex items-center justify-center gap-2 rounded bg-black/40"
                 >
                   <Play size={10} /> View Trailer
@@ -255,34 +415,10 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-        </div>
-      </header>
-
-      {/* 2. Spacer Div */}
-      <div className="h-[80px] w-full" aria-hidden="true"></div>
-
-      <style>{`
-        @keyframes scan-horizontal {
-          0% { transform: translateX(0); opacity: 0; }
-          50% { opacity: 1; }
-          100% { transform: translateX(100%); opacity: 0; }
-        }
-        @keyframes scan-down {
-          0% { top: -10%; opacity: 0; }
-          50% { opacity: 1; }
-          100% { top: 110%; opacity: 0; }
-        }
-        @keyframes scan-fast {
-           0% { transform: translateX(-100%); }
-           100% { transform: translateX(100%); }
-        }
-        @keyframes shimmer {
-           0% { background-position: 200% 0; }
-           100% { background-position: -200% 0; }
-        }
-      `}</style>
-    </>
+        </MobileNavMenu>
+      </MobileNav>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default ResizableNavbar;

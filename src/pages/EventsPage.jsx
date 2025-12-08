@@ -34,7 +34,7 @@ const AboutModal = ({ event, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 mt-17 z-2000 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-300">
+    <div className="fixed inset-0 mt-28 z-200 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-300">
       {/* Overlay click to close */}
       <div className="absolute inset-0" onClick={onClose}></div>
 

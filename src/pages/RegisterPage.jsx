@@ -285,7 +285,7 @@ const RegisterPage = () => {
 
   // --- VIEW: REGISTRATION FORM ---
   return (
-    <div className="relative z-10 container mx-auto px-4 py-12 animate-in slide-in-from-right duration-500">
+    <div className="relative z-10 mt-15 container mx-auto px-4 py-12 animate-in slide-in-from-right duration-500">
       <button
         onClick={() => window.history.back()}
         className="group flex items-center gap-2 text-gray-400 hover:text-blue-400 mb-8 transition-colors"

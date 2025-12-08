@@ -1,7 +1,7 @@
 import React from "react";
 
 import EventsSection from "../components/EventsSection.jsx";
-import VideoSection from "../components/VideoSection.jsx";
+import HeroSection from "../components/HeroSection.jsx";
 import CountdownTimer from "../components/CountdownTimer.jsx";
 import Map from "../components/Map.jsx";
 import Merch from "../components/Merch.jsx";
@@ -12,7 +12,7 @@ import VibeCheck from "../components/VibeCheck.jsx";
 const LandingPage = () => {
   return (
     <>
-      <VideoSection />
+      <HeroSection />
       <CountdownTimer />
       <EventsSection />
       <About />
