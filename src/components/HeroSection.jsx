@@ -218,13 +218,21 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
-          className="flex items-center gap-2 mb-6"
+          className="flex flex-col items-center gap-1 mb-6"
         >
-          <div className="h-[1px] w-8 bg-cyan-500/50" />
-          <span className="text-cyan-400/80 text-xs md:text-sm tracking-[0.3em] font-medium uppercase">
-            Guru Nanak Institute of Technology
+          {/* Top Line */}
+          <div className="flex items-center gap-2">
+            <div className="h-[1px] w-8 bg-cyan-500/50" />
+            <span className="text-cyan-400/80 text-xs md:text-sm tracking-[0.3em] font-medium uppercase text-center">
+              Guru Nanak Institute of Technology
+            </span>
+            <div className="h-[1px] w-8 bg-cyan-500/50" />
+          </div>
+
+          {/* New Line — "Presents" */}
+          <span className="text-cyan-500/70 text-[10px] md:text-xs tracking-[0.35em] font-semibold uppercase">
+            Presents
           </span>
-          <div className="h-[1px] w-8 bg-cyan-500/50" />
         </motion.div>
 
         {/* MAIN TITLE GROUP */}

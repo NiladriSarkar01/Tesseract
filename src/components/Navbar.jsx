@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Menu, X, Play, ChevronRight } from "lucide-react";
+import logo from "../assets/logo.png";
 
 // --- UTILITY: CN ---
 export function cn(...inputs) {
@@ -198,7 +199,14 @@ export const NavbarLogo = () => {
       className="relative z-20 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-white"
     >
       {/* Placeholder Logo Icon */}
-      <div className="h-6 w-6 rounded bg-gradient-to-br from-cyan-500 to-blue-600 shadow-[0_0_15px_rgba(6,182,212,0.5)]"></div>
+      <div className="relative w-9 h-9 flex items-center justify-center bg-cyan-600/10 border border-cyan-500/50 rounded group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
+        <div className="absolute inset-0 bg-cyan-500 blur-md opacity-20 group-hover:opacity-40 animate-pulse"></div>
+        <img
+          src={logo}
+          alt="Tesseract Logo"
+          className="w-50 h-50 relative z-10 group-hover:scale-110 transition-transform object-contain"
+        />
+      </div>
       <span className="font-bold tracking-wider text-white">TESSERACT</span>
     </Link>
   );
