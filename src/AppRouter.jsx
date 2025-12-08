@@ -13,7 +13,7 @@ import AdminDashboard from "./pages/DashBoardPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import PublicLayout from "./layouts/PublicLayout";
 import BlankLayout from "./layouts/BlankLayout";
-import { AdminGuard, GuestGuard } from "./guards";
+import { AdminGuard, GuestGuard } from "./Guards";
 
 export const AppRouter = createBrowserRouter([
   {
