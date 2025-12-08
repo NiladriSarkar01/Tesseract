@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { targetDate } from "../utils/Constants";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 // --- UTILS: Reveal Animation Hook & Component ---
 const useElementOnScreen = (options) => {
@@ -92,7 +93,7 @@ const TerminalBox = ({
 
       {/* Terminal Body - Reduced Padding, Larger Font */}
       <div className="p-2 font-mono text-sm relative grow flex flex-col">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-auto"></div>
         <div className="relative z-10 grow">{children}</div>
         {/* Mini Status Bar */}
         <div className="mt-auto pt-1.5 border-t border-white/5 flex items-center justify-between text-[10px] text-gray-500">
@@ -200,21 +201,26 @@ const Footer = () => {
           <Reveal className="md:col-span-3" delay={100}>
             <TerminalBox title="NAV_LINKS.SYS">
               <ul className="space-y-0.5">
-                {["Home", "Events", "Sponsors", "Team"].map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
+                {[
+                  { name: "HOME", to: "/" },
+                  { name: "EVENTS", to: "/events" },
+                  { name: "GALLERY", to: "/gallery" },
+                  { name: "TEAM", to: "/team" },
+                ].map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      to={item.to}
                       className="group flex items-center justify-between text-gray-400 hover:text-white transition-colors py-1 px-2 rounded hover:bg-white/5 border-l-2 border-transparent hover:border-cyan-500"
                     >
                       {/* Increased Font Size */}
                       <span className="tracking-wide text-xs uppercase font-semibold">
-                        {item}
+                        {item.name}
                       </span>
                       <ChevronRight
                         size={14}
                         className="text-blue-600 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"
                       />
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
