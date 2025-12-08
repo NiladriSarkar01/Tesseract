@@ -20,6 +20,7 @@ import {
   Radio,
   Crosshair,
   Binary,
+  ArrowLeft,
 } from "lucide-react";
 // Use local constants directly to avoid import errors if files are missing
 import { appName } from "../utils/Constants";
@@ -600,12 +601,19 @@ const VideoTeaser = ({ onComplete }) => {
   );
 
   return (
-    <div className="relative w-full h-[93vh] bg-black overflow-hidden font-sans selection:bg-cyan-500 selection:text-white">
+    <div className="relative w-full h-screen bg-black overflow-hidden font-sans selection:bg-cyan-500 selection:text-white">
       {/* Scanlines */}
       <div className="absolute inset-0 pointer-events-none z-50 bg-[linear-gradient(rgba(6,182,212,0.1)_50%,rgba(0,0,0,0.1)_50%)] bg-[size:100%_4px]"></div>
 
       {/* Audio */}
       <audio ref={audioRef} src={themeSong} preload="auto" />
+
+      <button
+        onClick={() => window.history.back()}
+        className="absolute top-8 left-8 z-[60] p-3 rounded-full bg-white/5 hover:bg-white/20 text-cyan-500/50 hover:text-cyan-500 transition-colors backdrop-blur-md border border-white/5"
+      >
+        <ArrowLeft />
+      </button>
 
       {/* Mute Toggle */}
       {phase !== "idle" && (

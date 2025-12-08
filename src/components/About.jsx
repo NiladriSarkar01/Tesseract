@@ -1,6 +1,7 @@
 import React from "react";
 
-const AboutTesseract = () => {
+// The component is renamed to App to comply with the single file React component requirement
+const About = () => {
   // Mock content for GNIT (Section 2)
   const gnitContent = {
     heading: "ABOUT GNIT",
@@ -19,7 +20,8 @@ const AboutTesseract = () => {
   };
 
   return (
-    <div className="bg-[#02040800] font-sans text-white relative overflow-hidden">
+    // The main container ensures full width and relative positioning for the background effects
+    <div className="bg-[#02040800] font-sans text-white relative overflow-hidden min-h-screen">
       {/* Background Grid and Glow for the entire page */}
       <div
         className="absolute inset-0 pointer-events-none opacity-5"
@@ -32,16 +34,19 @@ const AboutTesseract = () => {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-[150px] pointer-events-none transform -translate-x-1/2 -translate-y-1/2"></div>
 
       {/* --- SECTION 1: WHAT IS TESSERACT? (Full Width) --- */}
-      <div className="relative z-10 w-full mx-auto px-6 lg:px-12 py-20 md:py-24 border-b border-cyan-900/50">
+      {/* Added max-w-7xl to constrain content on very large screens for better readability */}
+      <div className="relative z-10 w-full mx-auto max-w-7xl px-6 lg:px-12 py-16 md:py-24 border-b border-cyan-900/50">
         <div className="max-w-5xl">
-          <h2 className="text-5xl md:text-8xl font-extrabold leading-tight mb-10">
+          {/* Responsive Typography: Adjusted base size to text-5xl for better mobile fit. */}
+          <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold leading-tight mb-10">
             <span className="block text-white">
               {tesseractContent.headingPart1}
             </span>
             <span className="block text-white">
               {tesseractContent.headingPart2}
             </span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500 text-7xl md:text-9xl scale-x-105">
+            {/* Adjusted base size to text-6xl and removed scale-x-105 for mobile safety */}
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500 text-6xl sm:text-8xl md:text-9xl">
               {tesseractContent.headingPart3}
             </span>
           </h2>
@@ -54,25 +59,28 @@ const AboutTesseract = () => {
       </div>
 
       {/* --- SECTION 2: ABOUT GNIT (Two Columns with Video) --- */}
-      <div className="relative z-10 w-full mx-auto px-6 lg:px-12 py-20 md:py-24">
+      {/* Added max-w-7xl to constrain content on very large screens */}
+      <div className="relative z-10 w-full mx-auto max-w-7xl px-6 lg:px-12 py-16 md:py-24">
+        {/* Layout is single column on mobile (grid-cols-1) and two columns on large screens (lg:grid-cols-2) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column: Heading and Text Content (About GNIT) */}
           <div className="lg:col-span-1">
-            <h2 className="text-5xl md:text-7xl font-extrabold leading-tight mb-8">
+            {/* Responsive Typography: Adjusted base size to text-4xl for better mobile fit. */}
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-8">
               <span className="block text-white">Learn More</span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500">
                 {gnitContent.heading}
               </span>
             </h2>
 
-            <p className="text-base md:text-lg text-gray-300 leading-relaxed font-light pr-4">
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed font-light pr-0 lg:pr-4">
               {gnitContent.paragraph}
             </p>
           </div>
 
           {/* Right Column: Video Placeholder */}
-          <div className="lg:col-span-1 min-h-[300px] md:min-h-[400px]">
-            {/* Responsive Iframe container for YouTube/Vimeo/etc. */}
+          <div className="lg:col-span-1">
+            {/* Responsive Iframe container: The padding-top trick ensures the 16:9 aspect ratio is maintained across all screen sizes */}
             <div className="relative pt-[56.25%] w-full h-0 shadow-2xl shadow-cyan-900/50 border-4 border-cyan-700/70 rounded-lg overflow-hidden">
               <iframe
                 className="absolute top-0 left-0 w-full h-full"
@@ -92,4 +100,4 @@ const AboutTesseract = () => {
   );
 };
 
-export default AboutTesseract;
+export default About;

@@ -16,8 +16,10 @@ import {
   Crosshair,
   Scan,
   User,
+  Instagram,
 } from "lucide-react";
 import { TEAM_DATA } from "../lib/data";
+import { Link } from "react-router-dom";
 
 // --- COMPONENT: AGENT SELECTOR DECK (Bottom Strip) ---
 const AgentDeck = ({ members, selectedId, onSelect }) => {
@@ -159,7 +161,7 @@ const HoloProfile = ({ member, onNext, onPrev }) => {
                   : "bg-cyan-900/20 border-cyan-500/30 text-blue-400"
               }`}
             >
-              {member.dept} DIVISION
+              {member.dept}
             </span>
             <div className="h-px flex-1 bg-white/10"></div>
             <span className="text-xs font-mono text-gray-500">
@@ -199,13 +201,23 @@ const HoloProfile = ({ member, onNext, onPrev }) => {
         </div>
 
         <div className="mt-auto pt-4 border-t border-white/10 flex flex-wrap gap-4">
-          <button className="flex-1 py-2.5 md:py-3 bg-white text-black font-bold uppercase tracking-wider text-xs hover:bg-cyan-500 hover:text-white transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg">
+          <button
+            onClick={() => {
+              window.location.href = `mailto:${member.email}`;
+            }}
+            className="flex-1 py-2.5 md:py-3 bg-white text-black font-bold uppercase tracking-wider text-xs hover:bg-cyan-500 hover:text-white transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg"
+          >
             <Mail size={16} /> Contact Agent
           </button>
+
           <div className="flex gap-2">
-            <SocialBtn icon={Github} />
-            <SocialBtn icon={Linkedin} />
-            <SocialBtn icon={Twitter} />
+            {member.github && <SocialBtn icon={Github} href={member.github} />}
+            {member.linkedin && (
+              <SocialBtn icon={Linkedin} href={member.linkedin} />
+            )}
+            {member.instagram && (
+              <SocialBtn icon={Instagram} href={member.instagram} />
+            )}
           </div>
         </div>
       </div>
@@ -213,9 +225,11 @@ const HoloProfile = ({ member, onNext, onPrev }) => {
   );
 };
 
-const SocialBtn = ({ icon: Icon }) => (
+const SocialBtn = ({ icon: Icon, href }) => (
   <a
-    href="#"
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
     className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center border border-white/20 text-gray-400 hover:text-white hover:border-cyan-500 hover:bg-cyan-500/10 transition-all rounded-sm"
   >
     <Icon size={18} />

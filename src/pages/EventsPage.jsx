@@ -23,8 +23,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 const AboutModal = ({ event, onClose }) => {
   if (!event) return null;
 
+  const navigate = useNavigate();
+
+  const onRegisterClick = () => {
+    navigate("/register", {
+      state: {
+        eventId: event.id,
+      },
+    });
+  };
+
   return (
-    <div className="fixed inset-0 mt-15 z-[200] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-300">
+    <div className="fixed inset-0 mt-17 z-2000 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-300">
       {/* Overlay click to close */}
       <div className="absolute inset-0" onClick={onClose}></div>
 
@@ -177,7 +187,10 @@ const AboutModal = ({ event, onClose }) => {
 
         {/* Footer Actions */}
         <div className="p-4 border-t border-white/10 bg-black/40 backdrop-blur flex gap-4">
-          <button className="flex-1 py-3 bg-cyan-600 hover:bg-cyan-500 text-black font-black uppercase tracking-wider rounded transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center justify-center gap-2">
+          <button
+            onClick={() => onRegisterClick()}
+            className="flex-1 py-3 bg-cyan-600 hover:bg-cyan-500 text-black font-black uppercase tracking-wider rounded transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center justify-center gap-2"
+          >
             Join Protocol <ArrowRight size={16} />
           </button>
         </div>

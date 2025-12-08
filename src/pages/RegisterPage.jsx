@@ -19,12 +19,14 @@ import {
   UserPlus,
   Trash2,
   Lock, // Added
-  AlertCircle, // Added
+  AlertCircle,
+  Mail,
+  ArrowLeft, // Added
 } from "lucide-react";
-import { random } from "../utils/Constants";
 
 import { EVENTS_DATA } from "../lib/data";
 import { Link, useLocation } from "react-router-dom";
+import { useApplicationStore } from "../store/useApplicationStore";
 
 // ==========================================
 //  👇 REGISTER PAGE WITH DEADLINE LOGIC 👇
@@ -34,12 +36,20 @@ const RegisterPage = () => {
   const location = useLocation();
   const eventId = location?.state?.eventId ?? "";
 
+  const {
+    createApplication,
+    isApplicationsLoading,
+    selectedApplication,
+    setSelectedApplication,
+  } = useApplicationStore();
+
   // --- CONFIG: REGISTRATION DEADLINE ---
   // You can set this to a specific Date and Time
   // Example: 25th February 2026, 11:59 PM
   const REGISTRATION_DEADLINE = new Date("2026-02-25T23:59:59");
 
   const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
+  const [fileName, setFileName] = useState("");
 
   useEffect(() => {
     const now = new Date();
@@ -50,7 +60,9 @@ const RegisterPage = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-    mobile: "",
+    email: "",
+    phone: "",
+    event: "",
     eventId: String(eventId),
     paymentMode: "online",
     paymentProof: null,
@@ -59,8 +71,7 @@ const RegisterPage = () => {
     teamMembers: [], // Array of names
   });
 
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState("idle");
   const fileInputRef = useRef(null);
 
   const selectedEvent = EVENTS_DATA.find(
@@ -75,6 +86,7 @@ const RegisterPage = () => {
         selectedEvent.participationMode === "team" ? "team" : "solo";
       setFormData((prev) => ({
         ...prev,
+        event: selectedEvent.title.toUpperCase(),
         registrationType: defaultType,
         teamMembers: [],
       }));
@@ -111,8 +123,15 @@ const RegisterPage = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    setFileName(file.name);
     if (file) {
-      setFormData((prev) => ({ ...prev, paymentProof: file }));
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+      reader.onload = async () => {
+        const base64Image = reader.result;
+        setFormData((prev) => ({ ...prev, paymentProof: base64Image }));
+      };
     }
   };
 
@@ -138,14 +157,19 @@ const RegisterPage = () => {
     setFormData((prev) => ({ ...prev, teamMembers: newMembers }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1500);
+    setFormData((prev) => ({
+      ...prev,
+      event: selectedEvent.title.toUpperCase(),
+    }));
+    console.log(formData);
+
+    const res = await createApplication(formData);
+    if (res.success) {
+      setState("success");
+      setSelectedApplication(res.data);
+    } else setState("fail");
   };
 
   // --- VIEW: DEADLINE PASSED / REGISTRATION CLOSED ---
@@ -188,18 +212,19 @@ const RegisterPage = () => {
             confirmation details.
           </p>
 
-          <Link to={"/events"}>
-            <button className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all">
-              Back to Events
-            </button>
-          </Link>
+          <button
+            onClick={() => window.history.back()}
+            className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all"
+          >
+            <ArrowLeft />
+          </button>
         </div>
       </div>
     );
   }
 
   // --- VIEW: SUCCESSFUL REGISTRATION ---
-  if (submitted) {
+  if (state === "success") {
     return (
       <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center animate-in zoom-in duration-500">
         <div className="bg-black/90 backdrop-blur-xl border border-cyan-500/30 p-8 md:p-12 rounded-3xl max-w-md w-full text-center relative overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.2)]">
@@ -225,13 +250,34 @@ const RegisterPage = () => {
           </p>
           <div className="bg-white/5 rounded-xl p-4 mb-8 text-sm text-left border border-white/10">
             <p className="text-gray-400 mb-1">Registration ID</p>
-            <p className="text-white font-mono">DRP-{random}</p>
+            <p className="text-white font-mono">{selectedApplication.DRP}</p>
           </div>
-          <Link to={"/events"}>
-            <button className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all">
-              Back to Events
-            </button>
-          </Link>
+          <button
+            onClick={() => window.history.back()}
+            className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all"
+          >
+            <ArrowLeft />
+          </button>
+        </div>
+      </div>
+    );
+  } else if (state === "fail") {
+    return (
+      <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center animate-in zoom-in duration-500">
+        <div className="bg-black/90 backdrop-blur-xl border border-red-500/30 p-8 md:p-12 rounded-3xl max-w-md w-full text-center relative overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.2)]">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
+          <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <X size={40} className="text-red-500" />
+          </div>
+          <h2 className="text-3xl font-bold text-white mb-2">
+            Registration Failed!
+          </h2>
+          <button
+            onClick={() => setState("idle")}
+            className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-red-500/30 transition-all"
+          >
+            Try Again.
+          </button>
         </div>
       </div>
     );
@@ -240,14 +286,15 @@ const RegisterPage = () => {
   // --- VIEW: REGISTRATION FORM ---
   return (
     <div className="relative z-10 container mx-auto px-4 py-12 animate-in slide-in-from-right duration-500">
-      <Link to={"/events"}>
-        <button className="group flex items-center gap-2 text-gray-400 hover:text-blue-400 mb-8 transition-colors">
-          <div className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 border border-white/10 group-hover:border-cyan-500/30 transition-colors">
-            <ChevronLeft size={20} />
-          </div>
-          <span className="font-medium">Back to Events</span>
-        </button>
-      </Link>
+      <button
+        onClick={() => window.history.back()}
+        className="group flex items-center gap-2 text-gray-400 hover:text-blue-400 mb-8 transition-colors"
+      >
+        <div className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 border border-white/10 group-hover:border-cyan-500/30 transition-colors">
+          <ChevronLeft size={20} />
+        </div>
+        <span className="font-medium">Back</span>
+      </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
         {/* Left Column: Form */}
@@ -379,11 +426,31 @@ const RegisterPage = () => {
                   <input
                     required
                     type="tel"
-                    name="mobile"
+                    name="phone"
                     pattern="[0-9]{10}"
-                    value={formData.mobile}
+                    value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="9876543210"
+                    className="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-cyan-500/50 transition-colors"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">
+                  Email
+                </label>
+                <div className="relative">
+                  <Mail
+                    size={18}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
+                  />
+                  <input
+                    required
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="example@example.com"
                     className="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-cyan-500/50 transition-colors"
                   />
                 </div>
@@ -538,7 +605,7 @@ const RegisterPage = () => {
                         <div className="flex items-center gap-2 text-blue-400">
                           <CheckCircle size={20} />
                           <span className="truncate max-w-[200px]">
-                            {formData.paymentProof.name}
+                            {fileName}
                           </span>
                           <button
                             onClick={(e) => {
@@ -635,17 +702,17 @@ const RegisterPage = () => {
             <button
               type="submit"
               disabled={
-                loading ||
+                isApplicationsLoading ||
                 !formData.paymentProof ||
                 !formData.eventId ||
                 (formData.registrationType === "team" &&
                   formData.teamMembers.length + 1 < selectedEvent.minMembers)
               }
               className={`w-full py-4 bg-cyan-600 text-white font-black uppercase tracking-wider rounded-xl hover:bg-cyan-500 transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)] disabled:opacity-50 disabled:cursor-not-allowed ${
-                loading ? "animate-pulse" : ""
+                isApplicationsLoading ? "animate-pulse" : ""
               }`}
             >
-              {loading ? "Processing..." : "Confirm Registration"}
+              {isApplicationsLoading ? "Processing..." : "Confirm Registration"}
             </button>
           </form>
         </div>
