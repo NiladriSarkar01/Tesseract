@@ -11,8 +11,8 @@ import TeamPage from "./pages/TeamPage";
 import VideoTeaser from "./components/VideoTeaser";
 import AdminDashboard from "./pages/DashBoardPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import PublicLayout from "./Layouts/PublicLayout";
-import BlankLayout from "./Layouts/BlankLayout";
+import PublicLayout from "./layouts/PublicLayout";
+import BlankLayout from "./layouts/BlankLayout";
 import { AdminGuard, GuestGuard } from "./guards";
 
 export const AppRouter = createBrowserRouter([
