@@ -19,7 +19,10 @@ export const AppRouter = createBrowserRouter([
   {
     element: <PublicLayout />,
     children: [
-      { path: "/", element: <LandingPage /> },
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
       { path: "/events", element: <EventsPage /> },
       { path: "/register", element: <RegisterPage /> },
       { path: "/contact", element: <ContactPage /> },

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
 
-import CyberLoader from "./components/Loader";
+import { CyberLoader } from "./components/Loader";
 
 export const AdminGuard = ({ children }) => {
   const { authUser, isCheckingAuth, checkAuth } = useAuthStore();

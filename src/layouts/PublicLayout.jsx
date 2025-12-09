@@ -1,25 +1,38 @@
-import React from "react";
-import { Outlet, useNavigation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Background from "../components/Background";
-import CyberLoader from "../components/Loader";
+import { TesseractLoader } from "../components/Loader";
 
 const PublicLayout = () => {
-  const navigation = useNavigation();
+  const [initialLoading, setInitialLoading] = useState(true);
 
-  const isLoading = navigation.state === "loading";
+  useEffect(() => {
+    // Simulate initial loading time (optional)
+    const timer = setTimeout(() => {
+      setInitialLoading(false);
+    }, 2500); // 1.5 sec loader
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (initialLoading) {
+    return (
+      <>
+        <Background />
+        <div className="flex items-center justify-center min-h-screen">
+          <TesseractLoader />
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Background />
       <Navbar />
-      {isLoading ? (
-        <div className="flex items-center justify-center min-h-screen">
-          <CyberLoader />
-        </div>
-      ) : (
-        <Outlet />
-      )}
+      <Outlet />
       <Footer />
     </>
   );
