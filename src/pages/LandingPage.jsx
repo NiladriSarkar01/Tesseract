@@ -8,6 +8,7 @@ import Merch from "../components/Merch.jsx";
 import About from "../components/About.jsx";
 import Ribbon from "../components/Ribbon.jsx";
 import VibeCheck from "../components/VibeCheck.jsx";
+import GalleryPreview from "../components/GalleryPreview.jsx";
 
 const LandingPage = () => {
   return (
@@ -18,6 +19,7 @@ const LandingPage = () => {
       <About />
       <Ribbon />
       <Merch />
+      <GalleryPreview />
       <Map />
       <Ribbon />
       <VibeCheck />

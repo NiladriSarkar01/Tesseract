@@ -250,9 +250,9 @@ const HeroSection = () => {
             <DecoderText text="TESSERACT" />
           </h1>
 
-          {/* 2025 Subtext */}
+          {/* 2026 Subtext */}
           <div className="absolute -bottom-4 right-0 md:right-4">
-            <span className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-purple-500 to-white opacity-80 italic">
+            <span className="text-4xl z-50 md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-purple-500 to-white opacity-80 italic">
               2026
             </span>
           </div>

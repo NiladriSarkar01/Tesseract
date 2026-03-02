@@ -4,297 +4,269 @@ import {
   Database,
   ChevronDown,
   Loader2,
-  Search,
   Zap,
-  Cpu,
+  ShieldAlert,
+  Terminal,
+  Download,
+  Eye,
 } from "lucide-react";
 
-// --- 1. CONFIGURATION & DATA GENERATION ---
+/* ----------------------------------
+   DATA
+---------------------------------- */
 
 const TOTAL_IMAGES = 78;
 
-// Programmatically generate 70 items
-const DEMO_DATA = Array.from({ length: TOTAL_IMAGES }, (_, index) => {
-  const id = index + 1;
-  return {
-    id: id,
-    title: `Image ${id}`,
-    // Points to public/gallery/img1.jpg, img2.jpg, etc.
-    img: `/gallery/img${id}.JPG`,
-    desc: "",
-  };
-});
+const DEMO_DATA = Array.from({ length: TOTAL_IMAGES }, (_, i) => ({
+  id: i + 1,
+  title: `DATA_UNIT_${String(i + 1).padStart(3, "0")}`,
+  img: `https://res.cloudinary.com/dtvxydxiv/image/upload/v1769710322/tesseract/gallery/img${i + 1}.jpg`,
+  status: "ENCRYPTED",
+}));
 
-// --- 2. UTILITY FUNCTIONS ---
-
-// Helper to assign random sizes for the Bento Grid look
 const assignSizes = (data) => {
-  // Pattern to repeat for grid variety
-  const pattern = [
-    "large",
-    "small",
-    "small",
-    "tall",
-    "small",
-    "wide",
-    "small",
-    "small",
-  ];
-
-  return data.map((item, index) => ({
+  const pattern = ["large", "small", "small", "tall", "small", "wide"];
+  return data.map((item, i) => ({
     ...item,
-    size: pattern[index % pattern.length],
+    size: pattern[i % pattern.length],
   }));
 };
 
-// Process the data
-const PROCESSED_DATA = assignSizes(DEMO_DATA);
+const DATA = assignSizes(DEMO_DATA);
 
-// --- 3. SUB-COMPONENTS ---
+/* ----------------------------------
+   SIZE MAP (FIXED)
+---------------------------------- */
 
-const GalleryHero = ({ count }) => {
-  return (
-    <section className="relative w-full h-[50vh] bg-[#050505] flex flex-col items-center justify-center border-b border-gray-800 overflow-hidden">
-      {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-800/20 via-[#050505] to-[#050505]"></div>
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-900 to-transparent opacity-50"></div>
-
-      {/* Grid Overlay */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-
-      <div className="relative z-10 text-center px-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-mono mb-6 backdrop-blur-sm">
-          <Zap size={12} className="fill-cyan-400" />
-          <span>SYSTEM ONLINE</span>
-        </div>
-
-        <h1 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-2">
-          LEGACY_DB
-        </h1>
-
-        <div className="h-1 w-24 bg-cyan-500 mx-auto mb-6 shadow-[0_0_15px_rgba(6,182,212,0.6)]"></div>
-
-        <div className="flex items-center justify-center gap-3 text-cyan-500 font-mono text-xs tracking-[0.2em]">
-          <Database size={14} />
-          <span>INDEXING {count} FILES</span>
-        </div>
-      </div>
-    </section>
-  );
+const sizeClasses = {
+  small: "col-span-1 row-span-1 h-[280px]",
+  large: "col-span-2 row-span-2 h-[580px]",
+  wide: "col-span-2 row-span-1 h-[280px]",
+  tall: "col-span-1 row-span-2 h-[580px]",
 };
 
-const DatabaseCard = ({ item, onClick }) => {
-  const sizeClasses = {
-    small: "col-span-1 row-span-1 h-[250px]",
-    large: "col-span-1 md:col-span-2 row-span-2 h-[516px]", // 250*2 + 16 gap
-    tall: "col-span-1 row-span-2 h-[516px]",
-    wide: "col-span-1 md:col-span-2 row-span-1 h-[250px]",
-  };
+/* ----------------------------------
+   HERO
+---------------------------------- */
 
+const GalleryHero = ({ count }) => (
+  <section className="relative h-[60vh] bg-black flex items-center justify-center border-b border-cyan-900/30 overflow-hidden">
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#111_1px,transparent_1px),linear-gradient(to_bottom,#111_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+    <div className="relative z-10 text-center">
+      <div className="inline-flex items-center gap-2 px-4 py-1 mb-8 border border-cyan-500/40 text-cyan-400 text-[10px] font-mono tracking-widest">
+        <Zap size={12} /> TERMINAL_LINK_ACTIVE
+      </div>
+
+      <h1 className="text-7xl md:text-9xl font-black italic tracking-tighter bg-gradient-to-b from-white to-gray-600 bg-clip-text text-transparent">
+        ARCH_01
+      </h1>
+
+      <div className="mt-6 text-cyan-500 text-[10px] font-mono tracking-[0.4em] flex justify-center items-center gap-2">
+        <Database size={12} /> {count} OBJECTS_FOUND
+      </div>
+    </div>
+  </section>
+);
+
+/* ----------------------------------
+   CARD
+---------------------------------- */
+
+function DatabaseCard({ item, onClick }) {
   return (
     <div
       onClick={() => onClick(item)}
-      className={`relative group overflow-hidden border border-gray-800 bg-gray-900/40 cursor-pointer ${
-        sizeClasses[item.size]
-      }`}
+      className={`group relative overflow-hidden cursor-pointer
+        border border-white/5 bg-black
+        transition-all duration-500
+        hover:border-cyan-400/60
+        hover:shadow-[0_20px_60px_rgba(0,255,255,0.18)]
+        hover:-translate-y-1
+        ${sizeClasses[item.size]}
+      `}
     >
-      <div className="absolute inset-0 bg-gray-800 animate-pulse" />
-
+      {/* IMAGE */}
       <img
         src={item.img}
         alt={item.title}
-        loading="lazy"
-        className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 filter grayscale group-hover:grayscale-0"
-        onError={(e) => {
-          e.target.style.display = "none";
-          e.target.parentNode.classList.add("bg-red-900/20");
-        }}
+        className="
+          absolute inset-0 w-full h-full object-cover
+          transition-transform duration-700 ease-out
+          group-hover:scale-105
+          group-hover:translate-x-[1%]
+          group-hover:-translate-y-[1%]
+        "
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+      {/* GLASS MOVEMENT */}
+      <div className="absolute inset-0 pointer-events-none z-10">
+        <div
+          className="
+            absolute -inset-[30%]
+            bg-white/10 backdrop-blur-md
+            mix-blend-overlay
+            rotate-[-6deg]
+            translate-x-[-12%] translate-y-[12%]
+            group-hover:translate-x-[12%]
+            group-hover:translate-y-[-12%]
+            transition-transform duration-700 ease-out
+          "
+        />
+      </div>
 
-      {/* Scanner Line Effect */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.8)] translate-y-[-100%] group-hover:translate-y-[600px] transition-transform duration-[1.5s] ease-linear pointer-events-none"></div>
+      {/* LIGHT SWEEP */}
+      <div className="absolute inset-0 pointer-events-none z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div
+          className="
+            absolute -left-full top-0 w-[200%] h-full
+            bg-gradient-to-r from-transparent via-purple-900/15 to-transparent
+            rotate-12
+            group-hover:animate-[sweep_1.2s_ease-out_forwards]
+          "
+        />
+      </div>
 
-      {/* Corner Accents */}
-      <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-cyan-500/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-      <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-cyan-500/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
-      <div className="absolute inset-0 p-5 flex flex-col justify-end">
-        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-          <h3 className="text-lg md:text-xl font-bold text-white font-mono truncate uppercase leading-none">
-            {item.title}
-          </h3>
+      {/* HUD */}
+      <div className="absolute inset-0 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute top-3 right-3 text-[9px] font-mono text-cyan-400 tracking-widest">
+          ACTIVE
+        </div>
+        <div className="absolute bottom-3 left-3 text-sm font-semibold text-white">
+          {item.title}
         </div>
       </div>
     </div>
   );
-};
+}
 
-// --- 4. MAIN COMPONENT ---
+/* ----------------------------------
+   PAGE
+---------------------------------- */
 
-const GalleryPage = () => {
+export default function GalleryPage() {
   const [itemsToShow, setItemsToShow] = useState(12);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState(null);
 
-  // Pagination Logic (No filtering)
-  const visibleItems = PROCESSED_DATA.slice(0, itemsToShow);
-  const hasMore = itemsToShow < PROCESSED_DATA.length;
+  const visible = DATA.slice(0, itemsToShow);
+  const hasMore = itemsToShow < DATA.length;
 
-  const handleLoadMore = () => {
-    setLoadingMore(true);
-    // Simulate "Decryption" delay
+  const loadMore = () => {
+    setLoading(true);
     setTimeout(() => {
-      setItemsToShow((prev) => prev + 8);
-      setLoadingMore(false);
-    }, 800);
+      setItemsToShow((p) => p + 8);
+      setLoading(false);
+    }, 1200);
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white selection:bg-cyan-500/30 pb-20 font-sans">
-      <GalleryHero count={PROCESSED_DATA.length} />
+    <div className="min-h-screen bg-black text-white font-mono pb-20 selection:bg-cyan-500/50">
+      <GalleryHero count={DATA.length} />
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Controls Toolbar - Now only shows count since filters are gone */}
-        <div className="sticky top-0 z-30 bg-[#050505]/80 backdrop-blur-md py-4 mb-8 border-b border-gray-800 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-gray-400 font-mono text-sm">
-            <Cpu size={16} className="text-cyan-500 animate-pulse" />
-            <span>VISIBLE_UNITS: {visibleItems.length}</span>
+      <div className="max-w-[1600px] mx-auto px-6 py-12">
+        {/* TOP BAR */}
+        <div className="sticky top-6 z-40 mb-12 p-4 bg-black/60 backdrop-blur-xl border border-white/10 flex justify-between items-center">
+          <div className="flex items-center gap-4 text-[10px] tracking-widest text-gray-400">
+            <Terminal size={14} className="text-cyan-500" />
+            SESSION_ACTIVE
+            <Eye size={14} />
+            VIEW_{visible.length}/{TOTAL_IMAGES}
           </div>
-
-          <div className="text-[10px] font-mono text-gray-600 tracking-widest uppercase">
-            ARCHIVE_MODE: UNRESTRICTED
+          <div className="text-cyan-500/70 animate-pulse text-[10px] tracking-widest">
+            AUTH_ADMIN_ROOT
           </div>
         </div>
 
-        {/* The Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-auto gap-4 transition-all">
-          {visibleItems.map((item) => (
-            <DatabaseCard key={item.id} item={item} onClick={setSelectedItem} />
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
+          {visible.map((item) => (
+            <DatabaseCard key={item.id} item={item} onClick={setSelected} />
           ))}
         </div>
 
-        {/* Empty State */}
-        {visibleItems.length === 0 && (
-          <div className="py-20 text-center border border-dashed border-gray-800 rounded-lg">
-            <Search className="mx-auto text-gray-700 mb-4" size={48} />
-            <p className="text-gray-500 font-mono text-sm">NO DATA FOUND</p>
-          </div>
-        )}
-
-        {/* "Load More" Sector Trigger */}
+        {/* LOAD MORE */}
         {hasMore && (
-          <div className="mt-16 flex justify-center">
+          <div className="mt-20 flex justify-center">
             <button
-              onClick={handleLoadMore}
-              disabled={loadingMore}
-              className="group relative px-10 py-4 bg-gray-900 border border-gray-800 hover:border-cyan-500/50 hover:bg-cyan-950/20 transition-all duration-300 w-full md:w-auto overflow-hidden"
+              onClick={loadMore}
+              disabled={loading}
+              className="px-12 py-5 border border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(0,255,255,0.25)] transition-all text-[11px] tracking-[0.4em]"
             >
-              <div className="flex items-center gap-3 font-mono text-sm tracking-[0.2em] text-cyan-400 group-hover:text-cyan-300 relative z-10">
-                {loadingMore ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" />
-                    DECRYPTING...
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown
-                      size={16}
-                      className="group-hover:translate-y-1 transition-transform"
-                    />
-                    ACCESS_NEXT_SECTOR
-                  </>
-                )}
-              </div>
-              {/* Button decorative scanline */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
-
-              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500 opacity-50 group-hover:opacity-100"></div>
-              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500 opacity-50 group-hover:opacity-100"></div>
+              {loading ? (
+                <span className="flex gap-3 items-center">
+                  <Loader2 className="animate-spin" size={16} />
+                  FETCHING
+                </span>
+              ) : (
+                <span className="flex gap-3 items-center">
+                  <ChevronDown size={16} />
+                  SYNC_ARCHIVE
+                </span>
+              )}
             </button>
-          </div>
-        )}
-
-        {/* End of Line Indicator */}
-        {!hasMore && visibleItems.length > 0 && (
-          <div className="mt-12 flex items-center justify-center gap-4 opacity-50">
-            <div className="h-px w-12 bg-gray-800"></div>
-            <div className="text-center text-[10px] font-mono text-gray-500 tracking-[0.3em]">
-              END OF ARCHIVE
-            </div>
-            <div className="h-px w-12 bg-gray-800"></div>
           </div>
         )}
       </div>
 
-      {/* Modal / Viewer */}
-      {selectedItem && (
+      {/* MODAL */}
+      {selected && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 animate-in fade-in duration-200"
-          onClick={() => setSelectedItem(null)}
+          onClick={() => setSelected(null)}
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-6"
         >
           <div
-            className="relative bg-[#0a0a0a] border border-gray-800 w-full max-w-4xl max-h-[90vh] overflow-y-auto flex flex-col md:flex-row shadow-[0_0_50px_rgba(0,0,0,0.8)]"
             onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-6xl h-[80vh] bg-[#050505] border border-white/10 flex"
           >
             <button
-              onClick={() => setSelectedItem(null)}
-              className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-red-500/20 text-gray-400 hover:text-red-400 border border-transparent hover:border-red-500/50 transition-all rounded-full"
+              onClick={() => setSelected(null)}
+              className="absolute -top-4 -right-4 bg-cyan-500 text-black p-3"
             >
-              <X size={20} />
+              <X size={22} />
             </button>
 
-            {/* Modal Image */}
-            <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-gray-900 border-b md:border-b-0 md:border-r border-gray-800">
+            <div className="w-2/3 relative">
               <img
-                src={selectedItem.img}
+                src={selected.img}
                 alt=""
                 className="absolute inset-0 w-full h-full object-cover"
               />
+              <div className="absolute inset-0 shadow-[inset_0_0_120px_rgba(0,0,0,0.9)]" />
             </div>
 
-            {/* Modal Content */}
-            <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col">
+            <div className="w-1/3 p-10 flex flex-col bg-black">
               <div className="mb-auto">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-gray-600 text-[10px] font-mono">
-                    ID: #{selectedItem.id}
-                  </span>
+                <div className="flex gap-2 items-center text-red-500 text-[10px] tracking-widest mb-6">
+                  <ShieldAlert size={14} /> CLASSIFIED
                 </div>
 
-                <h2 className="text-3xl md:text-4xl font-bold text-white font-mono mb-6 leading-tight">
-                  {selectedItem.title}
+                <h2 className="text-4xl font-black italic mb-8">
+                  {selected.title}
                 </h2>
 
-                <div className="space-y-4 text-gray-400 font-light text-sm leading-relaxed">
-                  <p>
-                    Detailed analysis of {selectedItem.title} currently
-                    restricted. Please upgrade your clearance level to access
-                    full metadata.
-                  </p>
-                </div>
+                <p className="text-gray-400 text-xs leading-relaxed">
+                  High-frequency signal detected. Encrypted payload confirmed.
+                </p>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-gray-800 flex justify-between items-center">
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-gray-500 font-mono uppercase">
-                    Clearance
-                  </span>
-                  <span className="text-xs text-white font-mono">
-                    LEVEL 5 ALPHA
-                  </span>
-                </div>
-                <button className="px-6 py-2 bg-white text-black font-mono text-xs font-bold hover:bg-cyan-400 transition-colors uppercase tracking-widest">
-                  Download Data
-                </button>
-              </div>
+              <button className="mt-10 py-4 bg-white text-black text-[11px] tracking-[0.2em] font-black flex items-center justify-center gap-2 hover:bg-cyan-400">
+                <Download size={14} /> DOWNLOAD_SOURCE
+              </button>
             </div>
           </div>
         </div>
       )}
+
+      {/* KEYFRAMES */}
+      <style>
+        {`
+          @keyframes sweep {
+            from { transform: translateX(-60%) rotate(12deg); }
+            to   { transform: translateX(60%) rotate(12deg); }
+          }
+        `}
+      </style>
     </div>
   );
-};
-
-export default GalleryPage;
+}

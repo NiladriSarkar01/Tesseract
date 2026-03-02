@@ -3,3 +3,34 @@
 body {
     background-color: black;
 }
+
+@keyframes sweep {
+  from {
+    transform: translateX(-60%) rotate(12deg);
+  }
+  to {
+    transform: translateX(60%) rotate(12deg);
+  }
+}
+
+.animate-sweep {
+  animation: sweep 1.2s ease-out forwards;
+}
+
+@keyframes sweep {
+  from {
+    transform: translateX(-60%) rotate(12deg);
+  }
+  to {
+    transform: translateX(60%) rotate(12deg);
+  }
+}
+
+@keyframes scan {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
