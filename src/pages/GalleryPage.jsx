@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo, useCallback } from "react";
 import {
   X,
   Database,
@@ -17,12 +17,18 @@ import {
 
 const TOTAL_IMAGES = 78;
 
-const DEMO_DATA = Array.from({ length: TOTAL_IMAGES }, (_, i) => ({
-  id: i + 1,
-  title: `DATA_UNIT_${String(i + 1).padStart(3, "0")}`,
-  img: `https://res.cloudinary.com/dtvxydxiv/image/upload/v1769710322/tesseract/gallery/img${i + 1}.jpg`,
-  status: "ENCRYPTED",
-}));
+const BASE_URL = "https://res.cloudinary.com/dtvxydxiv/image/upload";
+
+const DEMO_DATA = Array.from({ length: TOTAL_IMAGES }, (_, i) => {
+  const id = i + 1;
+  return {
+    id,
+    title: `DATA_UNIT_${String(id).padStart(3, "0")}`,
+    thumb: `${BASE_URL}/w_800,q_auto,f_auto/tesseract/gallery/img${id}.jpg`,
+    full: `${BASE_URL}/w_1800,q_auto,f_auto/tesseract/gallery/img${id}.jpg`,
+    status: "ENCRYPTED",
+  };
+});
 
 const assignSizes = (data) => {
   const pattern = ["large", "small", "small", "tall", "small", "wide"];
@@ -35,7 +41,7 @@ const assignSizes = (data) => {
 const DATA = assignSizes(DEMO_DATA);
 
 /* ----------------------------------
-   SIZE MAP (FIXED)
+   SIZE MAP
 ---------------------------------- */
 
 const sizeClasses = {
@@ -70,37 +76,38 @@ const GalleryHero = ({ count }) => (
 );
 
 /* ----------------------------------
-   CARD
+   CARD (MEMOIZED)
 ---------------------------------- */
 
-function DatabaseCard({ item, onClick }) {
+const DatabaseCard = memo(function DatabaseCard({ item, onClick }) {
   return (
     <div
       onClick={() => onClick(item)}
-      className={`group relative overflow-hidden cursor-pointer
+      className={`
+        group relative overflow-hidden cursor-pointer
         border border-white/5 bg-black
-        transition-all duration-500
+        transition-all duration-300
         hover:border-cyan-400/60
-        hover:shadow-[0_20px_60px_rgba(0,255,255,0.18)]
         hover:-translate-y-1
         ${sizeClasses[item.size]}
       `}
     >
       {/* IMAGE */}
       <img
-        src={item.img}
+        src={item.thumb}
         alt={item.title}
+        loading="lazy"
+        decoding="async"
         className="
           absolute inset-0 w-full h-full object-cover
-          transition-transform duration-700 ease-out
+          will-change-transform
+          transition-transform duration-500
           group-hover:scale-105
-          group-hover:translate-x-[1%]
-          group-hover:-translate-y-[1%]
         "
       />
 
-      {/* GLASS MOVEMENT */}
-      <div className="absolute inset-0 pointer-events-none z-10">
+      {/* HEAVY EFFECTS — DESKTOP ONLY */}
+      <div className="hidden md:block absolute inset-0 pointer-events-none z-10">
         <div
           className="
             absolute -inset-[30%]
@@ -110,25 +117,13 @@ function DatabaseCard({ item, onClick }) {
             translate-x-[-12%] translate-y-[12%]
             group-hover:translate-x-[12%]
             group-hover:translate-y-[-12%]
-            transition-transform duration-700 ease-out
-          "
-        />
-      </div>
-
-      {/* LIGHT SWEEP */}
-      <div className="absolute inset-0 pointer-events-none z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div
-          className="
-            absolute -left-full top-0 w-[200%] h-full
-            bg-gradient-to-r from-transparent via-purple-900/15 to-transparent
-            rotate-12
-            group-hover:animate-[sweep_1.2s_ease-out_forwards]
+            transition-transform duration-700
           "
         />
       </div>
 
       {/* HUD */}
-      <div className="absolute inset-0 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
         <div className="absolute top-3 right-3 text-[9px] font-mono text-cyan-400 tracking-widest">
           ACTIVE
         </div>
@@ -138,7 +133,7 @@ function DatabaseCard({ item, onClick }) {
       </div>
     </div>
   );
-}
+});
 
 /* ----------------------------------
    PAGE
@@ -152,13 +147,15 @@ export default function GalleryPage() {
   const visible = DATA.slice(0, itemsToShow);
   const hasMore = itemsToShow < DATA.length;
 
-  const loadMore = () => {
+  const loadMore = useCallback(() => {
+    if (loading) return;
     setLoading(true);
-    setTimeout(() => {
-      setItemsToShow((p) => p + 8);
+
+    requestIdleCallback(() => {
+      setItemsToShow((p) => Math.min(p + 6, DATA.length));
       setLoading(false);
-    }, 1200);
-  };
+    });
+  }, [loading]);
 
   return (
     <div className="min-h-screen bg-black text-white font-mono pb-20 selection:bg-cyan-500/50">
@@ -191,7 +188,7 @@ export default function GalleryPage() {
             <button
               onClick={loadMore}
               disabled={loading}
-              className="px-12 py-5 border border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(0,255,255,0.25)] transition-all text-[11px] tracking-[0.4em]"
+              className="px-12 py-5 border border-cyan-500/40 hover:border-cyan-400 transition-all text-[11px] tracking-[0.4em]"
             >
               {loading ? (
                 <span className="flex gap-3 items-center">
@@ -213,7 +210,7 @@ export default function GalleryPage() {
       {selected && (
         <div
           onClick={() => setSelected(null)}
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-6"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-6"
         >
           <div
             onClick={(e) => e.stopPropagation()}
@@ -228,11 +225,12 @@ export default function GalleryPage() {
 
             <div className="w-2/3 relative">
               <img
-                src={selected.img}
+                src={selected.full}
+                loading="eager"
+                decoding="async"
                 alt=""
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 shadow-[inset_0_0_120px_rgba(0,0,0,0.9)]" />
             </div>
 
             <div className="w-1/3 p-10 flex flex-col bg-black">
@@ -258,15 +256,15 @@ export default function GalleryPage() {
         </div>
       )}
 
-      {/* KEYFRAMES */}
-      <style>
-        {`
-          @keyframes sweep {
-            from { transform: translateX(-60%) rotate(12deg); }
-            to   { transform: translateX(60%) rotate(12deg); }
+      {/* REDUCED MOTION */}
+      <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation: none !important;
+            transition: none !important;
           }
-        `}
-      </style>
+        }
+      `}</style>
     </div>
   );
 }
