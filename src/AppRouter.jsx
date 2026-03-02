@@ -14,6 +14,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import PublicLayout from "./layouts/PublicLayout";
 import BlankLayout from "./layouts/BlankLayout";
 import { AdminGuard, GuestGuard } from "./Guards";
+import NavLayout from "./layouts/NavLayout";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -26,9 +27,13 @@ export const AppRouter = createBrowserRouter([
       { path: "/events", element: <EventsPage /> },
       { path: "/register", element: <RegisterPage /> },
       { path: "/contact", element: <ContactPage /> },
-      { path: "/team", element: <TeamPage /> },
       { path: "/gallery", element: <GalleryPage /> },
     ],
+  },
+
+  {
+    element: <NavLayout />,
+    children: [{ path: "/team", element: <TeamPage /> }],
   },
 
   {
