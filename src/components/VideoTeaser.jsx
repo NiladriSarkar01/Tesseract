@@ -92,7 +92,7 @@ const VideoTeaser = ({ onComplete }) => {
         Array(12)
           .fill(0)
           .map(() => chars[Math.floor(Math.random() * chars.length)])
-          .join("")
+          .join(""),
       );
     }, 60);
     return () => clearInterval(interval);
@@ -172,7 +172,7 @@ const VideoTeaser = ({ onComplete }) => {
         setPhase("uplink");
         addLog("ESTABLISHING_UPLINK...", "info");
         setTimeout(() => addLog("CONNECTED_TO_SAT_V4", "success"), 1500);
-      }, 3000)
+      }, 3000),
     );
 
     // 3. Security Scan (6s - 9s)
@@ -193,7 +193,7 @@ const VideoTeaser = ({ onComplete }) => {
           if (txtIdx >= secTexts.length) clearInterval(secInterval);
         }, 700);
         intervals.push(secInterval);
-      }, 6000)
+      }, 6000),
     );
 
     // 4. Override (9s - 10.5s)
@@ -203,7 +203,7 @@ const VideoTeaser = ({ onComplete }) => {
         addLog("ACCESS_DENIED", "error");
         addLog("ATTEMPTING_BYPASS...", "warning");
         setTimeout(() => addLog("ROOT_ACCESS_GRANTED", "success"), 1000);
-      }, 9000)
+      }, 9000),
     );
 
     // 5. Logo Reveal (10.5s - 13.5s)
@@ -211,7 +211,7 @@ const VideoTeaser = ({ onComplete }) => {
       setTimeout(() => {
         setPhase("reveal");
         addLog("CORE_SYSTEM_ONLINE", "success");
-      }, 10500)
+      }, 10500),
     );
 
     // --- NEW DOMAIN PHASES ---
@@ -222,7 +222,7 @@ const VideoTeaser = ({ onComplete }) => {
         setPhase("coding");
         setCodeSnippet(""); // Reset
         addLog("MODULE: CODING_ARENA", "info");
-      }, 13500)
+      }, 13500),
     );
 
     // 7. Robotics Domain (15.5s - 17.5s)
@@ -230,7 +230,7 @@ const VideoTeaser = ({ onComplete }) => {
       setTimeout(() => {
         setPhase("robotics");
         addLog("MODULE: ROBOTICS_LAB", "info");
-      }, 15500)
+      }, 15500),
     );
 
     // 8. Gaming Domain (17.5s - 19.5s)
@@ -238,7 +238,7 @@ const VideoTeaser = ({ onComplete }) => {
       setTimeout(() => {
         setPhase("gaming");
         addLog("MODULE: BATTLE_ZONE", "info");
-      }, 17500)
+      }, 17500),
     );
 
     // --- END NEW DOMAIN PHASES ---
@@ -255,7 +255,7 @@ const VideoTeaser = ({ onComplete }) => {
           if (wordIndex >= words.length) clearInterval(wordInterval);
         }, 600);
         intervals.push(wordInterval);
-      }, 19500)
+      }, 19500),
     );
 
     // 10. Features Flash (23.5s - 26.5s)
@@ -269,7 +269,7 @@ const VideoTeaser = ({ onComplete }) => {
           if (featIndex > 8) clearInterval(featInterval);
         }, 300);
         intervals.push(featInterval);
-      }, 23500)
+      }, 23500),
     );
 
     // 11. Info/Date (26.5s - 29.5s)
@@ -281,7 +281,7 @@ const VideoTeaser = ({ onComplete }) => {
         setPhase("outro");
         addLog("SEQUENCE_COMPLETE", "success");
         if (onComplete) onComplete();
-      }, 29500)
+      }, 29500),
     );
 
     return () => {
@@ -542,7 +542,7 @@ const VideoTeaser = ({ onComplete }) => {
       <div className="relative border-y-4 border-blue-600 py-12 w-full text-center bg-blue-900/20 backdrop-blur-lg animate-in zoom-in duration-700">
         <div className="overflow-hidden mb-4">
           <p className="text-3xl md:text-5xl text-white font-black tracking-[0.2em] animate-in slide-in-from-bottom duration-1000 delay-100">
-            FEBRUARY 27-28
+            MARCH 27-28
           </p>
         </div>
         <div className="overflow-hidden">
@@ -635,8 +635,8 @@ const VideoTeaser = ({ onComplete }) => {
                 log.type === "error"
                   ? "text-red-500"
                   : log.type === "success"
-                  ? "text-green-500"
-                  : ""
+                    ? "text-green-500"
+                    : ""
               }`}
             >
               {`> ${log.text}`}

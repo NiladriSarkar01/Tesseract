@@ -609,7 +609,7 @@ const RegisterPage = () => {
                       </span>
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
-                      UPI ID: tessaract@upi
+                      UPI ID: 9051583344-2@ybl
                     </p>
                   </div>
 

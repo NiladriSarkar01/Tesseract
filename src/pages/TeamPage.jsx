@@ -82,33 +82,72 @@ const Social = memo(function Social({ icon: Icon, href }) {
 
 const HoloProfile = memo(function HoloProfile({ member }) {
   if (!member) return null;
+  const cardRef = useRef(null);
+  const glareRef = useRef(null);
+  const rafRef = useRef(null);
+  const pendingRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    // Store latest coords without touching the DOM
+    pendingRef.current = { x: e.clientX, y: e.clientY };
+
+    // Only schedule a new frame if one isn't already queued
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      const card = cardRef.current;
+      const glare = glareRef.current;
+      const pos = pendingRef.current;
+      if (!card || !glare || !pos) return;
+      const r = card.getBoundingClientRect();
+      const x = ((pos.x - r.left) / r.width) * 100;
+      const y = ((pos.y - r.top) / r.height) * 100;
+      glare.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)`;
+      glare.style.opacity = "1";
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    if (glareRef.current) glareRef.current.style.opacity = "0";
+  };
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   return (
     <div className="holo-profile relative w-full h-full flex flex-col md:flex-row">
       {/* IMAGE */}
-      <div
-        className="relative w-full md:w-5/12 h-64 md:h-full"
-        style={{ perspective: "1000px" }}
-      >
+      <div className="relative w-full md:w-5/12 h-64 md:h-full">
         <div
-          className="holo-card relative w-full h-full group"
-          style={{ transformStyle: "preserve-3d" }}
+          ref={cardRef}
+          className="relative w-full h-full"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
         >
-          {/* FRAME (DESKTOP ONLY) */}
-          <div className="hidden md:block absolute inset-0 rounded-xl border border-white/20 backdrop-blur-md bg-white/5 shadow-[0_0_40px_rgba(0,255,255,0.12)]" />
+          {/* FRAME */}
+          <div className="absolute inset-0 rounded-xl border border-white/20 backdrop-blur-md bg-white/5 shadow-[0_0_40px_rgba(0,255,255,0.12)]" />
 
           <img
             src={member.img}
             alt={member.name}
             loading="eager"
             decoding="async"
-            className="holo-img absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] object-contain rounded-lg will-change-transform transition-transform duration-500"
+            className="absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] object-contain rounded-lg"
           />
 
-          {/* HOLO SWEEP (DESKTOP ONLY) */}
-          <div className="hidden md:block absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
-            <div className="holo-sweep absolute -left-full top-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/15 to-transparent rotate-12" />
-          </div>
+          {/* MOUSE-TRACKING GLARE */}
+          <div
+            ref={glareRef}
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            style={{ opacity: 0, transition: "opacity 0.2s ease" }}
+          />
         </div>
       </div>
 
@@ -195,28 +234,12 @@ export default function TeamPage() {
         .no-scrollbar::-webkit-scrollbar { display: none }
         .no-scrollbar { scrollbar-width: none }
 
-        /* Profile entrance animation */
         .holo-profile {
           animation: holoFadeIn 0.3s ease-out forwards;
         }
         @keyframes holoFadeIn {
           from { opacity: 0; transform: scale(0.97); }
           to   { opacity: 1; transform: scale(1); }
-        }
-
-        /* 3D hover effect on the card image */
-        @media (hover: hover) {
-          .holo-card:hover .holo-img {
-            transform: scale(1.04) rotateX(5deg) rotateY(-5deg);
-          }
-          .holo-card:hover .holo-sweep {
-            animation: sweep 1.2s ease-out forwards;
-          }
-        }
-
-        @keyframes sweep {
-          from { transform: translateX(-60%) rotate(12deg); }
-          to   { transform: translateX(60%) rotate(12deg); }
         }
 
         @media (prefers-reduced-motion: reduce) {

@@ -250,7 +250,7 @@ const Footer = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 relative z-10 mb-1">
                   {[
                     { name: "Arghya", role: "arghya45-dev" },
-                    { name: "Niladri", role: "blueBird" },
+                    { name: "Niladri", role: "blueFish" },
                     { name: "Aritra", role: "Rakebeery" },
                     { name: "Aikik", role: "Aikik-patra" },
                   ].map((dev, index) => (

@@ -36,7 +36,7 @@ export const EVENTS = [
 
 // --- EVENT DATA ---
 export const EVENTS_DATA = [
-  // 1 — Robo War (8 KG) - updated fully
+  // 1 — Robo War (8 KG)
   {
     id: 2,
     title: "Robo War (8 kg)",
@@ -45,7 +45,7 @@ export const EVENTS_DATA = [
     time: "10:00 AM",
     venue: "Open Air Theatre",
     image:
-      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop",
+      "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
     desc: "Build an 8 kg remote-controlled combat robot and battle it out in a tournament-style arena fight. Your goal — disable, immobilize, or outscore your opponent within 3 minutes to claim victory.",
     participationMode: "team",
     price: 0,
@@ -62,30 +62,34 @@ export const EVENTS_DATA = [
       "A kill switch and weapon lock are mandatory; safety inspection is required before every match.",
       "Teams using pneumatics or hydraulics must submit a safety authorization letter signed by faculty during registration.",
     ],
-
-    head: {
-      name: "Suparna Dey",
-      mobile: "+91 7980181134",
-      email: "suparna20052021@gmail.com",
-    },
-    coHead: {
-      name: "Tousif Azim",
-      mobile: "+91 9609670201",
-      email: "tousifw00431@gmail.com",
-    },
-    head: {
-      name: "Parna Ghosh",
-      mobile: "+91 8584872974",
-      email: "parnag125@gmail.com ",
-    },
-    coHead: {
-      name: "Soumodeep Guho",
-      mobile: "+91 8902478956",
-      email: "parnag125@gmail.com",
-    },
+    head: [
+      {
+        name: "Tousif Azim",
+        mobile: "+91 9609670201",
+        email: "tousifw00431@gmail.com",
+      },
+      {
+        name: "Parna Ghosh",
+        mobile: "+91 8584872974",
+        email: "parnag125@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Soumodeep Guho",
+        mobile: "+91 8902478956",
+        email: "parnag125@gmail.com",
+      },
+      {
+        name: "Dhruba Biswas",
+        mobile: "+91 8145104502",
+        email: "dhrubabiswas159@gmail.com",
+      },
+    ],
     prizes: "",
   },
-  // 2 — Robo War (15 KG) - updated fully
+
+  // 2 — Robo War (15 KG)
   {
     id: 11,
     title: "Robo War (15 kg)",
@@ -94,7 +98,7 @@ export const EVENTS_DATA = [
     time: "10:00 AM",
     venue: "Open Air Theatre",
     image:
-      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop",
+      "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
     desc: "Build a 15 kg remote-controlled combat robot and compete in a high-stakes tournament-style arena battle. Immobilize, disable, or outscore your opponent within 3 minutes to advance and claim victory.",
     participationMode: "team",
     price: 0,
@@ -111,29 +115,34 @@ export const EVENTS_DATA = [
       "A kill switch and weapon lock are mandatory; safety inspection is required before every match.",
       "Teams using pneumatics or hydraulics must submit a safety authorization letter signed by faculty during registration.",
     ],
-    head: {
-      name: "Suparna Dey",
-      mobile: "+91 7980181134",
-      email: "suparna20052021@gmail.com",
-    },
-    coHead: {
-      name: "Tousif Azim",
-      mobile: "+91 9609670201",
-      email: "tousifw00431@gmail.com",
-    },
-    head: {
-      name: "Parna Ghosh",
-      mobile: "+91 8584872974",
-      email: "parnag125@gmail.com ",
-    },
-    coHead: {
-      name: "Soumodeep Guho",
-      mobile: "+91 8902478956",
-      email: "parnag125@gmail.com",
-    },
+    head: [
+      {
+        name: "Tousif Azim",
+        mobile: "+91 9609670201",
+        email: "tousifw00431@gmail.com",
+      },
+      {
+        name: "Parna Ghosh",
+        mobile: "+91 8584872974",
+        email: "parnag125@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Soumodeep Guho",
+        mobile: "+91 8902478956",
+        email: "parnag125@gmail.com",
+      },
+      {
+        name: "Dhruba Biswas",
+        mobile: "+91 8145104502",
+        email: "dhrubabiswas159@gmail.com",
+      },
+    ],
     prizes: "",
   },
-  // 3 — Terranova - updated fully
+
+  // 3 — Terranova
   {
     id: 3,
     title: "Terranova",
@@ -141,9 +150,8 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "11:00 AM Onwards",
     venue: "Gaming Lab 1",
-    image:
-      "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1000",
-    desc: "Trapped in the abyss, your only hope is to break free by reaching the gates of heaven. The path is the ruthless “Hell Road,” where you must race at full speed, crash through dangers, and conquer every obstacle as fast as possible. Victory means escape — and peace at last.",
+    image: "https://images.pexels.com/photos/6779863/pexels-photo-6779863.jpeg",
+    desc: "Trapped in the abyss, your only hope is to break free by reaching the gates of heaven. The path is the ruthless \u201cHell Road,\u201d where you must race at full speed, crash through dangers, and conquer every obstacle as fast as possible. Victory means escape \u2014 and peace at last.",
     participationMode: "team",
     price: 0,
     teamPrice: 300,
@@ -156,9 +164,7 @@ export const EVENTS_DATA = [
       "The maximum weight of the bot is 3 kg.",
       "The wire must be 12ft long to avoid any issues.",
       "Ready-made toys/IC engines/LEGO kits are not allowed.",
-      "Both wired and wireless controllers are allowed. In wireless RF controllers, Wi-Fi and",
-      "Bluetooth-based controllers are also allowed.",
-
+      "Both wired and wireless controllers are allowed. In wireless RF controllers, Wi-Fi and Bluetooth-based controllers are also allowed.",
       "Rules:",
       "A team of a maximum of 5 members will be allowed to participate.",
       "Point systems will be introduced at the start of the event.",
@@ -168,29 +174,34 @@ export const EVENTS_DATA = [
       "Timeout of 3 minutes.",
       "The maximum voltage used for driving the bot should be 24V.",
     ],
-    head: {
-      name: "Rudranil Goswami ",
-      mobile: "+91 9830411863",
-      email: "rudranilgoswami3@gmail.com",
-    },
-    head: {
-      name: "Jeet Pal ",
-      mobile: "+91 7797303055",
-      email: "jeet832004@gmail.com",
-    },
-    coHead: {
-      name: "Dhruba Biswas",
-      mobile: "+91 8145104502",
-      email: "dhrubabiswas159@gmail.com",
-    },
-    coHead: {
-      name: "Sudipto Mondal",
-      mobile: "+91 8902478956",
-      email: "sudiptohwh2005@gmail.com ",
-    },
+    head: [
+      {
+        name: "Rudranil Goswami",
+        mobile: "+91 9830411863",
+        email: "rudranilgoswami3@gmail.com",
+      },
+      {
+        name: "Jeet Pal",
+        mobile: "+91 7797303055",
+        email: "jeet832004@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Suparna Dey",
+        mobile: "+91 7980181134",
+        email: "suparna20052021@gmail.com",
+      },
+      {
+        name: "Sudipto Mondal",
+        mobile: "+91 8902478956",
+        email: "sudiptohwh2005@gmail.com",
+      },
+    ],
     prizes: "",
   },
-  // 4 — Line Follower - updated fully
+
+  // 4 — Line Follower
   {
     id: 4,
     title: "Line Follower",
@@ -202,7 +213,7 @@ export const EVENTS_DATA = [
       "https://images.unsplash.com/photo-1589254047589-db4c14ad7779?q=80&w=1170&auto=format&fit=crop",
     desc: "Speed alone won't save you here. In this high-stakes time trial, your robot must navigate a twisting track of black lines on a white arena autonomously. From 90-degree turns to tricky crossovers, this event tests the stability of your hardware and the intelligence of your algorithms. Build it fast, code it smart, and don't lose the line!",
     participationMode: "both",
-    price: 150,
+    price: 200,
     teamPrice: 200,
     isTeamPriceFixed: true,
     minMembers: 2,
@@ -211,7 +222,7 @@ export const EVENTS_DATA = [
       "Build a fully autonomous line-following robot.",
       "Track includes sharp turns, acute angles, crossovers, and lighting variations.",
       "Robot must follow a black line on a white surface (or vice versa).",
-      "No remote control allowed — fully self-operated after start.",
+      "No remote control allowed \u2014 fully self-operated after start.",
       "Uses sensor array to detect path and adjust motors in real-time.",
       "Must maintain accuracy even at high speed.",
       "Fastest robot to complete the track without derailing wins.",
@@ -230,14 +241,17 @@ export const EVENTS_DATA = [
         email: "supratik9832@gmail.com",
       },
     ],
-    coHead: {
-      name: "Samrat Sinha",
-      mobile: "+91 8420112474",
-      email: "ss4912817@gmail.com",
-    },
+    coHead: [
+      {
+        name: "Samrat Sinha",
+        mobile: "+91 8420112474",
+        email: "ss4912817@gmail.com",
+      },
+    ],
     prizes: "",
   },
-  // 5 — Model ViSION - updated fully
+
+  // 5 — Model Vision
   {
     id: 7,
     title: "Model Vision",
@@ -247,38 +261,43 @@ export const EVENTS_DATA = [
     venue: "Gaming Lab 1",
     image:
       "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
-    desc: "Welcome to Model Vision — where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
-    participationMode: "both",
-    price: 80,
-    teamPrice: 100,
+    desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 150,
     isTeamPriceFixed: true,
-    minMembers: 2,
+    minMembers: 1,
     maxMembers: 3,
     rules: [
       "For each group, there should be a maximum of 5 participants and a minimum of 1 participant.",
       "From each group 2 participants will be allowed to come forward and elaborate on the working and functioning of the model.",
       "The team leader of each group will have to register with proper details, and no entries will be entertained without registration.",
-      "The judge's decision will be the final decision. ",
-      "A proper uniform is mandatory for all team members. ",
-      "Participants from GNIT should have their college ID cards with them. ",
+      "The judge's decision will be the final decision.",
+      "A proper uniform is mandatory for all team members.",
+      "Participants from GNIT should have their college ID cards with them.",
       "Participants from other institutes or schools are requested to bring their institutional ID card.",
-      "Every team must carry their own personal socket/extension board for model setup and power requirements. ",
-      "Registration will be done on the website and at the registration desk before the event. ",
+      "Every team must carry their own personal socket/extension board for model setup and power requirements.",
+      "Registration will be done on the website and at the registration desk before the event.",
       "The event head's decision will be final, for under any circumstance's rules can be altered if needed by the organizing authority.",
     ],
-    head: {
-      name: "Manjeera Patra",
-      mobile: "+91 8597757846",
-      email: "manjeerapatra131602@gmail.com ",
-    },
-    coHead: {
-      name: "Manjistha Patra",
-      mobile: "+91 8597757874",
-      email: "manjisthapatra1045@gmail.com ",
-    },
+    head: [
+      {
+        name: "Manjeera Patra",
+        mobile: "+91 8597757846",
+        email: "manjeerapatra131602@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Manjistha Patra",
+        mobile: "+91 8597757874",
+        email: "manjisthapatra1045@gmail.com",
+      },
+    ],
     prizes: "",
   },
-  // 6 — Robo Soccer -  updated fully
+
+  // 6 — Robo Soccer
   {
     id: 5,
     title: "Robo Soccer",
@@ -288,7 +307,7 @@ export const EVENTS_DATA = [
     venue: "Gaming Lab 1",
     image:
       "https://images.unsplash.com/photo-1666193183124-3f27c7800370?q=80&w=1040&auto=format&fit=crop",
-    desc: "Step into the arena of warriors at Turbo-Kick! Tesseract 2k26 brings you the ultimate fusion of match-day energy and raw engineering. Build your custom bot to master the obstacle-laden Prelims and strike your way through adrenaline-pumping 1v1 Knockout battles. From the 6-minute eliminations to the 8-minute Grand Final, only the best strategies will survive the Golden Goal. Don't just watch the future of sports—build it. Register Now!",
+    desc: "Step into the arena of warriors at Turbo-Kick! Tesseract 2k26 brings you the ultimate fusion of match-day energy and raw engineering. Build your custom bot to master the obstacle-laden Prelims and strike your way through adrenaline-pumping 1v1 Knockout battles. From the 6-minute eliminations to the 8-minute Grand Final, only the best strategies will survive the Golden Goal. Don't just watch the future of sports\u2014build it. Register Now!",
     participationMode: "team",
     price: 0,
     teamPrice: 300,
@@ -296,37 +315,36 @@ export const EVENTS_DATA = [
     minMembers: 2,
     maxMembers: 5,
     rules: [
-      "🔹 Team Requirements",
-      "Team size: 2–5 members",
+      "\uD83D\uDD39 Team Requirements",
+      "Team size: 2\u20135 members",
       "Members can be from different institutions",
-      "One participant → only one team",
+      "One participant \u2192 only one team",
       "Valid institutional ID mandatory",
       "No bot sharing between teams",
     ],
-    head: {
-      name: "Debjit mukherjee",
-      mobile: "+91 9830464724",
-      email: "mukh.debjit@gmail.com",
-    },
-    head: {
-      name: "Rajdeep Das",
-      mobile: "+91 9366141412",
-      email: "rajdeepdas.india0@gmail.com",
-    },
-    coHead: {
-      name: "Supriyo Mondal",
-      mobile: "+91 9064457370",
-      email: "",
-    },
-    coHead: {
-      name: "Srijita Biswas",
-      mobile: "+91 8902478956",
-      email: "shreejitabiswasvis@gmail.com",
-    },
+    head: [
+      {
+        name: "Debjit Mukherjee",
+        mobile: "+91 9830464724",
+        email: "mukh.debjit@gmail.com",
+      },
+      {
+        name: "Rajdeep Das",
+        mobile: "+91 9366141412",
+        email: "rajdeepdas.india0@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Srijita Biswas",
+        mobile: "+91 8902478956",
+        email: "shreejitabiswasvis@gmail.com",
+      },
+    ],
     prizes: "",
   },
 
-  // 7 — Super Coder - updated fully
+  // 7 — Super Coder
   {
     id: 9,
     title: "Super Coder",
@@ -337,10 +355,10 @@ export const EVENTS_DATA = [
     image:
       "https://plus.unsplash.com/premium_photo-1678566154673-a728037f3f00?q=80&w=702&auto=format&fit=crop",
     desc: "Code hard, break limits, and outsmart every problem thrown your way.",
+    participationMode: "both",
     price: 100,
     teamPrice: 150,
     isTeamPriceFixed: true,
-    participationMode: "both",
     minMembers: 1,
     maxMembers: 2,
     rules: [
@@ -353,19 +371,24 @@ export const EVENTS_DATA = [
       "Participants must be in proper uniform and must carry payment form and institutional ID cards.",
       "The decision of the Event Head will be final. The organizing authority reserves the right to modify rules if required.",
     ],
-    head: {
-      name: "Nazreen Imam",
-      mobile: "+91 6206705516",
-      email: "nazreenimam78601@gmail.com",
-    },
-    coHead: {
-      name: "Gourav Chanda",
-      mobile: "+91 9382757411",
-      email: "gouravchandra935@gmail.com",
-    },
+    head: [
+      {
+        name: "Nazreen Imam",
+        mobile: "+91 6206705516",
+        email: "nazreenimam78601@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Gourav Chanda",
+        mobile: "+91 9382757411",
+        email: "gouravchandra935@gmail.com",
+      },
+    ],
     prizes: "",
   },
-  // 8 — Capture the Flag - not updated
+
+  // 8 — Capture The Flag
   {
     id: 10,
     title: "Capture The Flag",
@@ -378,7 +401,7 @@ export const EVENTS_DATA = [
     desc: "Cybersecurity challenge where participants exploit vulnerabilities and capture hidden flags.",
     participationMode: "team",
     price: 0,
-    teamPrice: 100,
+    teamPrice: 150,
     isTeamPriceFixed: false,
     minMembers: 2,
     maxMembers: 3,
@@ -389,20 +412,24 @@ export const EVENTS_DATA = [
       "Any attempt to attack event infrastructure = disqualification.",
       "Top score within time wins.",
     ],
-    head: {
-      name: "Arnav Roy",
-      mobile: "+91 92920 33445",
-      email: "arnav.cyber@events.com",
-    },
-    coHead: {
-      name: "Simran Jain",
-      mobile: "+91 91234 22091",
-      email: "simran.j@events.com",
-    },
-    prizes: "Hacker badges + goodies.",
+    head: [
+      {
+        name: "Ujjal Bhattacharya",
+        mobile: "+91 9641768354",
+        email: "",
+      },
+    ],
+    coHead: [
+      {
+        name: "Ujan Ghosh",
+        mobile: "+91 9875510547",
+        email: "",
+      },
+    ],
+    prizes: "",
   },
 
-  // 9 — BGMI - not updated
+  // 9 — BGMI
   {
     id: 12,
     title: "BGMI",
@@ -411,34 +438,47 @@ export const EVENTS_DATA = [
     time: "09:00 AM",
     venue: "CSE Lab",
     image:
-      "https://images.unsplash.com/photo-1599399056366-e318f572dbba?q=80&w=1170&auto=format&fit=crop",
-    desc: "Aim sharp, rush hard, and let your squad dominate the battleground.",
-    participationMode: "both",
+      "https://cdn1.epicgames.com/spt-assets/53ec4985296b4facbe3a8d8d019afba9/pubg-battlegrounds-19vwb.jpg?resize=1&w=780&h=438&quality=high",
+    desc: "The ultimate mobile battleground awaits, where players unite, strategize, and engage in epic battles for victory. Join now!",
+    participationMode: "team",
     price: 0,
-    teamPrice: 100,
-    isTeamPriceFixed: false,
-    minMembers: 4,
+    teamPrice: 200,
+    isTeamPriceFixed: true,
+    minMembers: 1,
     maxMembers: 4,
     rules: [
-      "Register full squad before deadline.",
-      "No hacks/mods allowed.",
-      "Emulators prohibited.",
-      "Report 30 mins before event.",
-      "Organizer decision final.",
+      "Team should consist of (4+2) members (in case of any emergency).",
+      "Only one member of a team (Squad or Duo) has to pay the entry fee and for the match or tournaments.",
+      "If you failed to attend Match in time you will not get any refund.",
+      "Room ID and password would be shared 10 minutes before match. Players should be in lobby 5 minutes before starting the match.",
+      "The lobby will not be restarted for player's disconnections.",
+      "In case of online match, players should record their POV.",
+      "All Maps should be downloaded.",
+      "Make sure your BGMI Username matches with Registered BGMI username.",
+      "Players cannot engage with other players in a verbal manner (cuss words, racism, and sexism).",
+      "Sharing illegal programs and all third-party programs is forbidden.",
+      "Spamming both in writing and verbally is forbidden.",
+      "Teaming with opposing teams is forbidden.",
+      "No emulator player are allowed. External triggers are also.",
     ],
-    head: {
-      name: "Vikram Sharma",
-      mobile: "+91 98765 43210",
-      email: "vikram.s@events.com",
-    },
-    coHead: {
-      name: "Priya Singh",
-      mobile: "+91 87654 32109",
-      email: "priya.s@events.com",
-    },
-    prizes: "Trophy + gaming merchandise.",
+    head: [
+      {
+        name: "Sahil Mallick",
+        mobile: "+91 8697004118",
+        email: "sahilmallick434@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Priyanshu Mandal",
+        mobile: "+91 7980604507",
+        email: "",
+      },
+    ],
+    prizes: "",
   },
-  // 10 — DIGITAL KICKOFF - not updated
+
+  // 10 — DIGITAL KICKOFF
   {
     id: 13,
     title: "DIGITAL KICKOFF",
@@ -449,11 +489,11 @@ export const EVENTS_DATA = [
     image:
       "https://images.unsplash.com/photo-1587368062478-e804f5e2a55a?q=80&w=1323&auto=format&fit=crop",
     desc: "Play smart, strike hard, and let your gameplay rewrite the scoreboard.",
-    price: 0,
-    teamPrice: 100,
     participationMode: "team",
+    price: 0,
+    teamPrice: 350,
     isTeamPriceFixed: true,
-    minMembers: 3,
+    minMembers: 1,
     maxMembers: 4,
     rules: [
       "Standard game settings will be used.",
@@ -462,20 +502,24 @@ export const EVENTS_DATA = [
       "Pausing without permission results in penalty.",
       "Referee decision final.",
     ],
-    head: {
-      name: "Ayan Roy",
-      mobile: "+91 8100019667",
-      email: "ayanroy20.39@gmail.com",
-    },
-    coHead: {
-      name: "Debjit Dwari",
-      mobile: "+91 8240001874",
-      email: "debjitdwari2018@gmail.com",
-    },
+    head: [
+      {
+        name: "Ayan Roy",
+        mobile: "+91 8100019667",
+        email: "ayanroy20.39@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Debjit Dwari",
+        mobile: "+91 8240001874",
+        email: "debjitdwari2018@gmail.com",
+      },
+    ],
     prizes: "",
   },
 
-  // 11 — Carromact - fully updated
+  // 11 — Carromact
   {
     id: 15,
     title: "Carromact",
@@ -485,47 +529,50 @@ export const EVENTS_DATA = [
     venue: "Game Room",
     image:
       "https://images.unsplash.com/photo-1620741211956-32977c8973be?q=80&w=880&auto=format&fit=crop",
-    desc: "Carrom is a game of elegance, control, and sharp judgment .At Tesseract Carromact 2K26, the board becomes the battlefield where strategy meets precision and patience turns into victory. What starts as a simple break will evolve into a gripping contest of calculated moves, defensive play, and decisive strikes. Players will face high-pressure situations that demand focus, accuracy, and discipline. With exciting matches, intense moments, and pure competitive energy, Carromact 2K26 invites you to showcase your skills and experience the thrill of professional-level carrom. Get ready to aim, strike, and conquer the board.",
-    price: 100,
-    teamPrice: 150,
-    isTeamPriceFixed: true,
+    desc: "Carrom is a game of elegance, control, and sharp judgment. At Tesseract Carromact 2K26, the board becomes the battlefield where strategy meets precision and patience turns into victory. What starts as a simple break will evolve into a gripping contest of calculated moves, defensive play, and decisive strikes. Players will face high-pressure situations that demand focus, accuracy, and discipline. With exciting matches, intense moments, and pure competitive energy, Carromact 2K26 invites you to showcase your skills and experience the thrill of professional-level carrom. Get ready to aim, strike, and conquer the board.",
     participationMode: "both",
+    price: 80,
+    teamPrice: 100,
+    isTeamPriceFixed: true,
     minMembers: 2,
     maxMembers: 2,
     rules: [
-      "🔹 Qualifier Round",
+      "\uD83D\uDD39 Qualifier Round",
       "Conducted offline on college premises.",
       "Participants must report to the assigned venue (to be announced).",
       "Matches played in short-format based on standard carrom rules.",
       "Time limits & scoring pattern explained before start.",
       "Top performers/teams qualify for the Final Round.",
-
-      "🔹 Final Round",
+      "\uD83D\uDD39 Final Round",
       "Conducted offline.",
       "Matches follow standard professional carrom rules.",
       "Detailed rules & format explained before matches begin.",
       "Participants must maintain discipline, fairness & sportsmanship.",
       "Winner and 1st Runner-up decided based on performance.",
-
-      "🔹 Other Important Details",
+      "\uD83D\uDD39 Other Important Details",
       "Judge/organizing committee decision will be final.",
       "Any form of misconduct or unfair play will lead to disqualification.",
       "Participants must report on time for their matches.",
       "The organizing committee expects complete integrity from all players.",
     ],
-    head: {
-      name: "Somnath Bose",
-      mobile: "+91 6290211630",
-      email: "somnathbose0705@gmail.com",
-    },
-    coHead: {
-      name: "Sayan Tagore",
-      mobile: "+91 8420819573",
-      email: "sayantagore85@gmail.com",
-    },
+    head: [
+      {
+        name: "Somnath Bose",
+        mobile: "+91 6290211630",
+        email: "somnathbose0705@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Sayan Tagore",
+        mobile: "+91 8420819573",
+        email: "sayantagore85@gmail.com",
+      },
+    ],
     prizes: "",
   },
-  // 12 — TECH ARENA Chess - fully updated
+
+  // 12 — Tech Arena Chess
   {
     id: 14,
     title: "Tech Arena Chess",
@@ -536,8 +583,8 @@ export const EVENTS_DATA = [
     image:
       "https://images.unsplash.com/photo-1586165368502-1bad197a6461?q=80&w=1258&auto=format&fit=crop",
     desc: "Think deep, play sharp, and outsmart every move.",
-    price: 100,
     participationMode: "solo",
+    price: 100,
     minMembers: 1,
     maxMembers: 1,
     rules: [
@@ -546,10 +593,8 @@ export const EVENTS_DATA = [
       "Players are not required to carry any chess equipment.",
       "Exciting prizes for winners and e-certificates for all participants.",
       "For any issue, players should contact the organizers.",
-      "The organizer’s decision will be final in case of any dispute during the event.",
-
+      "The organizer's decision will be final in case of any dispute during the event.",
       "Game Rules:",
-
       "The tournament will follow a knockout format conducted under standard FIDE chess rules.",
       "White moves first, and player colors will be decided by pairing.",
       "Time Control: Each game will be 10 minutes per player, and 15 minutes per player in the final round.",
@@ -557,27 +602,31 @@ export const EVENTS_DATA = [
       "An illegal move counts only if the opponent claims it. After the claim, the position is restored, and after 3 illegal moves by a player, they will be disqualified.",
       "If 50 moves pass without a pawn move or capture, the game is drawn.",
       "In case of a draw, the winner will be decided by a 5-minute tiebreak game per player.",
-      "If a player’s time runs out, they lose the game unless the opponent does not have sufficient material to checkmate.",
+      "If a player's time runs out, they lose the game unless the opponent does not have sufficient material to checkmate.",
       "All standard rules including en-passant, castling, threefold repetition and pawn promotion are allowed.",
       "Spectators must not interfere or give advice.",
       "Mobile phones and electronic devices must be silent during a game.",
       "Players may resign at any time, but draws cannot be offered.",
       "Any unfair practice or misconduct may lead to disqualification.",
     ],
-    head: {
-      name: "Surajit Tunga",
-      mobile: "+91 8972195682",
-      email: "surajittunga2005@gmail.com",
-    },
-    coHead: {
-      name: "Sayak Banerjee ",
-      mobile: "+91 9874308654",
-      email: "banerjeesayak377@gmail.com",
-    },
+    head: [
+      {
+        name: "Surajit Tunga",
+        mobile: "+91 8972195682",
+        email: "surajittunga2005@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Sayak Banerjee",
+        mobile: "+91 9874308654",
+        email: "banerjeesayak377@gmail.com",
+      },
+    ],
     prizes: "",
   },
 
-  // 13 — Narrative lens - fully updated
+  // 13 — Narrative Lens
   {
     id: 17,
     title: "Narrative lens",
@@ -588,32 +637,37 @@ export const EVENTS_DATA = [
     image:
       "https://plus.unsplash.com/premium_photo-1698362818669-286ffb633a79?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "THIS EVENT CHALLENGES YOU TO BE A VISUAL STORYTELLER. INSTEAD OF SHOWING US JUST ONE POWERFUL IMAGE, YOU NEED TO USE A SMALL GROUP OF PICTURES THAT ALL FIT TOGETHER TO TELL A COMPLETE STORY, JOURNEY, OR IDEA.YOU MUST SUBMIT BETWEEN FOUR AND SIX PHOTOGRAPHS. THESE PICTURES CANNOT BE RANDOM; THEY MUST ALL FOCUS ON ONE SINGLE TOPIC AND BE PLACED IN A SPECIFIC ORDER SO THAT THE STORY FLOWS NATURALLY.THINK OF IT LIKE CREATING A SHORT MOVIE REEL WHERE EVERY FRAME IS IMPORTANT. THE MAIN GOAL IS TO MAKE SURE YOUR AUDIENCE CAN EASILY FOLLOW YOUR MESSAGE FROM THE VERY FIRST PICTURE TO THE VERY LAST ONE. THE ENTIRE SET MUST LOOK CONSISTENT AND CLEAR.",
-    price: 250,
     participationMode: "solo",
+    price: 250,
     minMembers: 1,
     maxMembers: 1,
     rules: [
-      "THE SUBMISSION MUST BE A PHOTO ESSAY—A SERIES OF PHOTOGRAPHS THAT TELLS A SINGULAR, INTEGRATED STORY OR NARRATIVE.",
-      "ENTRY WILL BE DISQUALIFIED IF THE ENTRY DOES NOT FOLLOW THE THEME. ",
+      "THE SUBMISSION MUST BE A PHOTO ESSAY\u2014A SERIES OF PHOTOGRAPHS THAT TELLS A SINGULAR, INTEGRATED STORY OR NARRATIVE.",
+      "ENTRY WILL BE DISQUALIFIED IF THE ENTRY DOES NOT FOLLOW THE THEME.",
       "THE SET MUST CONTAIN A MINIMUM OF 4 AND A MAXIMUM OF 6 INDIVIDUAL IMAGES. SUBMISSIONS OUTSIDE THIS RANGE WILL BE DISQUALIFIED",
       "MAXIMUM FILE SIZE OF [SUGGEST 5MB] PER IMAGE.",
       "ALL IMAGES MUST BE SUBMITTED IN HIGH-QUALITY JPEG (.JPG) FORMAT.",
       "THE PARTICIPANT MUST CLEARLY INDICATE THE INTENDED VIEWING SEQUENCE (E.G., BY NAMING FILES STORYNAME_01.JPG, STORYNAME_02.JPG, ETC.)",
       "THE PHOTOGRAPHS THEMSELVES MUST NOT CONTAIN ANY IDENTIFYING MARKS, BORDERS, LOGOS, OR WATERMARKS. THE FILE NAMES AND SUBMISSION FORM WILL BE USED FOR IDENTIFICATION.",
     ],
-    head: {
-      name: "Sholankee Saha",
-      mobile: "+91 9475834338",
-      email: "me.sholankee18@gmail.com ",
-    },
-    coHead: {
-      name: "Subhankar Baur",
-      mobile: "+91 7477772135",
-      email: "",
-    },
+    head: [
+      {
+        name: "Sholankee Saha",
+        mobile: "+91 9475834338",
+        email: "me.sholankee18@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Subhankar Baur",
+        mobile: "+91 7477772135",
+        email: "",
+      },
+    ],
     prizes: "",
   },
-  // 14 — The Nexus Transmutation - fully updated
+
+  // 14 — The Nexus Transmutation
   {
     id: 19,
     title: "The Nexus Transmutation",
@@ -623,56 +677,57 @@ export const EVENTS_DATA = [
     venue: "GNIT",
     image:
       "https://plus.unsplash.com/premium_photo-1661313651013-e1bee6b0e558?q=80&w=1170&auto=format&fit=crop",
-    desc: "⚡The Nexus Transmutation, 25 minutes to shatter quantum ciphers, hijack AR geometry, and execute the perfect knowledge transfer.",
-
+    desc: "\u26A1The Nexus Transmutation, 25 minutes to shatter quantum ciphers, hijack AR geometry, and execute the perfect knowledge transfer.",
     participationMode: "team",
-
-    // Pricing Logic
     price: 0,
-    teamPrice: 200, // Default for 1–3 members
+    teamPrice: 200,
     isTeamPriceFixed: false,
     specialTeamPrice: {
       members: 4,
       price: 250,
     },
-
     minMembers: 2,
     maxMembers: 4,
-
     rules: [
-      "⏳ Total time limit: 25 minutes (strictly enforced)",
-      "👥 Maximum 4 participants per team",
-      "🚫 No personal devices allowed (phones, laptops, smartwatches, etc.)",
-      "🖥️ Only the provided Nexus Console can be used",
-      "🌐 Challenges involve both digital and physical world elements",
-      "🔐 Participants must solve advanced encryption and cipher-based tasks",
-      "🧩 Clues may be hidden in augmented reality (AR) geometry",
-      "⚖️ Final round includes a live, time-pressured academic search (Ethical Crucible)",
-      "🚨 Extreme pressure environment — performance under stress matters",
-      "🏆 Team completing all challenges successfully within time wins",
+      "\u23F3 Total time limit: 25 minutes (strictly enforced)",
+      "\uD83D\uDC65 Maximum 4 participants per team",
+      "\uD83D\uDEAB No personal devices allowed (phones, laptops, smartwatches, etc.)",
+      "\uD83D\uDDA5\uFE0F Only the provided Nexus Console can be used",
+      "\uD83C\uDF10 Challenges involve both digital and physical world elements",
+      "\uD83D\uDD10 Participants must solve advanced encryption and cipher-based tasks",
+      "\uD83E\uDDE9 Clues may be hidden in augmented reality (AR) geometry",
+      "\u2696\uFE0F Final round includes a live, time-pressured academic search (Ethical Crucible)",
+      "\uD83D\uDEA8 Extreme pressure environment \u2014 performance under stress matters",
+      "\uD83C\uDFC6 Team completing all challenges successfully within time wins",
     ],
-
-    head: {
-      name: "Mahabir Mahato",
-      mobile: "+91 9163934535",
-      email: "mahabirmahatha2003@gmail.com",
-    },
-
-    coHead: {
-      name: "Swaraj Dhara",
-      mobile: "+91 9477776150",
-      email: "swarajdhara47@gmail.com",
-    },
-
-    subHead: {
-      name: "Ananya Kar",
-      mobile: "+91 8637886583",
-      email: "",
-    },
-
+    head: [
+      {
+        name: "Mahabir Mahato",
+        mobile: "+91 9163934535",
+        email: "mahabirmahatha2003@gmail.com",
+      },
+      {
+        name: "Ananya Kar",
+        mobile: "+91 8637886583",
+        email: "ananyakar8900@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Swaraj Dhara",
+        mobile: "+91 9477776150",
+        email: "swarajdhara47@gmail.com",
+      },
+      {
+        name: "Saheli Mandol",
+        mobile: "+91 6290986815",
+        email: "sahelimandal29@gmail.com",
+      },
+    ],
     prizes: "",
   },
-  // 15 — Quizzaract - fully updated
+
+  // 15 — Quizzaract
   {
     id: 20,
     title: "Quizzaract",
@@ -682,39 +737,48 @@ export const EVENTS_DATA = [
     venue: "XY Room",
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1172&auto=format&fit=crop",
-    desc: "In 1964, the first computer mouse wasn’t plastic, wireless, or RGB  it was a wooden block with wheels. At Tesseract Quizzaract 2K26, the only wooden thing will be the stage… but the ideas will shine with silicon grade sharpness. What will begin as a simple quiz will turn into a high voltage showdown of logic, code, and creativity where every cracked answer will feel like reinventing the mouse all over again.From mind bending logic traps to rapid fire tech rounds, teams will not just answer questions they will debug their own limits and leave the crowd buzzing for more. The event will promise a rollercoaster of intellect, excitement, and some truly epic ‘Aha!’ moments. Are you ready to geek out and test your tech-savvy skills? Our tech quiz is here to challenge your knowledge. Get ready to level up your tech IQ and see if you have what it takes to be a tech genius. So, get ready to test your tech intelligence! and let's dive into the exciting world of technology!",
-    participationMode: "both",
-    price: 100,
-    teamPrice: 150,
-    isTeamPriceFixed: true,
+    desc: "In 1964, the first computer mouse wasn't plastic, wireless, or RGB it was a wooden block with wheels. At Tesseract Quizzaract 2K26, the only wooden thing will be the stage\u2026 but the ideas will shine with silicon grade sharpness. What will begin as a simple quiz will turn into a high voltage showdown of logic, code, and creativity where every cracked answer will feel like reinventing the mouse all over again.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 100,
+    isTeamPriceFixed: false,
+    specialTeamPrice: {
+      members: 3,
+      price: 160,
+    },
     minMembers: 2,
-    maxMembers: 2,
+    maxMembers: 3,
     rules: [
       "Qualifier round:",
-      "This round will be conducted through google forms in online mode. All the participants should come to the college premises (The room number will be declared later)",
-      "In the Google form, there will be 22 Questions in total, (among them 20 questions are mandatory and in MCQ format + 2 questions are optional and in SAQ format)",
-      "The total allotted time for Prelims is 15 minutes.",
-      "Depending upon the participation top teams will be eligible for the Final round.",
-
+      "Conducted through Google Forms in online mode.",
+      "Participants must come to the college premises.",
+      "Total 22 questions (20 MCQ mandatory + 2 optional SAQ).",
+      "Total time: 15 minutes.",
+      "Top teams qualify for the final round.",
       "Final round:",
-      "This round will be conducted in offline mode. Participants will be provided a paper and would have to write answers on it",
-      "Rules and further information about this round will be provided on the spot",
-      "Participants are requested to write their team's name, the team leader's name, a valid phone number, and the team leader's Email-Id on top of the paper",
-      "Based on the performance, the WINNER TEAM and 1st Runner up team will be decided. We expect proper integrity from your end.",
+      "Conducted offline.",
+      "Participants will answer on paper.",
+      "Further rules will be explained on the spot.",
+      "Winner and 1st Runner-up will be decided based on performance.",
     ],
-    head: {
-      name: "Nowrin Parveen ",
-      mobile: "+91 8373015328",
-      email: "nowrinparveen365@gmail.com",
-    },
-    coHead: {
-      name: "Badhan Majumder",
-      mobile: "+91 6290677652",
-      email: "badhanmozumder04@gmail.com ",
-    },
+    head: [
+      {
+        name: "Nowrin Parveen",
+        mobile: "+91 8373015328",
+        email: "nowrinparveen365@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Badhan Majumder",
+        mobile: "+91 6290677652",
+        email: "badhanmozumder04@gmail.com",
+      },
+    ],
     prizes: "",
   },
-  // 16 — Frame War - fully updated
+
+  // 16 — Frame War
   {
     id: 16,
     title: "Frame War",
@@ -725,8 +789,8 @@ export const EVENTS_DATA = [
     image:
       "https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?q=80&w=687&auto=format&fit=crop",
     desc: "Capture the moment, frame the story, and let your lens speak louder than words.",
-    price: 100,
     participationMode: "solo",
+    price: 100,
     minMembers: 1,
     maxMembers: 1,
     rules: [
@@ -736,16 +800,20 @@ export const EVENTS_DATA = [
       "Basic editing allowed.",
       "Submission must include RAW files on request.",
     ],
-    head: {
-      name: "Arnabi Ghosh",
-      mobile: "+91 8240251631",
-      email: "arnabighosh2305@gmail.com",
-    },
-    coHead: {
-      name: "Riya Singha Roy",
-      mobile: "+91 9064632245",
-      email: "riyasinharoy02@gmail.com",
-    },
+    head: [
+      {
+        name: "Arnabi Ghosh",
+        mobile: "+91 8240251631",
+        email: "arnabighosh2305@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Riya Singha Roy",
+        mobile: "+91 9064632245",
+        email: "riyasinharoy02@gmail.com",
+      },
+    ],
     prizes: "",
   },
 ];

@@ -20,182 +20,576 @@ import { EVENTS_DATA, EVENT_CATEGORIES } from "../lib/data.js";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // --- COMPONENT: ABOUT MODAL ---
+// ─── Category palette (matches EventCard) ───────────────────────────────────
+const PALETTE = {
+  CODING: { accent: "#c40886", glow: "rgba(196,8,134,0.45)" },
+  MISCELLANEOUS: { accent: "#a855f7", glow: "rgba(168,85,247,0.45)" },
+  INDOORGAME: { accent: "#f97316", glow: "rgba(249,115,22,0.45)" },
+  GAMING: { accent: "#22c55e", glow: "rgba(34,197,94,0.45)" },
+  ROBOTICS: { accent: "#eab308", glow: "rgba(234,179,8,0.45)" },
+  DEFAULT: { accent: "#06b6d4", glow: "rgba(6,182,212,0.45)" },
+};
+
+function getPalette(cat = "") {
+  const key = cat.toUpperCase().replace(/\s+/g, "");
+  return PALETTE[key] ?? PALETTE.DEFAULT;
+}
+
+// ─── Contact Card ─────────────────────────────────────────────────────────────
+const ContactCard = ({ label, person, accent }) => (
+  <div
+    style={{
+      padding: "12px 14px",
+      background: "rgba(255,255,255,0.03)",
+      border: `1px solid rgba(255,255,255,0.08)`,
+      borderRadius: 2,
+      transition: "border-color 0.2s",
+    }}
+    onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${accent}50`)}
+    onMouseLeave={(e) =>
+      (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")
+    }
+  >
+    <p
+      style={{
+        fontFamily: "'Share Tech Mono', monospace",
+        fontSize: 8,
+        letterSpacing: "0.18em",
+        textTransform: "uppercase",
+        color: accent,
+        marginBottom: 6,
+      }}
+    >
+      {label}
+    </p>
+    <p
+      style={{
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 20,
+        letterSpacing: "0.05em",
+        color: "#fff",
+        marginBottom: 8,
+      }}
+    >
+      {person.name || "N/A"}
+    </p>
+    <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+      {person.mobile && (
+        <a
+          href={`tel:${person.mobile}`}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            fontFamily: "'Share Tech Mono', monospace",
+            fontSize: 9,
+            color: "rgba(255,255,255,0.35)",
+            textDecoration: "none",
+            transition: "color 0.2s",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = accent)}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.color = "rgba(255,255,255,0.35)")
+          }
+        >
+          <Phone size={10} style={{ color: accent }} />
+          {person.mobile}
+        </a>
+      )}
+      {person.email && (
+        <a
+          href={`mailto:${person.email}`}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            fontFamily: "'Share Tech Mono', monospace",
+            fontSize: 9,
+            color: "rgba(255,255,255,0.35)",
+            textDecoration: "none",
+            transition: "color 0.2s",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = accent)}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.color = "rgba(255,255,255,0.35)")
+          }
+        >
+          <Mail size={10} style={{ color: accent }} />
+          {person.email}
+        </a>
+      )}
+    </div>
+  </div>
+);
+
+// ─── Section heading ──────────────────────────────────────────────────────────
+const SectionHeading = ({ icon, label, accent }) => (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      paddingBottom: 10,
+      marginBottom: 12,
+      borderBottom: `1px solid rgba(255,255,255,0.07)`,
+    }}
+  >
+    <span style={{ color: accent }}>{icon}</span>
+    <span
+      style={{
+        fontFamily: "'Share Tech Mono', monospace",
+        fontSize: 10,
+        letterSpacing: "0.22em",
+        textTransform: "uppercase",
+        color: accent,
+      }}
+    >
+      {label}
+    </span>
+  </div>
+);
+
+// ─── AboutModal ───────────────────────────────────────────────────────────────
 const AboutModal = ({ event, onClose }) => {
   if (!event) return null;
 
   const navigate = useNavigate();
+  const pal = getPalette(event.category);
 
   const onRegisterClick = () => {
-    navigate("/register", {
-      state: {
-        eventId: event.id,
-      },
-    });
+    navigate("/register", { state: { eventId: event.id } });
   };
 
+  // Normalise head / coHead — always arrays
+  const heads = Array.isArray(event.head)
+    ? event.head
+    : event.head
+      ? [event.head]
+      : [];
+  const coHeads = Array.isArray(event.coHead)
+    ? event.coHead
+    : event.coHead
+      ? [event.coHead]
+      : [];
+
   return (
-    <div className="fixed inset-0 mt-28 z-200 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-300">
-      {/* Overlay click to close */}
-      <div className="absolute inset-0" onClick={onClose}></div>
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&display=swap');
+        .am-scroll::-webkit-scrollbar { width: 3px; }
+        .am-scroll::-webkit-scrollbar-track { background: transparent; }
+        .am-scroll::-webkit-scrollbar-thumb { background: ${pal.accent}40; border-radius: 2px; }
+        @keyframes am-fadein { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+      `}</style>
 
-      {/* Main Modal Container */}
-      {/* CHANGED: Increased max-width to 5xl for better spacing */}
-      <div className="bg-[#050505] border border-cyan-500/30 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-[0_0_50px_rgba(6,182,212,0.15)] relative z-10">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-gray-400 hover:bg-red-600 hover:text-white transition-colors z-20 backdrop-blur-md border border-white/10"
+      {/* Backdrop */}
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 200,
+          background: "rgba(2,4,10,0.88)",
+          backdropFilter: "blur(12px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 20,
+        }}
+        onClick={onClose}
+      >
+        {/* Modal */}
+        <div
+          onClick={(e) => e.stopPropagation()}
+          style={{
+            position: "relative",
+            marginTop: "5rem",
+            width: "100%",
+            maxWidth: 1200,
+            maxHeight: "85vh",
+            display: "flex",
+            flexDirection: "column",
+            background: "#07090f",
+            border: `1px solid ${pal.accent}35`,
+            borderRadius: 2,
+            boxShadow: `0 0 60px ${pal.glow}, 0 0 0 1px ${pal.accent}15`,
+            animation: "am-fadein 0.25s ease both",
+            overflow: "hidden",
+          }}
         >
-          <X size={20} />
-        </button>
+          {/* Close */}
+          <button
+            onClick={onClose}
+            style={{
+              position: "absolute",
+              top: 12,
+              right: 12,
+              zIndex: 20,
+              background: "rgba(0,0,0,0.65)",
+              border: `1px solid rgba(255,255,255,0.1)`,
+              color: "rgba(255,255,255,0.6)",
+              cursor: "pointer",
+              borderRadius: 2,
+              padding: "5px 7px",
+              display: "flex",
+              alignItems: "center",
+              transition: "background 0.2s, color 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#dc2626";
+              e.currentTarget.style.color = "#fff";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(0,0,0,0.65)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+            }}
+          >
+            <X size={16} />
+          </button>
 
-        {/* Header Image */}
-        <div className="relative h-48 shrink-0">
-          <img
-            src={event.image}
-            alt={event.title}
-            className="w-full h-full object-cover grayscale-[0.5]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent flex items-end p-6">
-            <div>
-              <span className="px-3 py-1 rounded bg-cyan-900/50 border border-cyan-500/30 text-cyan-300 text-[10px] font-bold uppercase tracking-wider mb-2 inline-block backdrop-blur-md">
+          {/* Hero image */}
+          <div
+            style={{
+              position: "relative",
+              height: 200,
+              flexShrink: 0,
+              overflow: "hidden",
+            }}
+          >
+            <img
+              src={event.image}
+              alt={event.title}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                filter: "saturate(0.75) contrast(1.1)",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(to bottom, rgba(7,9,15,0.15) 0%, rgba(7,9,15,0.95) 100%)",
+              }}
+            />
+            {/* Corner brackets */}
+            {[
+              { top: 10, left: 10, borderWidth: "2px 0 0 2px" },
+              { top: 10, right: 10, borderWidth: "2px 2px 0 0" },
+            ].map((s, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  width: 16,
+                  height: 16,
+                  borderStyle: "solid",
+                  borderColor: pal.accent,
+                  opacity: 0.8,
+                  ...s,
+                }}
+              />
+            ))}
+            {/* Title block */}
+            <div style={{ position: "absolute", bottom: 16, left: 20 }}>
+              <span
+                style={{
+                  display: "inline-block",
+                  marginBottom: 6,
+                  fontFamily: "'Share Tech Mono', monospace",
+                  fontSize: 8,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  padding: "2px 10px",
+                  border: `1px solid ${pal.accent}`,
+                  color: pal.accent,
+                  background: `${pal.accent}18`,
+                  borderRadius: 1,
+                }}
+              >
                 {event.category}
               </span>
-              <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter">
+              <h2
+                style={{
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: "clamp(24px, 4vw, 36px)",
+                  letterSpacing: "0.06em",
+                  color: "#fff",
+                  margin: 0,
+                  lineHeight: 1,
+                  textShadow: `0 0 30px ${pal.glow}`,
+                }}
+              >
                 {event.title}
               </h2>
             </div>
-          </div>
-        </div>
-
-        {/* Content Area */}
-        <div className="p-6 space-y-8 overflow-y-auto flex-grow custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] bg-fixed">
-          {/* Description */}
-          <div>
-            <h3 className="text-sm font-bold text-cyan-500 mb-3 flex items-center gap-2 uppercase tracking-widest border-b border-white/10 pb-2">
-              <ScrollText size={16} /> Mission Brief
-            </h3>
-            <p className="text-gray-400 leading-relaxed text-sm font-mono">
-              {event.desc}
-            </p>
-          </div>
-
-          {/* Info Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-3 rounded border border-white/10 bg-white/5">
-              <span className="text-[10px] text-gray-500 uppercase tracking-wider block mb-1">
-                Date
-              </span>
-              <div className="flex items-center gap-2 text-white font-mono text-sm">
-                <Calendar size={14} className="text-cyan-500" /> {event.date}
-              </div>
-            </div>
-            <div className="p-3 rounded border border-white/10 bg-white/5">
-              <span className="text-[10px] text-gray-500 uppercase tracking-wider block mb-1">
-                Time
-              </span>
-              <div className="flex items-center gap-2 text-white font-mono text-sm">
-                <Clock size={14} className="text-cyan-500" /> {event.time}
-              </div>
-            </div>
-            <div className="p-3 rounded border border-white/10 bg-white/5">
-              <span className="text-[10px] text-gray-500 uppercase tracking-wider block mb-1">
-                Location
-              </span>
-              <div className="flex items-center gap-2 text-white font-mono text-sm">
-                <MapPin size={14} className="text-cyan-500" /> {event.venue}
-              </div>
-            </div>
+            {/* ID */}
+            <span
+              style={{
+                position: "absolute",
+                bottom: 16,
+                right: 20,
+                fontFamily: "'Share Tech Mono', monospace",
+                fontSize: 9,
+                color: "rgba(255,255,255,0.25)",
+                letterSpacing: "0.1em",
+              }}
+            >
+              #{String(event.id).padStart(3, "0")}
+            </span>
           </div>
 
-          {/* --- NEW LAYOUT: Rules & Prizes Side-by-Side --- */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Rules & Regulations */}
-            <div>
-              <h3 className="text-sm font-bold text-cyan-500 mb-3 flex items-center gap-2 uppercase tracking-widest border-b border-white/10 pb-2">
-                <Ticket size={16} /> Protocols
-              </h3>
-              <ul className="text-gray-400 space-y-2 text-sm font-mono">
-                {event.rules?.map((rule, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="text-cyan-500 shrink-0">{`>`}</span>
-                    <span>{rule}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Prizes */}
-            <div>
-              <h3 className="text-sm font-bold text-cyan-500 mb-3 flex items-center gap-2 uppercase tracking-widest border-b border-white/10 pb-2">
-                <Zap size={16} /> Bounties
-              </h3>
-              <div className="p-4 rounded border border-cyan-500/20 bg-cyan-900/10 text-cyan-200 font-mono text-sm">
-                {event.prizes || "To be announced."}
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Details */}
-          <div>
-            <h3 className="text-sm font-bold text-cyan-500 mb-4 flex items-center gap-2 uppercase tracking-widest border-b border-white/10 pb-2">
-              <Phone size={16} /> Command Center
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Head Contact */}
-              <div className="p-4 bg-white/5 rounded-xl border border-white/10 hover:border-cyan-500/30 transition-colors group">
-                <p className="text-[10px] font-bold uppercase text-cyan-600 mb-2 tracking-wider">
-                  Event Head
-                </p>
-                <p className="text-base font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                  {event.head?.name || "N/A"}
-                </p>
-                <div className="space-y-2 text-xs text-gray-400 font-mono">
-                  <div className="flex items-center gap-2">
-                    <Phone size={12} className="text-cyan-600" />
-                    {event.head?.mobile || "N/A"}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Mail size={12} className="text-cyan-600" />
-                    {event.head?.email || "N/A"}
-                  </div>
-                </div>
-              </div>
-
-              {/* Co-Head Contact */}
-              <div className="p-4 bg-white/5 rounded-xl border border-white/10 hover:border-cyan-500/30 transition-colors group">
-                <p className="text-[10px] font-bold uppercase text-cyan-600 mb-2 tracking-wider">
-                  Co-Event Head
-                </p>
-                <p className="text-base font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                  {event.coHead?.name || "N/A"}
-                </p>
-                <div className="space-y-2 text-xs text-gray-400 font-mono">
-                  <div className="flex items-center gap-2">
-                    <Phone size={12} className="text-cyan-600" />
-                    {event.coHead?.mobile || "N/A"}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Mail size={12} className="text-cyan-600" />
-                    {event.coHead?.email || "N/A"}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer Actions */}
-        <div className="p-4 border-t border-white/10 bg-black/40 backdrop-blur flex gap-4">
-          <button
-            onClick={() => onRegisterClick()}
-            className="flex-1 py-3 bg-cyan-600 hover:bg-cyan-500 text-black font-black uppercase tracking-wider rounded transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center justify-center gap-2"
+          {/* Scrollable content */}
+          <div
+            className="am-scroll"
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              padding: "22px 24px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 24,
+            }}
           >
-            Join Protocol <ArrowRight size={16} />
-          </button>
+            {/* Description */}
+            <div>
+              <SectionHeading
+                icon={<ScrollText size={14} />}
+                label="Mission Brief"
+                accent={pal.accent}
+              />
+              <p
+                style={{
+                  fontFamily: "'Share Tech Mono', monospace",
+                  fontSize: 12,
+                  color: "rgba(255,255,255,0.45)",
+                  lineHeight: 1.8,
+                  margin: 0,
+                }}
+              >
+                {event.desc}
+              </p>
+            </div>
+
+            {/* Info grid */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: 10,
+              }}
+            >
+              {[
+                {
+                  icon: <Calendar size={13} />,
+                  label: "Date",
+                  val: event.date,
+                },
+                { icon: <Clock size={13} />, label: "Time", val: event.time },
+                {
+                  icon: <MapPin size={13} />,
+                  label: "Location",
+                  val: event.venue,
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: "10px 12px",
+                    background: "rgba(255,255,255,0.03)",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                    borderRadius: 2,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "'Share Tech Mono', monospace",
+                      fontSize: 10,
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,0.25)",
+                      display: "block",
+                      marginBottom: 6,
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: 6 }}
+                  >
+                    <span style={{ color: pal.accent }}>{item.icon}</span>
+                    <span
+                      style={{
+                        fontFamily: "'Share Tech Mono', monospace",
+                        fontSize: 10,
+                        color: "#fff",
+                      }}
+                    >
+                      {item.val}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Rules + Prizes */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 20,
+              }}
+            >
+              {/* Rules */}
+              <div>
+                <SectionHeading
+                  icon={<Ticket size={14} />}
+                  label="Protocols"
+                  accent={pal.accent}
+                />
+                <div
+                  style={{ display: "flex", flexDirection: "column", gap: 6 }}
+                >
+                  {event.rules?.map((rule, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        gap: 8,
+                        alignItems: "flex-start",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "'Share Tech Mono', monospace",
+                          fontSize: 10,
+                          color: pal.accent,
+                          flexShrink: 0,
+                          marginTop: 1,
+                        }}
+                      >
+                        ›
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: "'Share Tech Mono', monospace",
+                          fontSize: 12,
+                          color: "rgba(255,255,255,0.42)",
+                          lineHeight: 1.65,
+                        }}
+                      >
+                        {rule}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Prizes */}
+              <div>
+                <SectionHeading
+                  icon={<Zap size={14} />}
+                  label="Bounties"
+                  accent={pal.accent}
+                />
+                <div
+                  style={{
+                    padding: "14px 16px",
+                    background: `${pal.accent}10`,
+                    border: `1px solid ${pal.accent}25`,
+                    borderRadius: 2,
+                    fontFamily: "'Share Tech Mono', monospace",
+                    fontSize: 10,
+                    color: "rgba(255,255,255,0.45)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {event.prizes || "To be announced."}
+                </div>
+              </div>
+            </div>
+
+            {/* Contacts */}
+            <div>
+              <SectionHeading
+                icon={<Phone size={14} />}
+                label="Command Center"
+                accent={pal.accent}
+              />
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+                  gap: 10,
+                }}
+              >
+                {heads.map((p, i) => (
+                  <ContactCard
+                    key={`head-${i}`}
+                    label="Event Head"
+                    person={p}
+                    accent={pal.accent}
+                  />
+                ))}
+                {coHeads.map((p, i) => (
+                  <ContactCard
+                    key={`cohead-${i}`}
+                    label="Co-Event Head"
+                    person={p}
+                    accent={pal.accent}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div
+            style={{
+              padding: "12px 20px",
+              borderTop: `1px solid ${pal.accent}20`,
+              background: "rgba(0,0,0,0.5)",
+              backdropFilter: "blur(8px)",
+              display: "flex",
+              gap: 12,
+            }}
+          >
+            <button
+              onClick={onRegisterClick}
+              style={{
+                flex: 1,
+                padding: "11px 0",
+                background: pal.accent,
+                border: "none",
+                borderRadius: 2,
+                color: "#000",
+                cursor: "pointer",
+                fontFamily: "'Share Tech Mono', monospace",
+                fontSize: 10,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                fontWeight: 700,
+                boxShadow: `0 0 24px ${pal.glow}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                transition: "filter 0.2s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.filter = "brightness(1.15)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.filter = "brightness(1)")
+              }
+            >
+              Join Protocol <ArrowRight size={14} />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -237,7 +631,7 @@ const EventsPage = () => {
       <div className="fixed top-0 left-0 w-full h-[50vh] bg-linear-to-b from-[#0f172a] to-transparent pointer-events-none z-0"></div>
       <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
       {/* Main Content */}
-      <div className="relative z-10 container mx-auto px-6 py-20">
+      <div className="relative mt-16 z-10 container mx-auto px-6 py-20">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6 text-cyan-400 text-xs font-bold tracking-widest uppercase">
