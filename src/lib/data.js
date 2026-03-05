@@ -369,7 +369,8 @@ export const EVENTS_DATA = [
     date: "Feb 26, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    image: "",
+    image:
+      "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "Cybersecurity challenge where participants exploit vulnerabilities and capture hidden flags.",
     participationMode: "team",
     price: 0,
