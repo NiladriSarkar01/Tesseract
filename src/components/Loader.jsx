@@ -1,204 +1,192 @@
-import React from "react";
-import logo from "../assets/logo.png";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-export const CyberLoader = ({ text = "SYNCING DATA", size = 150 }) => {
+// ==========================================
+// 1. MULTI-LANGUAGE TESSERACT ASSETS
+// ==========================================
+
+const tesseractTranslations = [
+  "TESSERACT", // English
+  "テセラクト", // Japanese
+  "ТЕССЕРАКТ", // Russian
+  "ΤΕΣΣΕΡΑΚΤ", // Greek
+  "테세랙트", // Korean
+  "टेसेरैक्ट", // Hindi
+  "تسراكت", // Arabic
+  "T3SS3R4CT", // Glitch/Leet
+  "01010100", // Binary
+  "█████████", // Redacted
+  "T E S S E R A C T", // Spaced
+];
+
+// Reusable Multi-Language Text Component
+const MultiLangText = ({ className = "text-4xl md:text-6xl" }) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    // Cycles rapidly through languages every 150ms
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % tesseractTranslations.length);
+    }, 150);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div
-      className="flex flex-col items-center justify-center relative font-mono"
-      style={{ "--loader-size": `${size}px` }}
-    >
-      {/* INLINE STYLES FOR CUSTOM ANIMATIONS 
-         (Keeps your tailwind.config.js clean)
-      */}
-      <style>{`
-        @keyframes spin-reverse {
-          0% { transform: rotate(360deg); }
-          100% { transform: rotate(0deg); }
-        }
-        @keyframes text-flicker {
-          0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; text-shadow: 0 0 10px #00fff2; }
-          20%, 24%, 55% { opacity: 0.5; text-shadow: none; }
-        }
-      `}</style>
-
-      {/* --- LOADER WRAPPER --- */}
+    <div className="relative flex items-center justify-center">
+      {/* Glow Effect */}
       <div
-        className="relative flex justify-center items-center"
-        style={{ width: size, height: size }}
+        className={`absolute ${className} font-black text-cyan-500 blur-xl opacity-50 select-none pointer-events-none`}
       >
-        {/* Outer Ring - Cyan Dashed */}
-        <div className="absolute w-full h-full rounded-full border-2 border-dashed border-[#0066ff] border-t-transparent border-l-transparent animate-[spin_4s_linear_infinite] shadow-[0_0_15px_rgba(0,102,255,0.3)]"></div>
-
-        {/* Middle Ring - Cyan Solid with Reverse Spin */}
-        <div
-          className="absolute w-[70%] h-[70%] rounded-full border-4 border-transparent border-t-[#00fff2] border-b-[#00fff2] shadow-[0_0_20px_rgba(0,255,242,0.5)] drop-shadow-[0_0_5px_rgba(0,255,242,1)]"
-          style={{ animation: "spin-reverse 2s linear infinite" }}
-        >
-          {/* Decorative dots on middle ring */}
-          <div className="absolute top-[-6px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#00fff2] rounded-full shadow-[0_0_10px_#00fff2]"></div>
-          <div className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#00fff2] rounded-full shadow-[0_0_10px_#00fff2]"></div>
-        </div>
-
-        {/* Inner Ring - Blue Pulse */}
-        <div className="absolute w-[40%] h-[40%] rounded-full border-2 border-[#0066ff] opacity-60 animate-[pulse_2s_ease-in-out_infinite]"></div>
-
-        {/* Core - The glowing center */}
-        <div className="absolute w-[20%] h-[20%] bg-[#00fff2] rounded-full shadow-[0_0_10px_#00fff2,0_0_30px_#00fff2,0_0_60px_#0066ff] animate-pulse"></div>
+        {tesseractTranslations[index]}
       </div>
-
-      {/* --- GLITCH TEXT --- */}
+      {/* Main Text */}
       <div
-        className="mt-8 text-[#00fff2] text-lg tracking-[4px] uppercase font-bold relative"
-        style={{ animation: "text-flicker 3s infinite" }}
+        className={`${className} font-black text-white tracking-widest drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]`}
       >
+        {tesseractTranslations[index]}
+      </div>
+    </div>
+  );
+};
+
+// Subtle CRT Scanline overlay
+const ScanlineOverlay = () => (
+  <div className="absolute inset-0 pointer-events-none z-50 mix-blend-overlay opacity-20">
+    <div className="w-full h-full bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_4px]" />
+  </div>
+);
+
+// ==========================================
+// 2. EXPORTED COMPONENTS
+// ==========================================
+
+// --- A. CyberLoader (Small Spinner for Guards) ---
+export const CyberLoader = ({ text = "SYNCING", size = 150 }) => {
+  return (
+    <div className="flex bg-transparent flex-col items-center justify-center relative font-mono text-cyan-500 w-full h-full min-h-[200px]">
+      <div className="relative flex items-center justify-center mb-6">
+        {/* Minimal spinning border around the multi-lang text */}
+        <div className="absolute inset-0 scale-150 border border-cyan-500/30 rounded-full border-t-cyan-400 animate-[spin_2s_linear_infinite]" />
+        <div className="absolute inset-0 scale-125 border border-cyan-500/10 rounded-full border-b-blue-500 animate-[spin_3s_linear_infinite_reverse]" />
+
+        <MultiLangText className="text-xl md:text-2xl" />
+      </div>
+      <div className="mt-8 text-xs tracking-[0.4em] font-bold animate-pulse text-cyan-400">
         {`> ${text} <`}
       </div>
     </div>
   );
 };
 
+// --- B. TesseractLoader (Medium Spinner for Layouts) ---
 export const TesseractLoader = () => {
   return (
-    <div className="tesseract-wrapper flex flex-col items-center justify-center min-h-screen bg-transparent overflow-visible font-mono select-none">
-      <div className="perspective-1000">
-        <div className="loader-assembly">
-          <img src={logo} alt="Tesseract Logo" className="t-logo-bg" />
-          <div className="ring-wrapper">
-            <div className="stabilizer-ring">
-              <div className="tech-bit"></div>
-            </div>
-            <div className="stabilizer-ring"></div>
-          </div>
-        </div>
-      </div>
-
-      <style>{`
-        .tesseract-wrapper {
-        overflow: visible !important;
-          --cyan-primary: #06b6d4;
-          --cyan-bright: #22d3ee;
-          --glow-color: rgba(34, 211, 238, 0.6);
-      }
-
-
-        /* Increase overall loader assembly size */
-        .loader-assembly {
-         overflow: visible !important;
-          position: relative;
-          width: 260px;      /* was 160px */
-          height: 260px;     /* was 160px */
-          transform-style: preserve-3d;
-          animation: float 6s ease-in-out infinite;
-        }
-
-        /* Bigger tesseract cube */
-        .tesseract-core {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 70px;      /* was 40px */
-          height: 70px;     /* was 40px */
-          margin-top: -35px;
-          margin-left: -35px;
-          transform-style: preserve-3d;
-          animation: tumble 4s linear infinite;
-        }
-
-        .core-face {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: rgba(34, 211, 238, 0.2);
-          border: 2px solid #fff;       /* slightly thicker for bigger size */
-          box-shadow: 0 0 25px var(--cyan-bright);
-        }
-
-        /* Adjusted cube Z distances */
-        .f1 { transform: rotateY(0deg) translateZ(35px); }
-        .f2 { transform: rotateY(90deg) translateZ(35px); }
-        .f3 { transform: rotateY(180deg) translateZ(35px); }
-        .f4 { transform: rotateY(-90deg) translateZ(35px); }
-        .f5 { transform: rotateX(90deg) translateZ(35px); }
-        .f6 { transform: rotateX(-90deg) translateZ(35px); }
-
-        /* Bigger glowing center */
-        .inner-power {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 35px;        /* was 20px */
-          height: 35px;       /* was 20px */
-          transform: translate(-50%, -50%);
-          background: white;
-          border-radius: 50%;
-          box-shadow: 0 0 30px 15px var(--cyan-bright);
-          animation: pulse-core 0.5s ease-in-out infinite alternate;
-        }
-
-        /* Bigger containment rings */
-        .stabilizer-ring {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          margin-left: -120px;     /* was -70px */
-          margin-top: -120px;
-          width: 240px;            /* was 140px */
-          height: 240px;
-          border-radius: 50%;
-          border: 3px solid transparent;
-          border-top-color: var(--cyan-bright);
-          border-bottom-color: var(--cyan-bright);
-          box-shadow: 0 0 25px var(--glow-color);
-          animation: spin 3s linear infinite;
-        }
-
-        .stabilizer-ring:nth-child(2) {
-          width: 280px;          /* was 160px */
-          height: 280px;
-          margin-left: -140px;
-          margin-top: -140px;
-          border-left-color: var(--cyan-primary);
-          border-right-color: var(--cyan-primary);
-          border-top-color: transparent;
-          border-bottom-color: transparent;
-          animation: spin-reverse 5s linear infinite;
-        }
-
-        .tech-bit {
-          position: absolute;
-          top: -6px;      /* larger */
-          left: 50%;
-          transform: translateX(-50%);
-          width: 12px;    /* was 8px */
-          height: 12px;
-          background: white;
-          box-shadow: 0 0 15px white;
-        }
-
-        @keyframes spin { 
-          0% { transform: rotateX(70deg) rotateZ(0deg); } 
-          100% { transform: rotateX(70deg) rotateZ(360deg); } 
-        }
-        @keyframes spin-reverse { 
-          0% { transform: rotateX(70deg) rotateZ(360deg); } 
-          100% { transform: rotateX(70deg) rotateZ(0deg); } 
-        }
-
-        @keyframes tumble {
-          0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-          100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
-        }
-
-        @keyframes pulse-core {
-          0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
-          100% { opacity: 1; transform: translate(-50%, -50%) scale(1.6); }
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-14px); }
-        }
-      `}</style>
+    <div className="flex items-center justify-center w-full h-full min-h-[300px] bg-transparent font-mono">
+      <MultiLangText className="text-3xl md:text-4xl" />
     </div>
   );
 };
+
+// --- C. LogoLoader (Full Screen Intro - Default Export) ---
+const LogoLoader = ({ isLoading = true, fullScreen = true }) => {
+  const [progress, setProgress] = useState(0);
+  const [activeText, setActiveText] = useState("INITIALIZING");
+
+  useEffect(() => {
+    if (!isLoading) {
+      setProgress(100);
+      return;
+    }
+
+    const texts = [
+      "TRANSLATING PROTOCOLS",
+      "DECRYPTING MULTIVERSE",
+      "SYNCING NEURAL NET",
+      "RENDERING REALITY",
+    ];
+
+    const textInterval = setInterval(() => {
+      setActiveText(texts[Math.floor(Math.random() * texts.length)]);
+    }, 1000);
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        const jump = Math.random() < 0.2 ? 15 : 1;
+        return Math.min(prev + jump, 100);
+      });
+    }, 80);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(textInterval);
+    };
+  }, [isLoading]);
+
+  const containerClass = fullScreen
+    ? "fixed inset-0 z-[9999] bg-black text-white"
+    : "relative w-full h-[600px] bg-black text-white overflow-hidden rounded-xl border border-white/10";
+
+  return (
+    <AnimatePresence>
+      {isLoading && (
+        <motion.div
+          key="master-loader"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+          transition={{ duration: 0.8 }}
+          className={`${containerClass} flex flex-col items-center justify-center font-mono overflow-hidden`}
+        >
+          {/* Background elements */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#0f172a_0%,#000000_100%)]" />
+          <ScanlineOverlay />
+
+          {/* Main Multi-Language Text Centerpiece */}
+          <div className="relative z-10 flex items-center justify-center h-48">
+            <MultiLangText className="text-5xl md:text-7xl lg:text-8xl" />
+          </div>
+
+          {/* Progress & Status HUD */}
+          <div className="relative z-20 mt-16 w-64 md:w-96">
+            <div className="flex justify-between items-end mb-2 h-6">
+              <span className="text-cyan-500 text-xs tracking-[0.2em] font-bold">
+                {activeText}
+              </span>
+              <span className="text-white text-xs font-bold">
+                {Math.round(progress)}%
+              </span>
+            </div>
+
+            {/* Progress Bar Container */}
+            <div className="w-full h-1 bg-gray-900 relative overflow-hidden">
+              <motion.div
+                className="absolute top-0 left-0 h-full bg-cyan-400"
+                style={{ width: `${progress}%` }}
+                layoutId="progBar"
+              >
+                <div className="absolute right-0 top-0 h-full w-4 bg-white blur-[2px]" />
+              </motion.div>
+            </div>
+
+            {/* Decorative UI Brackets */}
+            <div className="absolute -left-4 top-0 bottom-0 w-2 border-l border-t border-b border-cyan-500/30 h-full" />
+            <div className="absolute -right-4 top-0 bottom-0 w-2 border-r border-t border-b border-cyan-500/30 h-full" />
+          </div>
+
+          {/* Footer Technical Data */}
+          <div className="absolute bottom-10 flex gap-8 text-[10px] text-cyan-900/60 tracking-widest uppercase">
+            <span>LOCALIZATION: MULTIPLE</span>
+            <span>//</span>
+            <span>SYS.BOOT.SEQ</span>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default LogoLoader;

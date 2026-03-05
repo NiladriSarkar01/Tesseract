@@ -33,7 +33,7 @@ const AgentDeck = memo(function AgentDeck({ members, selectedId, onSelect }) {
             key={m.id}
             data-id={m.id}
             onClick={() => onSelect(m.id)}
-            className={`relative transition-transform duration-200 ${
+            className={`relative flex-shrink-0 transition-transform duration-200 ${
               selectedId === m.id ? "scale-110" : "opacity-60 hover:opacity-100"
             }`}
           >
@@ -84,10 +84,16 @@ const HoloProfile = memo(function HoloProfile({ member }) {
   if (!member) return null;
 
   return (
-    <div className="relative w-full h-full flex flex-col md:flex-row animate-in fade-in zoom-in-95 duration-300">
+    <div className="holo-profile relative w-full h-full flex flex-col md:flex-row">
       {/* IMAGE */}
-      <div className="relative w-full md:w-5/12 h-64 md:h-full perspective">
-        <div className="relative w-full h-full group preserve-3d">
+      <div
+        className="relative w-full md:w-5/12 h-64 md:h-full"
+        style={{ perspective: "1000px" }}
+      >
+        <div
+          className="holo-card relative w-full h-full group"
+          style={{ transformStyle: "preserve-3d" }}
+        >
           {/* FRAME (DESKTOP ONLY) */}
           <div className="hidden md:block absolute inset-0 rounded-xl border border-white/20 backdrop-blur-md bg-white/5 shadow-[0_0_40px_rgba(0,255,255,0.12)]" />
 
@@ -96,26 +102,18 @@ const HoloProfile = memo(function HoloProfile({ member }) {
             alt={member.name}
             loading="eager"
             decoding="async"
-            className="
-              absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)]
-              object-contain rounded-lg
-              will-change-transform
-              transition-transform duration-500
-              md:group-hover:scale-[1.04]
-              md:group-hover:rotate-x-[5deg]
-              md:group-hover:rotate-y-[-5deg]
-            "
+            className="holo-img absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] object-contain rounded-lg will-change-transform transition-transform duration-500"
           />
 
           {/* HOLO SWEEP (DESKTOP ONLY) */}
           <div className="hidden md:block absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
-            <div className="absolute -left-full top-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/15 to-transparent rotate-12 group-hover:animate-[sweep_1.2s_ease-out_forwards]" />
+            <div className="holo-sweep absolute -left-full top-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/15 to-transparent rotate-12" />
           </div>
         </div>
       </div>
 
       {/* INFO */}
-      <div className="w-full md:w-7/12 p-6 md:p-10 flex flex-col bg-[#050505]/90 md:backdrop-blur">
+      <div className="w-full md:w-7/12 p-6 md:p-10 flex flex-col bg-[#050505]/90 md:backdrop-blur overflow-y-auto">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-xs font-mono text-cyan-400 tracking-widest">
             {member.level}_ACCESS
@@ -133,16 +131,10 @@ const HoloProfile = memo(function HoloProfile({ member }) {
           <p className="text-gray-300 text-sm leading-relaxed">{member.bio}</p>
         </div>
 
-        <div className="mt-auto flex items-center gap-3">
+        <div className="mt-auto flex items-center gap-3 pt-4">
           <button
             onClick={() => (window.location.href = `mailto:${member.email}`)}
-            className="
-              flex-1 flex items-center justify-center gap-2 py-3
-              bg-white text-black font-semibold text-xs uppercase tracking-widest
-              rounded-lg transition-all
-              hover:bg-cyan-400
-              active:scale-[0.98]
-            "
+            className="flex-1 flex items-center justify-center gap-2 py-3 bg-white text-black font-semibold text-xs uppercase tracking-widest rounded-lg transition-all hover:bg-cyan-400 active:scale-[0.98]"
           >
             <Mail size={16} />
             Contact
@@ -176,16 +168,19 @@ export default function TeamPage() {
   }, []);
 
   return (
-    <div className="h-[79vh] mt-17 bg-[#020408] text-white relative overflow-hidden">
-      <main className="h-full flex items-center justify-center px-6">
+    <div
+      className="bg-[#020408] text-white relative overflow-hidden"
+      style={{ height: "calc(100vh - 4rem)", marginTop: "4rem" }}
+    >
+      <main className="h-full flex items-center justify-center px-6 pb-24">
         {active ? (
           <div className="w-full max-w-6xl h-[600px]">
             <HoloProfile member={active} />
           </div>
         ) : (
-          <div className="text-gray-500 flex flex-col items-center">
+          <div className="text-gray-500 flex flex-col items-center gap-3">
             <Search size={40} />
-            NO AGENTS
+            <span className="font-mono text-sm tracking-widest">NO AGENTS</span>
           </div>
         )}
       </main>
@@ -196,23 +191,36 @@ export default function TeamPage() {
         onSelect={handleSelect}
       />
 
-      {/* GLOBAL PERF SAFETY */}
       <style>{`
         .no-scrollbar::-webkit-scrollbar { display: none }
         .no-scrollbar { scrollbar-width: none }
-        .perspective { perspective: 1000px }
-        .preserve-3d { transform-style: preserve-3d }
+
+        /* Profile entrance animation */
+        .holo-profile {
+          animation: holoFadeIn 0.3s ease-out forwards;
+        }
+        @keyframes holoFadeIn {
+          from { opacity: 0; transform: scale(0.97); }
+          to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* 3D hover effect on the card image */
+        @media (hover: hover) {
+          .holo-card:hover .holo-img {
+            transform: scale(1.04) rotateX(5deg) rotateY(-5deg);
+          }
+          .holo-card:hover .holo-sweep {
+            animation: sweep 1.2s ease-out forwards;
+          }
+        }
 
         @keyframes sweep {
           from { transform: translateX(-60%) rotate(12deg); }
-          to { transform: translateX(60%) rotate(12deg); }
+          to   { transform: translateX(60%) rotate(12deg); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          * {
-            animation: none !important;
-            transition: none !important;
-          }
+          * { animation: none !important; transition: none !important; }
         }
       `}</style>
     </div>

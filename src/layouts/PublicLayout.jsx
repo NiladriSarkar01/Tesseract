@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Background from "../components/Background";
-import { TesseractLoader } from "../components/Loader";
+import { CyberLoader, TesseractLoader } from "../components/Loader";
 
 const PublicLayout = () => {
   const [initialLoading, setInitialLoading] = useState(true);
@@ -22,7 +22,7 @@ const PublicLayout = () => {
       <>
         <Background />
         <div className="flex items-center justify-center min-h-screen">
-          <TesseractLoader />
+          <CyberLoader />
         </div>
       </>
     );

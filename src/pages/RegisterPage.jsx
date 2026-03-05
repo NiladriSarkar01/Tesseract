@@ -23,6 +23,7 @@ import {
   Mail,
   ArrowLeft, // Added
 } from "lucide-react";
+import paymentQR from "../assets/payment-qr.jpeg";
 
 import { EVENTS_DATA } from "../lib/data";
 import { Link, useLocation } from "react-router-dom";
@@ -45,8 +46,8 @@ const RegisterPage = () => {
 
   // --- CONFIG: REGISTRATION DEADLINE ---
   // You can set this to a specific Date and Time
-  // Example: 25th February 2026, 11:59 PM
-  const REGISTRATION_DEADLINE = new Date("2026-02-25T23:59:59");
+  // Example: 26th March 2026, 11:59 PM
+  const REGISTRATION_DEADLINE = new Date("2026-03-26T23:59:59");
 
   const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
   const [fileName, setFileName] = useState("");
@@ -75,7 +76,7 @@ const RegisterPage = () => {
   const fileInputRef = useRef(null);
 
   const selectedEvent = EVENTS_DATA.find(
-    (e) => String(e.id) === formData.eventId
+    (e) => String(e.id) === formData.eventId,
   );
 
   // Reset form defaults when event changes
@@ -103,14 +104,23 @@ const RegisterPage = () => {
     }
 
     // Team
-    if (selectedEvent.isTeamPriceFixed) {
-      // Fixed price for the whole team regardless of member count
-      return selectedEvent.teamPrice;
-    } else {
-      // Per member pricing (Leader + Team Members)
-      const count = 1 + formData.teamMembers.length;
-      return selectedEvent.teamPrice * count;
+    const count = 1 + formData.teamMembers.length;
+
+    // Special pricing (like Nexus Transmutation)
+    if (selectedEvent.specialTeamPrice) {
+      if (count === selectedEvent.specialTeamPrice.members) {
+        return selectedEvent.specialTeamPrice.price;
+      }
+      return selectedEvent.teamPrice; // 1–3 members
     }
+
+    // Fixed team price
+    if (selectedEvent.isTeamPriceFixed) {
+      return selectedEvent.teamPrice;
+    }
+
+    // Per-member pricing (default logic for other events)
+    return selectedEvent.teamPrice * count;
   };
 
   const currentPrice = calculatePrice();
@@ -577,7 +587,7 @@ const RegisterPage = () => {
                     {/* Placeholder QR */}
                     <div className="w-48 h-48 bg-white p-2 rounded-lg mb-4">
                       <img
-                        src={``}
+                        src={paymentQR}
                         alt="Payment QR"
                         className="w-full h-full object-contain"
                       />
