@@ -55,7 +55,7 @@ const TerminalInput = ({
 
 const Merch = () => {
   // --- CONFIGURATION ---
-  const IS_STOCK_AVAILABLE = true;
+  const IS_STOCK_AVAILABLE = false;
   const NEXT_DROP_DATE = new Date(
     Date.now() + 1000 * 60 * 60 * 24 * 3,
   ).toISOString(); // 3 days from now

@@ -216,16 +216,20 @@ export const EVENTS_DATA = [
       "Must maintain accuracy even at high speed.",
       "Fastest robot to complete the track without derailing wins.",
     ],
-    head: {
-      name: "Anshuman Shaw",
-      mobile: "+91 9088411976",
-      email: "ansh98314414488@gmail.com",
-    },
-    head: {
-      name: "Supratik Nath",
-      mobile: "+91 9932237759",
-      email: "supratik9832@gmail.com",
-    },
+    head: [
+      {
+        id: 1,
+        name: "Anshuman Shaw",
+        mobile: "+91 9088411976",
+        email: "ansh98314414488@gmail.com",
+      },
+      {
+        id: 2,
+        name: "Supratik Nath",
+        mobile: "+91 9932237759",
+        email: "supratik9832@gmail.com",
+      },
+    ],
     coHead: {
       name: "Samrat Sinha",
       mobile: "+91 8420112474",
@@ -581,7 +585,8 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
-    image: "",
+    image:
+      "https://plus.unsplash.com/premium_photo-1698362818669-286ffb633a79?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "THIS EVENT CHALLENGES YOU TO BE A VISUAL STORYTELLER. INSTEAD OF SHOWING US JUST ONE POWERFUL IMAGE, YOU NEED TO USE A SMALL GROUP OF PICTURES THAT ALL FIT TOGETHER TO TELL A COMPLETE STORY, JOURNEY, OR IDEA.YOU MUST SUBMIT BETWEEN FOUR AND SIX PHOTOGRAPHS. THESE PICTURES CANNOT BE RANDOM; THEY MUST ALL FOCUS ON ONE SINGLE TOPIC AND BE PLACED IN A SPECIFIC ORDER SO THAT THE STORY FLOWS NATURALLY.THINK OF IT LIKE CREATING A SHORT MOVIE REEL WHERE EVERY FRAME IS IMPORTANT. THE MAIN GOAL IS TO MAKE SURE YOUR AUDIENCE CAN EASILY FOLLOW YOUR MESSAGE FROM THE VERY FIRST PICTURE TO THE VERY LAST ONE. THE ENTIRE SET MUST LOOK CONSISTENT AND CLEAR.",
     price: 250,
     participationMode: "solo",
@@ -853,7 +858,7 @@ export const TEAM_DATA = [
     id: 3,
     name: "Debtanu Roy",
     dept: "Co-convenor",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
+    img: "https://res.cloudinary.com/dtvxydxiv/image/upload/v1772710321/IMG-20250810-WA0182_-_Debtanu_Roy_niani2.jpg",
     level: "L3",
     bio: "Supports core leadership and streamlines operations for smooth event execution.",
     email: "debtanuroy82@gmail.com",
@@ -881,13 +886,15 @@ export const TEAM_DATA = [
     id: 5,
     name: "Swarnabindu Sen",
     dept: "SPOC",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
+    img: "https://res.cloudinary.com/dtvxydxiv/image/upload/v1772710446/IMG-20260305-WA0018_-_Swarnabindu_Sen_vurovn.jpg",
     level: "L3",
     bio: "Primary point of contact ensuring clear communication and efficient coordination.",
-    email: "",
+    email: "senswarnabindu@gmail.com",
     github: "",
-    linkedin: "",
-    instagram: "",
+    linkedin:
+      "https://www.linkedin.com/in/swarnabindu-sen-aaa2a2265?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    instagram:
+      "https://www.instagram.com/eckaydenteezhist_i?igsh=MTdhYnR5anhqdHJjMg==",
   },
 
   {
@@ -936,46 +943,49 @@ export const TEAM_DATA = [
     id: 9,
     name: "Sneha Sen",
     dept: "Marketing Head",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
+    img: "https://res.cloudinary.com/dtvxydxiv/image/upload/v1772710577/IMG-20260218-WA0022_-_Sneha_Sen_du8b3t.jpg",
     level: "L4",
     bio: "Drives branding, outreach, and engagement to maximize visibility and impact.",
-    email: "",
+    email: "snehasen.official@gmail.com",
     github: "",
-    linkedin: "",
-    instagram: "",
+    linkedin:
+      "https://www.linkedin.com/in/sneha-sen-3a66bb29a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    instagram:
+      "https://www.instagram.com/kaler_mandira?igsh=MW11OTJ6Z2hsdzVvNg==",
   },
 
   {
     id: 10,
     name: "Surajit Pal",
     dept: "Robotics Coordinator",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
+    img: "https://res.cloudinary.com/dtvxydxiv/image/upload/v1772710898/WhatsApp_Image_2026-03-05_at_3.44.44_PM_-_Surajit_Paul_gycxlx.jpg",
     level: "L3",
     bio: "Guides robotics initiatives and fosters innovation in automation and hardware.",
-    email: "",
+    email: "surajitpaul1304@gmail.com",
     github: "",
-    linkedin: "",
-    instagram: "",
+    linkedin: "https://www.linkedin.com/in/psurajit/",
+    instagram: "https://www.instagram.com/__mr.paul_/",
   },
 
   {
     id: 11,
     name: "Saksham Singh",
     dept: "Management Coordinator",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
+    img: "https://res.cloudinary.com/dtvxydxiv/image/upload/v1772710829/IMG_20251207_233825_377_-_Saksham_Singh_tjqyfp.webp",
     level: "L3",
     bio: "Organizes operations and ensures smooth execution of planning and logistics.",
-    email: "",
+    email: "sakshamsingh899@gmail.com",
     github: "",
-    linkedin: "",
-    instagram: "",
+    linkedin:
+      "https://www.linkedin.com/in/saksham-singh-a68b512b1?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    instagram: "https://www.instagram.com/babu.saheb_?igsh=OHh0eHdhM21hcjF0",
   },
 
   {
     id: 12,
     name: "Niladri Sarkar",
     dept: "Tech Team",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
+    img: "https://res.cloudinary.com/dtvxydxiv/image/upload/v1772711659/_MG_3740.JPG_g4gbe0.jpg",
     level: "L3",
     bio: "Builds scalable technical solutions and powers digital innovation.",
     email: "niladrisarkar422@gmail.com",
@@ -991,7 +1001,7 @@ export const TEAM_DATA = [
     level: "L3",
     bio: "Develops intelligent systems and contributes to cutting-edge technical projects.",
     email: "chakrabortyarghya11@gmail.com",
-    github: "",
+    github: "https://github.com/arghya45-dev",
     linkedin:
       "https://www.linkedin.com/in/arghya-chakraborty-61b151276?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     instagram:
@@ -1001,13 +1011,13 @@ export const TEAM_DATA = [
     id: 14,
     name: "Aikik Patra",
     dept: "Tech Team",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
+    img: "https://res.cloudinary.com/dtvxydxiv/image/upload/v1772714290/WhatsApp_Image_2026-03-05_at_17.16.27_f30b4a.jpg",
     level: "L3",
     bio: "Collaborates on development tasks and enhances system performance.",
     email: "",
     github: "",
-    linkedin: "https://www.linkedin.com/in/niladri-sarkar-b96a40274/",
-    instagram: "https://www.instagram.com/_nil_d_sarkar_/",
+    linkedin: "",
+    instagram: "",
   },
   {
     id: 15,
@@ -1080,13 +1090,15 @@ export const TEAM_DATA = [
     id: 20,
     name: "Champak Kundu",
     dept: "Advisor",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000",
+    img: "https://res.cloudinary.com/dtvxydxiv/image/upload/v1772710999/IMG-20250514-WA0086_-_CHAMPAK_KUNDU_sy9k5b.jpg",
     level: "L3",
     bio: "upports leadership with valuable advice and operational perspective.",
-    email: "",
+    email: "champakkundu2004@gmail.com",
     github: "",
-    linkedin: "",
-    instagram: "",
+    linkedin:
+      "https://www.linkedin.com/in/champak-kundu-ab1652253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    instagram:
+      "https://www.instagram.com/itz_champak_?utm_source=qr&igsh=MWN6cHRlbmw1aG83dw==",
   },
 
   {
@@ -1115,6 +1127,14 @@ export const TEAM_DATA = [
     instagram: "",
   },
 ];
+
+export const SOCIALS = {
+  email: "tesseract.2k26@gmail.com",
+  linkedin: "",
+  instagram:
+    "https://www.instagram.com/tesseract_gnit?igsh=MWt0dDAzM243YTU5dQ==",
+  facebook: "https://www.facebook.com/share/1CgBLmjYEG/",
+};
 
 //removed events
 //1 - FIGMA

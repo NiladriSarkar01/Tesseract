@@ -14,10 +14,13 @@ import {
   Cpu,
   Wifi,
   Bot,
+  Facebook,
+  Instagram,
 } from "lucide-react";
 import { targetDate } from "../utils/Constants";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { SOCIALS } from "../lib/data";
 
 // --- UTILS: Reveal Animation Hook & Component ---
 const useElementOnScreen = (options) => {
@@ -182,15 +185,24 @@ const Footer = () => {
 
             {/* Compact Social Icons */}
             <div className="flex gap-2 mt-4 md:mt-0 relative z-10">
-              {[Twitter, Github, Linkedin, Mail].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-cyan-600 hover:border-cyan-600 transition-all duration-300 shadow-md"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
+              <a
+                href={SOCIALS.facebook}
+                className="w-9 h-9 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-cyan-600 hover:border-cyan-600 transition-all duration-300 shadow-md"
+              >
+                <Facebook size={16} />
+              </a>
+              <a
+                href={SOCIALS.instagram}
+                className="w-9 h-9 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-cyan-600 hover:border-cyan-600 transition-all duration-300 shadow-md"
+              >
+                <Instagram size={16} />
+              </a>
+              <a
+                href={`mailto:${SOCIALS.email}`}
+                className="w-9 h-9 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-cyan-600 hover:border-cyan-600 transition-all duration-300 shadow-md"
+              >
+                <Mail size={16} />
+              </a>
             </div>
           </div>
         </Reveal>
@@ -308,9 +320,11 @@ const Footer = () => {
                   </div>
                   {/* Increased Content Font */}
                   <p className="text-gray-400 text-xs pl-5 leading-snug group-hover:text-gray-200">
-                    157/F, Nilgunj Rd, Panihati, Khardaha,
+                    Guru Nanak Institute of Technology,
                     <br />
-                    West Bengal 700110
+                    157/F, Nilgunj Rd, Panihati,
+                    <br />
+                    Kolkata, West Bengal - 700114
                   </p>
                 </div>
 
@@ -325,7 +339,7 @@ const Footer = () => {
                     </span>
                   </div>
                   <span className="text-gray-400 text-xs pl-5 group-hover:text-white">
-                    contact@tesseract.io
+                    {SOCIALS.email}
                   </span>
                 </a>
               </div>

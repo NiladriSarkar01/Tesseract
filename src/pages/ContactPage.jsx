@@ -25,6 +25,7 @@ import {
 import { Link } from "react-router-dom";
 import { useContactStore } from "../store/useContactStore";
 import { random } from "../utils/Constants";
+import { SOCIALS } from "../lib/data";
 
 const ContactPage = () => {
   const navigate = useNavigate();
@@ -196,7 +197,7 @@ const ContactPage = () => {
               href="mailto:support@techfest.com"
               className="text-blue-400 font-bold hover:underline"
             >
-              support@techfest.com
+              {SOCIALS.email}
             </a>
           </div>
         </div>
@@ -218,7 +219,7 @@ const ContactPage = () => {
               href="tel:+919876543210"
               className="text-blue-400 font-bold hover:underline"
             >
-              +91 98765 43210
+              +91 XXXXX XXXXX
             </a>
           </div>
         </div>
@@ -227,11 +228,13 @@ const ContactPage = () => {
       {/* Social Media Strip */}
       <div className="flex justify-center gap-4 mb-16">
         {[
-          { Icon: Instagram, link: "#", label: "Instagram" },
-          { Icon: Twitter, link: "#", label: "Twitter" },
-          { Icon: Linkedin, link: "#", label: "LinkedIn" },
-          { Icon: Facebook, link: "#", label: "Facebook" },
-          { Icon: Globe, link: "#", label: "Website" },
+          { Icon: Instagram, link: SOCIALS.instagram, label: "Instagram" },
+          { Icon: Facebook, link: SOCIALS.facebook, label: "Facebook" },
+          {
+            Icon: Globe,
+            link: "https://www.tesseract-gnit.online",
+            label: "Website",
+          },
         ].map((social, index) => (
           <a
             key={index}
@@ -300,8 +303,8 @@ const ContactPage = () => {
                 formStatus === "success"
                   ? "bg-green-600 text-white hover:bg-green-500"
                   : formStatus === "error"
-                  ? "bg-red-600 text-white hover:bg-red-500"
-                  : "bg-cyan-600 text-white hover:bg-cyan-500 hover:scale-[1.02] active:scale-[0.98]"
+                    ? "bg-red-600 text-white hover:bg-red-500"
+                    : "bg-cyan-600 text-white hover:bg-cyan-500 hover:scale-[1.02] active:scale-[0.98]"
               }`}
             >
               {formStatus === "idle" && (
