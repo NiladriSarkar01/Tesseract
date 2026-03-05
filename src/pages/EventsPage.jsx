@@ -646,7 +646,7 @@ const EventsPage = () => {
             skills and ignite your imagination.
           </p>
         </div>
-        <div className="sticky top-20 z-40 w-full backdrop-blur-xl border-b border-white/10 bg-[#020408]/80 shadow-lg shadow-red-900/5 transition-all duration-300">
+        <div className="sticky top-25 z-40 w-full backdrop-blur-xl border-b border-white/10 bg-[#020408]/80 shadow-lg shadow-red-900/5 transition-all duration-300">
           <div className="container mx-auto px-4 py-4 md:px-6 flex flex-col lg:flex-row items-center justify-between gap-4">
             {/* Brand / Title */}
             <div className="flex items-center gap-2 text-red-500 w-full lg:w-auto justify-center lg:justify-start">
