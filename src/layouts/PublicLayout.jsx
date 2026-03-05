@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Background from "../components/Background";
 import { CyberLoader, TesseractLoader } from "../components/Loader";
+import ScrollToTop from "../components/ScrollToTop";
 
 const PublicLayout = () => {
   const [initialLoading, setInitialLoading] = useState(true);
@@ -30,6 +31,7 @@ const PublicLayout = () => {
 
   return (
     <>
+      <ScrollToTop />
       <Background />
       <Navbar />
       <Outlet />
