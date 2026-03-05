@@ -18,20 +18,16 @@ import {
   Users,
   UserPlus,
   Trash2,
-  Lock, // Added
+  Lock,
   AlertCircle,
   Mail,
-  ArrowLeft, // Added
+  ArrowLeft,
 } from "lucide-react";
 import paymentQR from "../assets/payment-qr.jpeg";
 
 import { EVENTS_DATA } from "../lib/data";
 import { Link, useLocation } from "react-router-dom";
 import { useApplicationStore } from "../store/useApplicationStore";
-
-// ==========================================
-//  👇 REGISTER PAGE WITH DEADLINE LOGIC 👇
-// ==========================================
 
 const RegisterPage = () => {
   const location = useLocation();
@@ -44,13 +40,12 @@ const RegisterPage = () => {
     setSelectedApplication,
   } = useApplicationStore();
 
-  // --- CONFIG: REGISTRATION DEADLINE ---
-  // You can set this to a specific Date and Time
-  // Example: 26th March 2026, 11:59 PM
   const REGISTRATION_DEADLINE = new Date("2026-03-26T23:59:59");
 
   const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
   const [fileName, setFileName] = useState("");
+  // NEW: manual validation error state
+  const [formError, setFormError] = useState("");
 
   useEffect(() => {
     const now = new Date();
@@ -67,9 +62,9 @@ const RegisterPage = () => {
     eventId: String(eventId),
     paymentMode: "online",
     paymentProof: null,
-    registrationType: "solo", // 'solo' or 'team'
+    registrationType: "solo",
     teamName: "",
-    teamMembers: [], // Array of names
+    teamMembers: [],
   });
 
   const [state, setState] = useState("idle");
@@ -79,10 +74,8 @@ const RegisterPage = () => {
     (e) => String(e.id) === formData.eventId,
   );
 
-  // Reset form defaults when event changes
   useEffect(() => {
     if (selectedEvent) {
-      // Default to team if solo not allowed
       const defaultType =
         selectedEvent.participationMode === "team" ? "team" : "solo";
       setFormData((prev) => ({
@@ -94,37 +87,31 @@ const RegisterPage = () => {
     }
   }, [selectedEvent?.id]);
 
-  // Calculate dynamic price based on members
   const calculatePrice = () => {
     if (!selectedEvent) return 0;
 
-    // Solo
     if (formData.registrationType === "solo") {
       return selectedEvent.price;
     }
 
-    // Team
     const count = 1 + formData.teamMembers.length;
 
-    // Special pricing (like Nexus Transmutation)
     if (selectedEvent.specialTeamPrice) {
       if (count === selectedEvent.specialTeamPrice.members) {
         return selectedEvent.specialTeamPrice.price;
       }
-      return selectedEvent.teamPrice; // 1–3 members
+      return selectedEvent.teamPrice;
     }
 
-    // Fixed team price
     if (selectedEvent.isTeamPriceFixed) {
       return selectedEvent.teamPrice;
     }
 
-    // Per-member pricing (default logic for other events)
     return selectedEvent.teamPrice * count;
   };
 
   const currentPrice = calculatePrice();
-  const teamMemberCount = 1 + formData.teamMembers.length; // Leader + added members
+  const teamMemberCount = 1 + formData.teamMembers.length;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -133,19 +120,18 @@ const RegisterPage = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
     setFileName(file.name);
-    if (file) {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(file);
-      reader.onload = async () => {
-        const base64Image = reader.result;
-        setFormData((prev) => ({ ...prev, paymentProof: base64Image }));
-      };
-    }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = async () => {
+      const base64Image = reader.result;
+      setFormData((prev) => ({ ...prev, paymentProof: base64Image }));
+      // Clear any previous file error when user picks a file
+      setFormError("");
+    };
   };
 
-  // Team Member Management
   const addTeamMember = () => {
     if (formData.teamMembers.length < selectedEvent.maxMembers - 1) {
       setFormData((prev) => ({
@@ -167,25 +153,48 @@ const RegisterPage = () => {
     setFormData((prev) => ({ ...prev, teamMembers: newMembers }));
   };
 
+  // FIX: manual validation instead of relying on hidden required inputs
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormError("");
+
+    // Manually validate payment proof since the file input is hidden
+    if (!formData.paymentProof) {
+      setFormError("Please upload your payment screenshot before submitting.");
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+      return;
+    }
+
+    // Validate team size
+    if (
+      formData.registrationType === "team" &&
+      selectedEvent &&
+      formData.teamMembers.length + 1 < selectedEvent.minMembers
+    ) {
+      setFormError(
+        `Your team needs at least ${selectedEvent.minMembers} members (you + ${selectedEvent.minMembers - 1} others).`,
+      );
+      return;
+    }
+
     setFormData((prev) => ({
       ...prev,
       event: selectedEvent.title.toUpperCase(),
     }));
-    console.log(formData);
 
     const res = await createApplication(formData);
     if (res.success) {
       setState("success");
       setSelectedApplication(res.data);
-    } else setState("fail");
+    } else {
+      setState("fail");
+    }
   };
 
-  // --- VIEW: DEADLINE PASSED / REGISTRATION CLOSED ---
+  // --- VIEW: DEADLINE PASSED ---
   if (isRegistrationClosed) {
     return (
-      <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center animate-in zoom-in duration-500">
+      <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center register-fade-in">
         <div className="bg-black/90 backdrop-blur-xl border border-cyan-500/30 p-8 md:p-12 rounded-3xl max-w-md w-full text-center relative overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.2)]">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
 
@@ -224,19 +233,19 @@ const RegisterPage = () => {
 
           <button
             onClick={() => window.history.back()}
-            className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all"
+            className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all flex items-center justify-center gap-2"
           >
-            <ArrowLeft />
+            <ArrowLeft size={18} /> Go Back
           </button>
         </div>
       </div>
     );
   }
 
-  // --- VIEW: SUCCESSFUL REGISTRATION ---
+  // --- VIEW: SUCCESS ---
   if (state === "success") {
     return (
-      <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center animate-in zoom-in duration-500">
+      <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center register-fade-in">
         <div className="bg-black/90 backdrop-blur-xl border border-cyan-500/30 p-8 md:p-12 rounded-3xl max-w-md w-full text-center relative overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.2)]">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
           <div className="w-20 h-20 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -264,16 +273,19 @@ const RegisterPage = () => {
           </div>
           <button
             onClick={() => window.history.back()}
-            className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all"
+            className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all flex items-center justify-center gap-2"
           >
-            <ArrowLeft />
+            <ArrowLeft size={18} /> Go Back
           </button>
         </div>
       </div>
     );
-  } else if (state === "fail") {
+  }
+
+  // --- VIEW: FAIL ---
+  if (state === "fail") {
     return (
-      <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center animate-in zoom-in duration-500">
+      <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center register-fade-in">
         <div className="bg-black/90 backdrop-blur-xl border border-red-500/30 p-8 md:p-12 rounded-3xl max-w-md w-full text-center relative overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.2)]">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
           <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -293,9 +305,9 @@ const RegisterPage = () => {
     );
   }
 
-  // --- VIEW: REGISTRATION FORM ---
+  // --- VIEW: FORM ---
   return (
-    <div className="relative z-10 mt-15 container mx-auto px-4 py-12 animate-in slide-in-from-right duration-500">
+    <div className="relative z-10 mt-16 container mx-auto px-4 py-12 register-slide-in">
       <button
         onClick={() => window.history.back()}
         className="group flex items-center gap-2 text-gray-400 hover:text-blue-400 mb-8 transition-colors"
@@ -316,7 +328,6 @@ const RegisterPage = () => {
             <p className="text-gray-400">
               Complete the form below to register for the event.
             </p>
-            {/* Display Deadline Info */}
             <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-cyan-900/20 border border-cyan-500/20 rounded-lg text-xs text-blue-300">
               <Clock size={12} />
               Deadline: {REGISTRATION_DEADLINE.toLocaleDateString()} at{" "}
@@ -361,7 +372,7 @@ const RegisterPage = () => {
               </div>
             </div>
 
-            {/* Participation Type (Solo/Team) Toggle */}
+            {/* Participation Type Toggle */}
             {selectedEvent && selectedEvent.participationMode === "both" && (
               <div className="p-1 bg-white/5 rounded-xl flex border border-white/10">
                 <button
@@ -445,6 +456,7 @@ const RegisterPage = () => {
                   />
                 </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">
                   Email
@@ -467,9 +479,9 @@ const RegisterPage = () => {
               </div>
             </div>
 
-            {/* TEAM MEMBER SECTION */}
+            {/* Team Member Section */}
             {selectedEvent && formData.registrationType === "team" && (
-              <div className="animate-in fade-in slide-in-from-top-4 space-y-4 pt-4 border-t border-white/10">
+              <div className="register-fade-in space-y-4 pt-4 border-t border-white/10">
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-bold text-white flex items-center gap-2">
                     <Users size={18} className="text-blue-500" /> Team Details
@@ -502,7 +514,6 @@ const RegisterPage = () => {
                   {formData.teamMembers.map((member, index) => (
                     <div key={index} className="flex gap-2">
                       <input
-                        required
                         type="text"
                         value={member}
                         onChange={(e) =>
@@ -531,7 +542,7 @@ const RegisterPage = () => {
                       <UserPlus size={16} /> Add Team Member
                     </button>
                   )}
-                  {/* Validation message if team size is too small */}
+
                   {formData.teamMembers.length + 1 <
                     selectedEvent.minMembers && (
                     <p className="text-xs text-blue-400 mt-1">
@@ -582,9 +593,8 @@ const RegisterPage = () => {
               </div>
 
               {formData.paymentMode === "online" ? (
-                <div className="space-y-6 animate-in fade-in">
+                <div className="space-y-6 register-fade-in">
                   <div className="flex flex-col items-center p-6 bg-white/5 rounded-xl border border-dashed border-white/20 hover:border-cyan-500/30 transition-colors">
-                    {/* Placeholder QR */}
                     <div className="w-48 h-48 bg-white p-2 rounded-lg mb-4">
                       <img
                         src={paymentQR}
@@ -609,7 +619,11 @@ const RegisterPage = () => {
                     </label>
                     <div
                       onClick={() => fileInputRef.current?.click()}
-                      className="border-2 border-dashed border-white/20 hover:border-cyan-500/50 rounded-xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors bg-black/30"
+                      className={`border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors bg-black/30 ${
+                        formError && !formData.paymentProof
+                          ? "border-red-500/60 hover:border-red-500"
+                          : "border-white/20 hover:border-cyan-500/50"
+                      }`}
                     >
                       {formData.paymentProof ? (
                         <div className="flex items-center gap-2 text-blue-400">
@@ -618,12 +632,14 @@ const RegisterPage = () => {
                             {fileName}
                           </span>
                           <button
+                            type="button"
                             onClick={(e) => {
                               e.stopPropagation();
                               setFormData((prev) => ({
                                 ...prev,
                                 paymentProof: null,
                               }));
+                              setFileName("");
                             }}
                             className="p-1 hover:bg-white/10 rounded-full text-gray-400"
                           >
@@ -641,11 +657,11 @@ const RegisterPage = () => {
                           </p>
                         </>
                       )}
+                      {/* FIX: removed `required` — validated manually in handleSubmit */}
                       <input
                         ref={fileInputRef}
                         type="file"
                         accept="image/*"
-                        required
                         className="hidden"
                         onChange={handleFileChange}
                       />
@@ -653,7 +669,7 @@ const RegisterPage = () => {
                   </div>
                 </div>
               ) : (
-                <div className="space-y-6 animate-in fade-in">
+                <div className="space-y-6 register-fade-in">
                   <div className="p-4 bg-yellow-900/20 border border-yellow-500/20 rounded-xl text-sm text-yellow-200">
                     <strong>Instructions:</strong> Please visit the Registration
                     Desk at the Main Auditorium Lobby. Pay in cash and collect
@@ -666,21 +682,28 @@ const RegisterPage = () => {
                     </label>
                     <div
                       onClick={() => fileInputRef.current?.click()}
-                      className="border-2 border-dashed border-white/20 hover:border-cyan-500/50 rounded-xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors bg-black/30"
+                      className={`border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors bg-black/30 ${
+                        formError && !formData.paymentProof
+                          ? "border-red-500/60 hover:border-red-500"
+                          : "border-white/20 hover:border-cyan-500/50"
+                      }`}
                     >
                       {formData.paymentProof ? (
                         <div className="flex items-center gap-2 text-blue-400">
                           <CheckCircle size={20} />
+                          {/* FIX: was formData.paymentProof.name — base64 has no .name, use fileName state */}
                           <span className="truncate max-w-[200px]">
-                            {formData.paymentProof.name}
+                            {fileName}
                           </span>
                           <button
+                            type="button"
                             onClick={(e) => {
                               e.stopPropagation();
                               setFormData((prev) => ({
                                 ...prev,
                                 paymentProof: null,
                               }));
+                              setFileName("");
                             }}
                             className="p-1 hover:bg-white/10 rounded-full text-gray-400"
                           >
@@ -695,16 +718,24 @@ const RegisterPage = () => {
                           </p>
                         </>
                       )}
+                      {/* FIX: removed `required` — validated manually in handleSubmit */}
                       <input
                         ref={fileInputRef}
                         type="file"
                         accept="image/*"
-                        required
                         className="hidden"
                         onChange={handleFileChange}
                       />
                     </div>
                   </div>
+                </div>
+              )}
+
+              {/* FIX: show manual validation error message here, visible to user */}
+              {formError && (
+                <div className="mt-4 flex items-center gap-2 text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
+                  <AlertCircle size={16} className="shrink-0" />
+                  {formError}
                 </div>
               )}
             </div>
@@ -713,9 +744,9 @@ const RegisterPage = () => {
               type="submit"
               disabled={
                 isApplicationsLoading ||
-                !formData.paymentProof ||
                 !formData.eventId ||
                 (formData.registrationType === "team" &&
+                  selectedEvent &&
                   formData.teamMembers.length + 1 < selectedEvent.minMembers)
               }
               className={`w-full py-4 bg-cyan-600 text-white font-black uppercase tracking-wider rounded-xl hover:bg-cyan-500 transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)] disabled:opacity-50 disabled:cursor-not-allowed ${
@@ -779,7 +810,6 @@ const RegisterPage = () => {
                     </span>
                   </div>
 
-                  {/* Dynamic Pricing Display */}
                   <div className="flex justify-between items-center pt-2">
                     <div className="flex flex-col">
                       <span className="text-lg text-gray-400">
@@ -822,6 +852,23 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes registerFadeIn {
+          from { opacity: 0; transform: scale(0.97); }
+          to   { opacity: 1; transform: scale(1); }
+        }
+        @keyframes registerSlideIn {
+          from { opacity: 0; transform: translateX(20px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+        .register-fade-in  { animation: registerFadeIn  0.3s ease-out forwards; }
+        .register-slide-in { animation: registerSlideIn 0.4s ease-out forwards; }
+
+        @media (prefers-reduced-motion: reduce) {
+          * { animation: none !important; transition: none !important; }
+        }
+      `}</style>
     </div>
   );
 };
