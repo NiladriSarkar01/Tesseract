@@ -584,7 +584,7 @@ export const EVENTS_DATA = [
       "https://images.unsplash.com/photo-1586165368502-1bad197a6461?q=80&w=1258&auto=format&fit=crop",
     desc: "Think deep, play sharp, and outsmart every move.",
     participationMode: "solo",
-    price: 100,
+    price: 50,
     minMembers: 1,
     maxMembers: 1,
     rules: [

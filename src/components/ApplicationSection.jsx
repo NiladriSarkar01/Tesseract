@@ -253,7 +253,6 @@ const ApplicationSection = () => {
   useEffect(() => {
     getHelper();
   }, [getApplications, params]);
-  console.log(applications);
 
   const onUpdateApplication = () => {
     if (!updateForm) return;
@@ -454,8 +453,8 @@ const ApplicationSection = () => {
                         p.status === "Approved"
                           ? "bg-green-900/20 text-green-500 border-green-500/30"
                           : p.status === "Rejected"
-                          ? "bg-red-900/20 text-red-500 border-red-500/30"
-                          : "bg-yellow-900/20 text-yellow-500 border-yellow-500/30"
+                            ? "bg-red-900/20 text-red-500 border-red-500/30"
+                            : "bg-yellow-900/20 text-yellow-500 border-yellow-500/30"
                       }`}
                     >
                       {p.status}
