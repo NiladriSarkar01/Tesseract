@@ -329,7 +329,7 @@ const Footer = () => {
                 </div>
 
                 <a
-                  href="mailto:contact@techverse.io"
+                  href={`mailto:${SOCIALS.email}`}
                   className="block p-1.5 rounded border border-white/5 hover:border-cyan-500/30 hover:bg-white/5 transition-all group"
                 >
                   <div className="flex items-center gap-2 mb-0.5 text-blue-400/80">

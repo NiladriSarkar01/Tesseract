@@ -835,7 +835,7 @@ export const EVENT_SLIDES = [
     title: "GAMING",
     subtitle: "THE ARENA",
     category: "GAMING",
-    desc: "Immerse yourself in 48 hours of non-stop competitive gaming. From Valorant to FIFA, prove your dominance.",
+    desc: "Immerse yourself in 48 hours of non-stop competitive gaming. Prove your dominance.",
     color: "from-red-900 to-orange-900", // Warm tones
     accent: "text-red-400",
     image:

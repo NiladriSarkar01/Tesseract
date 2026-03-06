@@ -212,14 +212,18 @@ const ContactPage = () => {
             <h3 className="text-xl font-bold text-white mb-2">
               Emergency Contact
             </h3>
-            <p className="text-gray-400 text-sm mb-4">
-              Student Council President
-            </p>
             <a
-              href="tel:+919876543210"
+              href="tel:+918337068883"
               className="text-blue-400 font-bold hover:underline"
             >
-              +91 XXXXX XXXXX
+              +91 8337068883
+            </a>
+            <br />
+            <a
+              href="tel:+917439368801"
+              className="text-blue-400 font-bold hover:underline"
+            >
+              +91 7439368801
             </a>
           </div>
         </div>
