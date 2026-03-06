@@ -347,9 +347,9 @@ export const EVENTS_DATA = [
   // 7 — Super Coder
   {
     id: 9,
-    title: "Super Coder",
+    title: "Super Coders",
     category: "Coding",
-    date: "Feb 26, 2026",
+    date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
     image:
@@ -393,7 +393,7 @@ export const EVENTS_DATA = [
     id: 10,
     title: "Capture The Flag",
     category: "Coding",
-    date: "Feb 26, 2026",
+    date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
     image:
@@ -434,7 +434,7 @@ export const EVENTS_DATA = [
     id: 12,
     title: "BGMI",
     category: "Gaming",
-    date: "Feb 26, 2026",
+    date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
     image:
@@ -483,7 +483,7 @@ export const EVENTS_DATA = [
     id: 13,
     title: "DIGITAL KICKOFF",
     category: "Gaming",
-    date: "Feb 26, 2026",
+    date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
     image:
