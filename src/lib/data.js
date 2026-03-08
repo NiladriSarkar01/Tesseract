@@ -77,13 +77,13 @@ export const EVENTS_DATA = [
     coHead: [
       {
         name: "Soumodeep Guho",
-        mobile: "+91 8902478956",
-        email: "parnag125@gmail.com",
+        mobile: "+91 8967203175",
+        email: "soumyadeepguha69@gmail.com",
       },
       {
         name: "Dhruba Biswas",
         mobile: "+91 8145104502",
-        email: "dhrubabiswas159@gmail.com",
+        email: "dhrubabiswas7777@gmail.com",
       },
     ],
     prizes: "",
@@ -136,7 +136,7 @@ export const EVENTS_DATA = [
       {
         name: "Dhruba Biswas",
         mobile: "+91 8145104502",
-        email: "dhrubabiswas159@gmail.com",
+        email: "dhrubabiswas7777@gmail.com",
       },
     ],
     prizes: "",
@@ -267,7 +267,7 @@ export const EVENTS_DATA = [
     teamPrice: 150,
     isTeamPriceFixed: true,
     minMembers: 1,
-    maxMembers: 3,
+    maxMembers: 5,
     rules: [
       "For each group, there should be a maximum of 5 participants and a minimum of 1 participant.",
       "From each group 2 participants will be allowed to come forward and elaborate on the working and functioning of the model.",
@@ -336,8 +336,8 @@ export const EVENTS_DATA = [
     ],
     coHead: [
       {
-        name: "Srijita Biswas",
-        mobile: "+91 8902478956",
+        name: "Shreejita Biswas",
+        mobile: "+91 9804784751",
         email: "shreejitabiswasvis@gmail.com",
       },
     ],
@@ -380,7 +380,7 @@ export const EVENTS_DATA = [
     ],
     coHead: [
       {
-        name: "Gourav Chanda",
+        name: "Gourav Chandra",
         mobile: "+91 9382757411",
         email: "gouravchandra935@gmail.com",
       },
@@ -399,18 +399,40 @@ export const EVENTS_DATA = [
     image:
       "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "Cybersecurity challenge where participants exploit vulnerabilities and capture hidden flags.",
-    participationMode: "team",
-    price: 0,
-    teamPrice: 150,
-    isTeamPriceFixed: false,
-    minMembers: 2,
-    maxMembers: 3,
+    participationMode: "both",
+    price: 150,
+    teamPrice: 200,
+    isTeamPriceFixed: true,
+    minMembers: 1,
+    maxMembers: 4,
     rules: [
-      "No external WiFi devices allowed.",
-      "Tools must be open-source.",
-      "Flag sharing between teams is prohibited.",
-      "Any attempt to attack event infrastructure = disqualification.",
-      "Top score within time wins.",
+      "The competition is open to registered participants only.",
+
+      "Participants may compete individually or in teams of up to 4 members.",
+
+      "Team members cannot participate in multiple teams.",
+
+      "The competition will follow a Jeopardy-style CTF format with challenges in areas such as Cryptography, Web Security, Digital Forensics, Reverse Engineering, and Miscellaneous categories.",
+
+      "Each challenge contains a hidden flag that must be submitted in the required format on the official CTF platform.",
+
+      "Flags must be submitted exactly in the specified format (e.g., FLAG{example_flag}).",
+
+      "Points will be awarded based on the difficulty level of each challenge.",
+
+      "The team with the highest score at the end of the competition will be declared the winner.",
+
+      "Participants are allowed to use open-source tools, personal scripts, and publicly available resources.",
+
+      "Attacking the CTF infrastructure, exploiting the scoring platform, or disrupting the competition environment is strictly prohibited.",
+
+      "Sharing flags or collaborating with other teams is not allowed and may lead to disqualification.",
+
+      "In case of a tie, the team that achieves the score earlier (based on submission timestamp) will be ranked higher.",
+
+      "Participants are expected to maintain ethical conduct and fair play throughout the competition.",
+
+      "The decision of the organizing committee will be final and binding in all matters related to the event.",
     ],
     head: [
       {
@@ -702,7 +724,7 @@ export const EVENTS_DATA = [
     ],
     head: [
       {
-        name: "Mahabir Mahato",
+        name: "Mahabir Mahatha",
         mobile: "+91 9163934535",
         email: "mahabirmahatha2003@gmail.com",
       },
@@ -1024,7 +1046,7 @@ export const TEAM_DATA = [
 
   {
     id: 10,
-    name: "Surajit Pal",
+    name: "Surajit Paul",
     dept: "Robotics Coordinator",
     img: "https://res.cloudinary.com/dtvxydxiv/image/upload/v1772710898/WhatsApp_Image_2026-03-05_at_3.44.44_PM_-_Surajit_Paul_gycxlx.jpg",
     level: "L3",
