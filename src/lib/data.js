@@ -44,6 +44,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "10:00 AM",
     venue: "Open Air Theatre",
+    whatsappLink: "https://chat.whatsapp.com/Bamds7udD57AgdSwS22Gi1?mode=gi_t",
     image:
       "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
     desc: "Build an 8 kg remote-controlled combat robot and battle it out in a tournament-style arena fight. Your goal — disable, immobilize, or outscore your opponent within 3 minutes to claim victory.",
@@ -97,6 +98,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "10:00 AM",
     venue: "Open Air Theatre",
+    whatsappLink: "https://chat.whatsapp.com/H4Nzuz8N8eL5k8e8VIDaqi?mode=gi_t",
     image:
       "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
     desc: "Build a 15 kg remote-controlled combat robot and compete in a high-stakes tournament-style arena battle. Immobilize, disable, or outscore your opponent within 3 minutes to advance and claim victory.",
@@ -150,6 +152,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "11:00 AM Onwards",
     venue: "Gaming Lab 1",
+    whatsappLink: "https://chat.whatsapp.com/JMrabGgzHOA84Dh9SEnpoz?mode=gi_t",
     image: "https://images.pexels.com/photos/6779863/pexels-photo-6779863.jpeg",
     desc: "Trapped in the abyss, your only hope is to break free by reaching the gates of heaven. The path is the ruthless \u201cHell Road,\u201d where you must race at full speed, crash through dangers, and conquer every obstacle as fast as possible. Victory means escape \u2014 and peace at last.",
     participationMode: "team",
@@ -209,11 +212,12 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "11:00 AM Onwards",
     venue: "GNIT",
+    whatsappLink: "https://chat.whatsapp.com/IYvC08c8fpDBP1C7UfDOqQ?mode=gi_t",
     image:
       "https://images.unsplash.com/photo-1589254047589-db4c14ad7779?q=80&w=1170&auto=format&fit=crop",
     desc: "Speed alone won't save you here. In this high-stakes time trial, your robot must navigate a twisting track of black lines on a white arena autonomously. From 90-degree turns to tricky crossovers, this event tests the stability of your hardware and the intelligence of your algorithms. Build it fast, code it smart, and don't lose the line!",
-    participationMode: "both",
-    price: 200,
+    participationMode: "team",
+    price: 0,
     teamPrice: 200,
     isTeamPriceFixed: true,
     minMembers: 2,
@@ -259,6 +263,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "11:00 AM Onwards",
     venue: "Gaming Lab 1",
+    whatsappLink: "https://chat.whatsapp.com/CzqkqYAvg5j5O9mt2T8cw7?mode=gi_t",
     image:
       "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
     desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
@@ -269,7 +274,7 @@ export const EVENTS_DATA = [
     minMembers: 1,
     maxMembers: 5,
     rules: [
-      "For each group, there should be a maximum of 5 participants and a minimum of 1 participant.",
+      "For each group, there should be a maximum of 5 participants and a minimum of 2 participants.",
       "From each group 2 participants will be allowed to come forward and elaborate on the working and functioning of the model.",
       "The team leader of each group will have to register with proper details, and no entries will be entertained without registration.",
       "The judge's decision will be the final decision.",
@@ -305,6 +310,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "11:00 AM Onwards",
     venue: "Gaming Lab 1",
+    whatsappLink: "https://chat.whatsapp.com/HwIOib7H1oxK6xmdbvHL0z?mode=gi_t",
     image:
       "https://images.unsplash.com/photo-1666193183124-3f27c7800370?q=80&w=1040&auto=format&fit=crop",
     desc: "Step into the arena of warriors at Turbo-Kick! Tesseract 2k26 brings you the ultimate fusion of match-day energy and raw engineering. Build your custom bot to master the obstacle-laden Prelims and strike your way through adrenaline-pumping 1v1 Knockout battles. From the 6-minute eliminations to the 8-minute Grand Final, only the best strategies will survive the Golden Goal. Don't just watch the future of sports\u2014build it. Register Now!",
@@ -340,6 +346,11 @@ export const EVENTS_DATA = [
         mobile: "+91 9804784751",
         email: "shreejitabiswasvis@gmail.com",
       },
+      {
+        name: "supriyo mondal",
+        mobile: "+91 9064457370",
+        email: "",
+      },
     ],
     prizes: "",
   },
@@ -352,6 +363,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
+    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
     image:
       "https://plus.unsplash.com/premium_photo-1678566154673-a728037f3f00?q=80&w=702&auto=format&fit=crop",
     desc: "Code hard, break limits, and outsmart every problem thrown your way.",
@@ -396,6 +408,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
+    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
     image:
       "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "Cybersecurity challenge where participants exploit vulnerabilities and capture hidden flags.",
@@ -459,6 +472,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
+    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
     image:
       "https://cdn1.epicgames.com/spt-assets/53ec4985296b4facbe3a8d8d019afba9/pubg-battlegrounds-19vwb.jpg?resize=1&w=780&h=438&quality=high",
     desc: "The ultimate mobile battleground awaits, where players unite, strategize, and engage in epic battles for victory. Join now!",
@@ -494,7 +508,7 @@ export const EVENTS_DATA = [
       {
         name: "Priyanshu Mandal",
         mobile: "+91 7980604507",
-        email: "",
+        email: "priyanshumondal927@gmail.com",
       },
     ],
     prizes: "",
@@ -508,6 +522,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
+    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
     image:
       "https://images.unsplash.com/photo-1587368062478-e804f5e2a55a?q=80&w=1323&auto=format&fit=crop",
     desc: "Play smart, strike hard, and let your gameplay rewrite the scoreboard.",
@@ -549,6 +564,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "Game Room",
+    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
     image:
       "https://images.unsplash.com/photo-1620741211956-32977c8973be?q=80&w=880&auto=format&fit=crop",
     desc: "Carrom is a game of elegance, control, and sharp judgment. At Tesseract Carromact 2K26, the board becomes the battlefield where strategy meets precision and patience turns into victory. What starts as a simple break will evolve into a gripping contest of calculated moves, defensive play, and decisive strikes. Players will face high-pressure situations that demand focus, accuracy, and discipline. With exciting matches, intense moments, and pure competitive energy, Carromact 2K26 invites you to showcase your skills and experience the thrill of professional-level carrom. Get ready to aim, strike, and conquer the board.",
@@ -602,6 +618,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "Game Room",
+    whatsappLink: "https://chat.whatsapp.com/GXvFCnGjO4l422BjTX8biQ?mode=gi_t",
     image:
       "https://images.unsplash.com/photo-1586165368502-1bad197a6461?q=80&w=1258&auto=format&fit=crop",
     desc: "Think deep, play sharp, and outsmart every move.",
@@ -648,29 +665,42 @@ export const EVENTS_DATA = [
     prizes: "",
   },
 
-  // 13 — Narrative Lens
+  // 13 — canva fusion
   {
     id: 17,
-    title: "Narrative lens",
+    title: "Canva Fusion",
     category: "Miscellaneous",
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
+    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
     image:
       "https://plus.unsplash.com/premium_photo-1698362818669-286ffb633a79?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    desc: "THIS EVENT CHALLENGES YOU TO BE A VISUAL STORYTELLER. INSTEAD OF SHOWING US JUST ONE POWERFUL IMAGE, YOU NEED TO USE A SMALL GROUP OF PICTURES THAT ALL FIT TOGETHER TO TELL A COMPLETE STORY, JOURNEY, OR IDEA.YOU MUST SUBMIT BETWEEN FOUR AND SIX PHOTOGRAPHS. THESE PICTURES CANNOT BE RANDOM; THEY MUST ALL FOCUS ON ONE SINGLE TOPIC AND BE PLACED IN A SPECIFIC ORDER SO THAT THE STORY FLOWS NATURALLY.THINK OF IT LIKE CREATING A SHORT MOVIE REEL WHERE EVERY FRAME IS IMPORTANT. THE MAIN GOAL IS TO MAKE SURE YOUR AUDIENCE CAN EASILY FOLLOW YOUR MESSAGE FROM THE VERY FIRST PICTURE TO THE VERY LAST ONE. THE ENTIRE SET MUST LOOK CONSISTENT AND CLEAR.",
-    participationMode: "solo",
-    price: 250,
-    minMembers: 1,
-    maxMembers: 1,
+    desc: "A platform where ideas transform into visual stories. Participants will showcase their ideas through a 3–5 minute poster presentation. Teams of 2–3 members can present one hand-drawn poster on chart paper based on a selected topic. participants are expected to follow the event guidelines.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 150,
+    isTeamPriceFixed: true,
+    minMembers: 2,
+    maxMembers: 3,
     rules: [
-      "THE SUBMISSION MUST BE A PHOTO ESSAY\u2014A SERIES OF PHOTOGRAPHS THAT TELLS A SINGULAR, INTEGRATED STORY OR NARRATIVE.",
-      "ENTRY WILL BE DISQUALIFIED IF THE ENTRY DOES NOT FOLLOW THE THEME.",
-      "THE SET MUST CONTAIN A MINIMUM OF 4 AND A MAXIMUM OF 6 INDIVIDUAL IMAGES. SUBMISSIONS OUTSIDE THIS RANGE WILL BE DISQUALIFIED",
-      "MAXIMUM FILE SIZE OF [SUGGEST 5MB] PER IMAGE.",
-      "ALL IMAGES MUST BE SUBMITTED IN HIGH-QUALITY JPEG (.JPG) FORMAT.",
-      "THE PARTICIPANT MUST CLEARLY INDICATE THE INTENDED VIEWING SEQUENCE (E.G., BY NAMING FILES STORYNAME_01.JPG, STORYNAME_02.JPG, ETC.)",
-      "THE PHOTOGRAPHS THEMSELVES MUST NOT CONTAIN ANY IDENTIFYING MARKS, BORDERS, LOGOS, OR WATERMARKS. THE FILE NAMES AND SUBMISSION FORM WILL BE USED FOR IDENTIFICATION.",
+      "EACH TEAM IS ALLOTTED A PRESENTATION TIME OF 3–5 MINUTES.",
+      "EACH TEAM CAN CONSIST OF A MINIMUM OF 2 AND A MAXIMUM OF 3 PARTICIPANTS.",
+      "EVERY TEAM SHOULD MENTION THE SUBJECT OF THEIR POSTER.",
+      "ONLY ONE POSTER CAN BE PRESENTED BY EACH TEAM.",
+      "THE POSTERS MUST BE DESIGNED IN (4 FEET × 2.5 FEET) FULL-SIZED CHART PAPER.",
+      "POSTERS MUST BE HAND-DRAWN.",
+      "USING ANY KIND OF ELECTRONIC GADGETS AND MODELS IS STRICTLY PROHIBITED DURING THE POSTERPRESENTATION.",
+      "SUBMIT THE TOPIC, TEAM DETAILS, MEMBERS' NAMES, AND POSTER SOFT COPY TO THE EVENT HEAD’S EMAIL BEFORE THE DEADLINE.",
+      "THE EVENT HEAD’S DECISION WILL BE FINAL UNDER ALL CIRCUMSTANCES. RULES CAN BE ALTERED IF NEEDED BY THE ORGANIZING AUTHORITY.",
+
+      "TOPICS –",
+      "ARTIFICIAL INTELLIGENCE IN DAILY LIFE",
+      "CYBER SECURITY AND DATA PRIVACY",
+      "LITERATURE: A REFLECTION OF SOCIETY",
+      "TECHNOLOGY AND MENTAL HEALTH",
+      "THE IMPACT OF SOCIAL MEDIA ON SOCIETY",
+      "THE EVOLUTION OF THE INTERNET",
     ],
     head: [
       {
@@ -681,8 +711,8 @@ export const EVENTS_DATA = [
     ],
     coHead: [
       {
-        name: "Subhankar Baur",
-        mobile: "+91 7477772135",
+        name: "Amanpreet Singh Gandhi",
+        mobile: "+91 9674026452",
         email: "",
       },
     ],
@@ -697,6 +727,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "GNIT",
+    whatsappLink: "https://chat.whatsapp.com/HzL2iRHW6USHXPUqkX2Yuw?mode=gi_t",
     image:
       "https://plus.unsplash.com/premium_photo-1661313651013-e1bee6b0e558?q=80&w=1170&auto=format&fit=crop",
     desc: "\u26A1The Nexus Transmutation, 25 minutes to shatter quantum ciphers, hijack AR geometry, and execute the perfect knowledge transfer.",
@@ -757,6 +788,8 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
+    whatsappLink:
+      "https://chat.whatsapp.com/B6tbdoUGaih8MCxNLjh6YB?mode=hqctsha",
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1172&auto=format&fit=crop",
     desc: "In 1964, the first computer mouse wasn't plastic, wireless, or RGB it was a wooden block with wheels. At Tesseract Quizzaract 2K26, the only wooden thing will be the stage\u2026 but the ideas will shine with silicon grade sharpness. What will begin as a simple quiz will turn into a high voltage showdown of logic, code, and creativity where every cracked answer will feel like reinventing the mouse all over again.",
@@ -808,6 +841,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
+    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
     image:
       "https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?q=80&w=687&auto=format&fit=crop",
     desc: "Capture the moment, frame the story, and let your lens speak louder than words.",
@@ -834,6 +868,61 @@ export const EVENTS_DATA = [
         name: "Riya Singha Roy",
         mobile: "+91 9064632245",
         email: "riyasinharoy02@gmail.com",
+      },
+    ],
+    prizes: "",
+  },
+
+  // 9 — free fire
+  {
+    id: 6,
+    title: "FREE FIRE",
+    category: "Gaming",
+    date: "Mar 27, 2026",
+    time: "09:00 AM",
+    venue: "CSE Lab",
+    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    image:
+      "https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg",
+    desc: "The ultimate mobile battleground awaits, where players unite, strategize, and engage in epic battles for victory. Join now!",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 200,
+    isTeamPriceFixed: true,
+    minMembers: 1,
+    maxMembers: 4,
+    rules: [
+      "TEAM SHOULD CONSIST OF 4 MEMBERS. A MAXIMUM OF 2 SUBSTITUTE PLAYERS MAY BEREGISTERED AND USED ONLY IN CASE OF EMERGENCIES.",
+      "THE TOURNAMENT WILL BE CONDUCTED IN TWO FORMATS: SOLO AND SQUAD.",
+      "ONLY ONE MEMBER OF A TEAM HAS TO PAY THE ENTRY FEE AND FOR THE MATCH OR TOURNAMENTS.",
+      "IF YOU FAILED TO ATTEND MATCH IN TIME YOU WILL NOT GET ANY REFUND.",
+      "ROOM ID AND PASSWORD WOULD BE SHARED 10 MINUTES BEFORE MATCH. PLAYERS SHOULD BE IN LOBBY 5 MINUTES BEFORE STARTING THE MATCH.",
+      "THE LOBBY WILL NOT BE RESTARTED FOR PLAYER'S DISCONNECTIONS.",
+      "IN CASE OF ONLINE MATCH , PLAYERS SHOULD RECORD THEIR POV.",
+      "ALL MAPS SHOULD BE DOWNLOADED.",
+      "MAKE SURE YOUR BGMI USERNAME MATCHES WITH REGISTERED BGMI USERNAME.",
+      "PLAYERS CANNOT ENGAGE WITH OTHER PLAYERS IN A VERBAL MANNER (CUSS WORDS, RACISM, AND SEXISM).",
+      "SHARING ILLEGAL PROGRAMS AND ALL THIRD-PARTY PROGRAMS IS FORBIDDEN.",
+      "SPAMMING BOTH IN WRITING AND VERBALLY IS FORBIDDEN.",
+      "TEAMING WITH OPPOSING TEAMS IS FORBIDDEN.",
+      "NO EMULATOR PLAYER ARE ALLOWED. EXTERNAL TRIGGERS ARE ALSO.",
+      "EVERY PLAYER'S APP VERSION WILL BE CHECKED BY THE VOLUNTEERS BEFORE THEY ARE ABOUT TO ENTER THE ROOM.",
+      "MISBEHAVING WITH THE MANAGEMENT WILL LEAD TO DISQUALIFICATION.",
+      "EVENT HEAD DECISION WILL BE FINAL, FOR UNDER ANY CIRCUMSTANCES RULES CAN BE ALTERED IF NEEDED BY THE ORGANIZING AUTHORITY.",
+      "MANAGEMENT HAS THE RIGHT TO CHECK PLAYER DEVICES THROUGHOUT THE EVENT IN BETWEEN MATCHES AS WELL. IF WE FIND ANYTHING UNETHICAL YOU WILL BE DISQUALIFIED FROM THE EVENT",
+    ],
+    head: [
+      {
+        name: "Sahil Mallick",
+        mobile: "+91 8697004118",
+        email: "sahilmallick434@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Priyanshu Mandal",
+        mobile: "+91 7980604507",
+        email: "priyanshumondal927@gmail.com",
       },
     ],
     prizes: "",

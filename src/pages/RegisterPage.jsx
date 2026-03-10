@@ -20,6 +20,8 @@ import {
   Trash2,
   Lock,
   AlertCircle,
+  MessageCircle,
+  ExternalLink,
   Mail,
   ArrowLeft,
 } from "lucide-react";
@@ -254,22 +256,37 @@ const RegisterPage = () => {
           <h2 className="text-3xl font-bold text-white mb-2">
             Registration Successful!
           </h2>
-          <p className="text-gray-400 mb-8">
+          <p className="text-gray-400 mb-6">
             You have successfully registered for <br />
             <span className="text-blue-500 font-bold">
               {selectedEvent?.title || "the event"}
             </span>
             .
-            {formData.registrationType === "team" && (
-              <span className="block text-sm mt-2 text-white/60">
-                Team: {formData.teamName} ({formData.teamMembers.length + 1}{" "}
-                members)
-              </span>
-            )}
           </p>
+
+          {/* New Event-Specific Action Link */}
+          {selectedEvent?.whatsappLink && (
+            <div className="mb-8 p-4 bg-green-500/10 border border-green-500/20 rounded-2xl animate-pulse hover:animate-none transition-all">
+              <p className="text-green-400 text-sm font-bold mb-3 flex items-center justify-center gap-2">
+                <MessageCircle size={16} /> Important: Join the Event Group
+              </p>
+              <a
+                href={selectedEvent.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-black rounded-xl transition-all w-full justify-center shadow-lg shadow-green-900/20"
+              >
+                Join WhatsApp Group <ExternalLink size={16} />
+              </a>
+              <p className="text-[10px] text-gray-500 mt-2">
+                Join for event schedules, rule updates, and live announcements.
+              </p>
+            </div>
+          )}
+
           <div className="bg-white/5 rounded-xl p-4 mb-8 text-sm text-left border border-white/10">
             <p className="text-gray-400 mb-1">Registration ID</p>
-            <p className="text-white font-mono">{selectedApplication.DRP}</p>
+            <p className="text-white font-mono">{selectedApplication?.DRP}</p>
           </div>
           <button
             onClick={() => window.history.back()}
