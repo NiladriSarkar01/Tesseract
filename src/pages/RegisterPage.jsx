@@ -25,6 +25,7 @@ import {
   Mail,
   ArrowLeft,
 } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import paymentQR from "../assets/payment-qr.jpeg";
 
 import { EVENTS_DATA } from "../lib/data";
@@ -46,8 +47,8 @@ const RegisterPage = () => {
 
   const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
   const [fileName, setFileName] = useState("");
-  // NEW: manual validation error state
   const [formError, setFormError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState(null);
 
   useEffect(() => {
     const now = new Date();
@@ -129,7 +130,6 @@ const RegisterPage = () => {
     reader.onload = async () => {
       const base64Image = reader.result;
       setFormData((prev) => ({ ...prev, paymentProof: base64Image }));
-      // Clear any previous file error when user picks a file
       setFormError("");
     };
   };
@@ -155,19 +155,23 @@ const RegisterPage = () => {
     setFormData((prev) => ({ ...prev, teamMembers: newMembers }));
   };
 
-  // FIX: manual validation instead of relying on hidden required inputs
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError("");
 
-    // Manually validate payment proof since the file input is hidden
+    if (!turnstileToken) {
+      setFormError(
+        "Security check not complete. Please wait a moment and try again.",
+      );
+      return;
+    }
+
     if (!formData.paymentProof) {
       setFormError("Please upload your payment screenshot before submitting.");
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
       return;
     }
 
-    // Validate team size
     if (
       formData.registrationType === "team" &&
       selectedEvent &&
@@ -184,12 +188,16 @@ const RegisterPage = () => {
       event: selectedEvent.title.toUpperCase(),
     }));
 
-    const res = await createApplication(formData);
+    const res = await createApplication({
+      ...formData,
+      "cf-turnstile-response": turnstileToken,
+    });
     if (res.success) {
       setState("success");
       setSelectedApplication(res.data);
     } else {
       setState("fail");
+      setTurnstileToken(null);
     }
   };
 
@@ -264,7 +272,6 @@ const RegisterPage = () => {
             .
           </p>
 
-          {/* New Event-Specific Action Link */}
           {selectedEvent?.whatsappLink && (
             <div className="mb-8 p-4 bg-green-500/10 border border-green-500/20 rounded-2xl animate-pulse hover:animate-none transition-all">
               <p className="text-green-400 text-sm font-bold mb-3 flex items-center justify-center gap-2">
@@ -674,7 +681,6 @@ const RegisterPage = () => {
                           </p>
                         </>
                       )}
-                      {/* FIX: removed `required` — validated manually in handleSubmit */}
                       <input
                         ref={fileInputRef}
                         type="file"
@@ -708,7 +714,6 @@ const RegisterPage = () => {
                       {formData.paymentProof ? (
                         <div className="flex items-center gap-2 text-blue-400">
                           <CheckCircle size={20} />
-                          {/* FIX: was formData.paymentProof.name — base64 has no .name, use fileName state */}
                           <span className="truncate max-w-[200px]">
                             {fileName}
                           </span>
@@ -735,7 +740,6 @@ const RegisterPage = () => {
                           </p>
                         </>
                       )}
-                      {/* FIX: removed `required` — validated manually in handleSubmit */}
                       <input
                         ref={fileInputRef}
                         type="file"
@@ -748,7 +752,6 @@ const RegisterPage = () => {
                 </div>
               )}
 
-              {/* FIX: show manual validation error message here, visible to user */}
               {formError && (
                 <div className="mt-4 flex items-center gap-2 text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
                   <AlertCircle size={16} className="shrink-0" />
@@ -757,11 +760,21 @@ const RegisterPage = () => {
               )}
             </div>
 
+            {/* Turnstile CAPTCHA */}
+            <Turnstile
+              siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+              onSuccess={(token) => setTurnstileToken(token)}
+              onExpire={() => setTurnstileToken(null)}
+              onError={() => setTurnstileToken(null)}
+              options={{ theme: "dark" }}
+            />
+
             <button
               type="submit"
               disabled={
                 isApplicationsLoading ||
                 !formData.eventId ||
+                !turnstileToken ||
                 (formData.registrationType === "team" &&
                   selectedEvent &&
                   formData.teamMembers.length + 1 < selectedEvent.minMembers)
