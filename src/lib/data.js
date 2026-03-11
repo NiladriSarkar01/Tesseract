@@ -577,7 +577,7 @@ export const EVENTS_DATA = [
     desc: "Play smart, strike hard, and let your gameplay rewrite the scoreboard.",
     participationMode: "team",
     price: 0,
-    teamPrice: 350,
+    teamPrice: 400,
     isTeamPriceFixed: true,
     minMembers: 1,
     maxMembers: 4,
