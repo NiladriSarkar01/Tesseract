@@ -825,17 +825,17 @@ export const EVENTS_DATA = [
     ],
     coHead: [
       {
+        name: "Soumyadeep Dubey",
+        mobile: "+91 6291399659",
+        email: "soumyadeepdubey2@gmail.com",
+      },
+      {
         name: "Swaraj Dhara",
         mobile: "+91 9477776150",
         email: "swarajdhara47@gmail.com",
       },
       {
         name: "Saheli Mandol",
-        mobile: "+91 6290986815",
-        email: "sahelimandal29@gmail.com",
-      },
-      {
-        name: "",
         mobile: "+91 6290986815",
         email: "sahelimandal29@gmail.com",
       },
