@@ -315,7 +315,7 @@ export const EVENTS_DATA = [
     whatsappLink: "https://chat.whatsapp.com/CzqkqYAvg5j5O9mt2T8cw7?mode=gi_t",
     image:
       "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
-    desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
+    desc: "Welcome to Model Vision — where ideas come to life through innovation. Participants are invited to showcase hardware, robotics, embedded systems, and IoT-based models designed to solve real-world problems. This event celebrates creativity, technical skills, and the ability to turn concepts into functional prototypes. Present your innovation, demonstrate its working, and inspire others with your ideas. Think beyond limits. Build the future.",
     participationMode: "team",
     price: 0,
     teamPrice: 150,
@@ -323,16 +323,25 @@ export const EVENTS_DATA = [
     minMembers: 1,
     maxMembers: 5,
     rules: [
-      "For each group, there should be a maximum of 5 participants and a minimum of 2 participants.",
-      "From each group 2 participants will be allowed to come forward and elaborate on the working and functioning of the model.",
-      "The team leader of each group will have to register with proper details, and no entries will be entertained without registration.",
-      "The judge's decision will be the final decision.",
-      "A proper uniform is mandatory for all team members.",
-      "Participants from GNIT should have their college ID cards with them.",
-      "Participants from other institutes or schools are requested to bring their institutional ID card.",
-      "Every team must carry their own personal socket/extension board for model setup and power requirements.",
-      "Registration will be done on the website and at the registration desk before the event.",
-      "The event head's decision will be final, for under any circumstance's rules can be altered if needed by the organizing authority.",
+      "Each team must consist of minimum 1 and maximum 5 participants.",
+      "Two members from each team will be allowed to present and explain the working of the model.",
+
+      "The team leader must complete the registration with proper details.",
+      "No entries will be accepted without registration.",
+
+      "Participants from GNIT must carry their college ID cards.",
+      "Participants from other colleges must carry their institutional ID cards.",
+      "Proper uniform is mandatory for all team members.",
+      "Models should preferably be hardware, electronics, robotics, or IoT based working prototypes.",
+      "Teams should be prepared to explain the working principle, innovation, and real-world application of their model.",
+
+      "Each team must bring their own extension board or socket if required for powering their model.",
+      "Participants must complete model setup before the event begins.",
+
+      "Projects will be evaluated based on innovation, technical implementation, usefulness, and presentation.",
+      "The judge’s decision will be final.",
+      "Registration will be available online through the website and at the registration desk before the event.",
+      "The event head reserves the right to modify rules if necessary under any circumstances.",
     ],
     head: [
       {
@@ -396,7 +405,7 @@ export const EVENTS_DATA = [
         email: "shreejitabiswasvis@gmail.com",
       },
       {
-        name: "supriyo mondal",
+        name: "Supriyo Mondal",
         mobile: "+91 9064457370",
         email: "",
       },
@@ -412,7 +421,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    whatsappLink: "demolink",
     image:
       "https://plus.unsplash.com/premium_photo-1678566154673-a728037f3f00?q=80&w=702&auto=format&fit=crop",
     desc: "Code hard, break limits, and outsmart every problem thrown your way.",
@@ -457,7 +466,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    whatsappLink: "demolink",
     image:
       "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "Cybersecurity challenge where participants exploit vulnerabilities and capture hidden flags.",
@@ -521,13 +530,13 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    whatsappLink: "demolink",
     image:
       "https://cdn1.epicgames.com/spt-assets/53ec4985296b4facbe3a8d8d019afba9/pubg-battlegrounds-19vwb.jpg?resize=1&w=780&h=438&quality=high",
     desc: "The ultimate mobile battleground awaits, where players unite, strategize, and engage in epic battles for victory. Join now!",
     participationMode: "team",
     price: 0,
-    teamPrice: 200,
+    teamPrice: 250,
     isTeamPriceFixed: true,
     minMembers: 1,
     maxMembers: 4,
@@ -571,7 +580,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    whatsappLink: "demolink",
     image:
       "https://images.unsplash.com/photo-1587368062478-e804f5e2a55a?q=80&w=1323&auto=format&fit=crop",
     desc: "Play smart, strike hard, and let your gameplay rewrite the scoreboard.",
@@ -579,7 +588,7 @@ export const EVENTS_DATA = [
     price: 0,
     teamPrice: 400,
     isTeamPriceFixed: true,
-    minMembers: 1,
+    minMembers: 4,
     maxMembers: 4,
     rules: [
       "Standard game settings will be used.",
@@ -613,7 +622,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "Game Room",
-    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    whatsappLink: "demolink",
     image:
       "https://images.unsplash.com/photo-1620741211956-32977c8973be?q=80&w=880&auto=format&fit=crop",
     desc: "Carrom is a game of elegance, control, and sharp judgment. At Tesseract Carromact 2K26, the board becomes the battlefield where strategy meets precision and patience turns into victory. What starts as a simple break will evolve into a gripping contest of calculated moves, defensive play, and decisive strikes. Players will face high-pressure situations that demand focus, accuracy, and discipline. With exciting matches, intense moments, and pure competitive energy, Carromact 2K26 invites you to showcase your skills and experience the thrill of professional-level carrom. Get ready to aim, strike, and conquer the board.",
@@ -722,7 +731,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
-    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    whatsappLink: "demolink",
     image:
       "https://plus.unsplash.com/premium_photo-1698362818669-286ffb633a79?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "A platform where ideas transform into visual stories. Participants will showcase their ideas through a 3–5 minute poster presentation. Teams of 2–3 members can present one hand-drawn poster on chart paper based on a selected topic. participants are expected to follow the event guidelines.",
@@ -785,11 +794,11 @@ export const EVENTS_DATA = [
     teamPrice: 200,
     isTeamPriceFixed: false,
     specialTeamPrice: {
-      members: 4,
+      members: 5,
       price: 250,
     },
     minMembers: 2,
-    maxMembers: 4,
+    maxMembers: 5,
     rules: [
       "\u23F3 Total time limit: 25 minutes (strictly enforced)",
       "\uD83D\uDC65 Maximum 4 participants per team",
@@ -825,6 +834,11 @@ export const EVENTS_DATA = [
         mobile: "+91 6290986815",
         email: "sahelimandal29@gmail.com",
       },
+      {
+        name: "",
+        mobile: "+91 6290986815",
+        email: "sahelimandal29@gmail.com",
+      },
     ],
     prizes: "",
   },
@@ -842,14 +856,10 @@ export const EVENTS_DATA = [
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1172&auto=format&fit=crop",
     desc: "In 1964, the first computer mouse wasn't plastic, wireless, or RGB it was a wooden block with wheels. At Tesseract Quizzaract 2K26, the only wooden thing will be the stage\u2026 but the ideas will shine with silicon grade sharpness. What will begin as a simple quiz will turn into a high voltage showdown of logic, code, and creativity where every cracked answer will feel like reinventing the mouse all over again.",
-    participationMode: "team",
-    price: 0,
+    participationMode: "both",
+    price: 80,
     teamPrice: 100,
-    isTeamPriceFixed: false,
-    specialTeamPrice: {
-      members: 3,
-      price: 160,
-    },
+    isTeamPriceFixed: true,
     minMembers: 2,
     maxMembers: 3,
     rules: [
@@ -890,7 +900,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
-    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    whatsappLink: "demolink",
     image:
       "https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?q=80&w=687&auto=format&fit=crop",
     desc: "Capture the moment, frame the story, and let your lens speak louder than words.",
@@ -936,7 +946,7 @@ export const EVENTS_DATA = [
     desc: "The ultimate mobile battleground awaits, where players unite, strategize, and engage in epic battles for victory. Join now!",
     participationMode: "team",
     price: 0,
-    teamPrice: 200,
+    teamPrice: 250,
     isTeamPriceFixed: true,
     minMembers: 1,
     maxMembers: 4,
