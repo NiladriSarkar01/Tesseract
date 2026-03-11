@@ -43,6 +43,8 @@ const RegisterPage = () => {
     setSelectedApplication,
   } = useApplicationStore();
 
+  console.log(import.meta.env.VITE_TURNSTILE_SITE_KEY);
+
   const REGISTRATION_DEADLINE = new Date("2026-03-26T23:59:59");
 
   const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
