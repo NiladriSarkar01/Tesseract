@@ -12,11 +12,9 @@ export const useApplicationStore = create((set) => ({
   },
 
   getApplications: async (params) => {
-    console.log(params);
     const jsonString = JSON.stringify(params);
     const encodedJson = encodeURIComponent(jsonString);
     const url = `application/get?data=${encodedJson}`;
-    console.log(url);
 
     set({ isApplicationsLoading: true });
     try {
@@ -25,11 +23,11 @@ export const useApplicationStore = create((set) => ({
         set({ meta: res.data.meta });
         set({ applications: res.data.data });
       } else {
-        console.log(res.data.message);
+        console.error(res.data.message);
       }
       return res.data;
     } catch (error) {
-      console.log(error.response.data.message);
+      console.error(error.response.data.message);
       return { success: false, message: error.response.data.message };
     } finally {
       set({ isApplicationsLoading: false });
@@ -37,7 +35,6 @@ export const useApplicationStore = create((set) => ({
   },
 
   createApplication: async (data) => {
-    console.log(data);
     set({ isApplicationsLoading: true });
     try {
       const res = await axiosInstance.post("/application/create", data);
@@ -62,14 +59,14 @@ export const useApplicationStore = create((set) => ({
     set({ isApplicationsLoading: true });
     try {
       const res = await axiosInstance.put(
-        `/application/update/?applicationId=${data.applicationId}&status=${data.status}`
+        `/application/update/?applicationId=${data.applicationId}&status=${data.status}`,
       );
       if (res.data.success) {
         set((state) => ({
           applications: state.applications.map((app) =>
             app._id === data.applicationId
               ? { ...app, status: data.status }
-              : app
+              : app,
           ),
         }));
         console.log(res.data.message);
