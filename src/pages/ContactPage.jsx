@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ChevronLeft,
@@ -23,6 +23,7 @@ import {
   X,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { useContactStore } from "../store/useContactStore";
 import { random } from "../utils/Constants";
 import { SOCIALS } from "../lib/data";
@@ -53,11 +54,15 @@ const ContactPage = () => {
   });
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Turnstile state + ref
+  const [turnstileToken, setTurnstileToken] = useState(null);
+  const turnstileRef = useRef(null);
+
   const toggleFaq = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // 2. HANDLE INPUT CHANGE
+  // HANDLE INPUT CHANGE
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -66,15 +71,35 @@ const ContactPage = () => {
     }));
   };
 
-  // 3. HANDLE FORM SUBMISSION
+  // HANDLE FORM SUBMISSION
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    const res = await createContact(formData);
+
+    if (!turnstileToken) {
+      setErrorMessage(
+        "Security check not complete. Please wait a moment and try again.",
+      );
+      return;
+    }
+
+    setErrorMessage("");
+
+    // Consume token immediately to prevent reuse
+    const tokenToSubmit = turnstileToken;
+    setTurnstileToken(null);
+
+    const res = await createContact({
+      ...formData,
+      "cf-turnstile-response": tokenToSubmit,
+    });
+
     if (res.success) {
       setState("success");
       setSelectedContact(res.data);
     } else {
       setState("fail");
+      // Reset widget so a fresh token is ready if user tries again
+      turnstileRef.current?.reset();
     }
   };
 
@@ -116,7 +141,11 @@ const ContactPage = () => {
             Query Submition Failed!
           </h2>
           <button
-            onClick={() => setState("idle")}
+            onClick={() => {
+              setState("idle");
+              // Reset widget when user clicks Try Again so token is fresh
+              turnstileRef.current?.reset();
+            }}
             className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-red-500/30 transition-all"
           >
             Please Try Again.
@@ -159,7 +188,6 @@ const ContactPage = () => {
 
       {/* General Info Grid - (Keep Static) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        {/* ... (Venue, General Queries, Emergency Cards remain the same) ... */}
         {/* Card 1: Location */}
         <div className="relative p-8 bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden group hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(220,38,38,0.15)] text-center">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -300,10 +328,39 @@ const ContactPage = () => {
               className="w-full bg-black/50 border border-white/10 rounded-xl py-4 px-4 text-white focus:outline-none focus:border-cyan-500/50 focus:bg-white/5 transition-all resize-none placeholder:text-gray-600"
             ></textarea>
 
+            {/* Turnstile CAPTCHA — same pattern as RegisterPage */}
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+              onSuccess={(token) => setTurnstileToken(token)}
+              onExpire={() => {
+                setTurnstileToken(null);
+                turnstileRef.current?.reset();
+              }}
+              onError={() => {
+                setTurnstileToken(null);
+                setTimeout(() => turnstileRef.current?.reset(), 2000);
+              }}
+              options={{
+                theme: "dark",
+                retry: "auto",
+                retryInterval: 8000,
+                refreshExpired: "auto",
+              }}
+            />
+
+            {errorMessage && (
+              <p className="text-red-400 text-sm text-center mt-2 flex items-center justify-center gap-2">
+                <AlertCircle size={14} /> {errorMessage}
+              </p>
+            )}
+
             <button
               type="submit"
-              disabled={formStatus === "loading" || formStatus === "success"}
-              className={`w-full py-4 font-bold uppercase tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)] flex items-center justify-center gap-2 ${
+              disabled={
+                isContactsLoading || !turnstileToken || formStatus === "success"
+              }
+              className={`w-full py-4 font-bold uppercase tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${
                 formStatus === "success"
                   ? "bg-green-600 text-white hover:bg-green-500"
                   : formStatus === "error"
@@ -311,33 +368,25 @@ const ContactPage = () => {
                     : "bg-cyan-600 text-white hover:bg-cyan-500 hover:scale-[1.02] active:scale-[0.98]"
               }`}
             >
-              {formStatus === "idle" && (
-                <>
-                  Send Message <ArrowRight size={18} />
-                </>
-              )}
-              {formStatus === "loading" && (
+              {isContactsLoading ? (
                 <>
                   <Loader2 size={18} className="animate-spin" /> Sending...
                 </>
-              )}
-              {formStatus === "success" && (
+              ) : formStatus === "success" ? (
                 <>
                   <Check size={18} /> Message Sent!
                 </>
-              )}
-              {formStatus === "error" && (
+              ) : formStatus === "error" ? (
                 <>
                   <AlertCircle size={18} /> Failed. Try Again.
                 </>
+              ) : (
+                <>
+                  {!turnstileToken ? "Verifying Security..." : "Send Message"}
+                  {turnstileToken && <ArrowRight size={18} />}
+                </>
               )}
             </button>
-
-            {errorMessage && (
-              <p className="text-red-400 text-sm text-center mt-2">
-                {errorMessage}
-              </p>
-            )}
           </form>
         </div>
 
@@ -354,7 +403,6 @@ const ContactPage = () => {
 
           <div className="grid grid-cols-1 gap-4">
             {isContactsLoading ? (
-              // Simple Loading Skeleton
               <div className="text-gray-500 text-center py-10">
                 Loading Coordinators...
               </div>

@@ -11,6 +11,7 @@ import {
   User,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 import { useAuthStore } from "../store/useAuthStore";
 
@@ -23,7 +24,6 @@ const MatrixRain = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    // Set canvas size
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -31,7 +31,6 @@ const MatrixRain = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    // Matrix characters (Katakana + Latin)
     const chars =
       "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const charArray = chars.split("");
@@ -45,11 +44,10 @@ const MatrixRain = () => {
     }
 
     const draw = () => {
-      // Semi-transparent black to create trail effect
       ctx.fillStyle = "rgba(5, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#ef4444"; // Red text
+      ctx.fillStyle = "#ef4444";
       ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
@@ -90,7 +88,7 @@ const HexColumn = () => {
             `0x${Math.floor(Math.random() * 16777215)
               .toString(16)
               .padStart(6, "0")
-              .toUpperCase()}`
+              .toUpperCase()}`,
         )
         .join(" ");
 
@@ -123,6 +121,10 @@ const LoginPage = ({ onLoginSuccess, onCancel }) => {
   const logsEndRef = useRef(null);
   const [glitchIntensity, setGlitchIntensity] = useState(0);
 
+  // Turnstile state + ref
+  const [turnstileToken, setTurnstileToken] = useState(null);
+  const turnstileRef = useRef(null);
+
   const navigate = useNavigate();
   const { login, isLoggingIn } = useAuthStore();
 
@@ -131,10 +133,9 @@ const LoginPage = ({ onLoginSuccess, onCancel }) => {
     logsEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [logs]);
 
-  // The "Messy" Hacking Sequence
   const initiateSequence = () => {
     setStage("hacking");
-    setGlitchIntensity(1); // Start heavy glitch
+    setGlitchIntensity(1);
 
     const commands = [
       "INITIALIZING BRUTE FORCE...",
@@ -156,11 +157,10 @@ const LoginPage = ({ onLoginSuccess, onCancel }) => {
     ];
 
     let i = 0;
-    // Faster log speed
     const interval = setInterval(() => {
       if (i >= commands.length) {
         clearInterval(interval);
-        setGlitchIntensity(0); // Stop glitch
+        setGlitchIntensity(0);
         setTimeout(() => setStage("login"), 500);
         return;
       }
@@ -178,7 +178,6 @@ const LoginPage = ({ onLoginSuccess, onCancel }) => {
       };
 
       setLogs((prev) => [...prev, newLog]);
-      // Randomly shake screen
       if (Math.random() > 0.7) setGlitchIntensity(2);
       else setGlitchIntensity(1);
 
@@ -188,8 +187,30 @@ const LoginPage = ({ onLoginSuccess, onCancel }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await login({ email: username, password: password });
-    console.log(res.success);
+
+    if (!turnstileToken) {
+      setLogs((prev) => [
+        ...prev,
+        {
+          text: "ERROR: HUMAN VERIFICATION INCOMPLETE — RETRY",
+          type: "error",
+          id: Math.random(),
+        },
+      ]);
+      setGlitchIntensity(2);
+      setTimeout(() => setGlitchIntensity(0), 800);
+      return;
+    }
+
+    // Consume token immediately to prevent reuse
+    const tokenToSubmit = turnstileToken;
+    setTurnstileToken(null);
+
+    const res = await login({
+      email: username,
+      password: password,
+      "cf-turnstile-response": tokenToSubmit,
+    });
 
     if (res.success) {
       setStage("success");
@@ -198,7 +219,7 @@ const LoginPage = ({ onLoginSuccess, onCancel }) => {
       }, 2000);
     } else {
       setStage("denied");
-      setGlitchIntensity(3); // Massive glitch on fail
+      setGlitchIntensity(3);
       setLogs((prev) => [
         ...prev,
         {
@@ -210,6 +231,8 @@ const LoginPage = ({ onLoginSuccess, onCancel }) => {
       setTimeout(() => {
         setStage("login");
         setGlitchIntensity(0);
+        // Reset widget so a fresh token is ready for next attempt
+        turnstileRef.current?.reset();
       }, 2000);
       setPassword("");
     }
@@ -367,11 +390,54 @@ const LoginPage = ({ onLoginSuccess, onCancel }) => {
                 </div>
               </div>
 
+              {/* Turnstile — styled to match the terminal aesthetic */}
+              <div className="border border-red-900/50 bg-black/50 p-3 flex flex-col gap-2">
+                <p className="text-[10px] tracking-[0.15em] text-red-500/60 uppercase">
+                  // Human Verification Protocol
+                </p>
+                <Turnstile
+                  ref={turnstileRef}
+                  siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onExpire={() => {
+                    setTurnstileToken(null);
+                    turnstileRef.current?.reset();
+                  }}
+                  onError={() => {
+                    setTurnstileToken(null);
+                    setTimeout(() => turnstileRef.current?.reset(), 2000);
+                  }}
+                  options={{
+                    theme: "dark",
+                    retry: "auto",
+                    retryInterval: 8000,
+                    refreshExpired: "auto",
+                  }}
+                />
+                {/* Verification status indicator */}
+                <p
+                  className={`text-[10px] tracking-widest uppercase font-bold transition-colors ${
+                    turnstileToken ? "text-green-500" : "text-red-500/40"
+                  }`}
+                >
+                  {turnstileToken
+                    ? "▶ VERIFICATION PASSED"
+                    : "▷ AWAITING VERIFICATION..."}
+                </p>
+              </div>
+
               <button
                 type="submit"
-                className="w-full py-4 bg-red-600 text-black font-black uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all flex items-center justify-center gap-2 mt-6 relative group overflow-hidden"
+                disabled={isLoggingIn || !turnstileToken}
+                className="w-full py-4 bg-red-600 text-black font-black uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all flex items-center justify-center gap-2 mt-6 relative group overflow-hidden disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-red-600 disabled:hover:text-black"
               >
-                <span className="relative z-10">AUTHENTICATE</span>
+                <span className="relative z-10">
+                  {isLoggingIn
+                    ? "AUTHENTICATING..."
+                    : !turnstileToken
+                      ? "VERIFYING..."
+                      : "AUTHENTICATE"}
+                </span>
                 <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-200 z-0"></div>
               </button>
             </form>
