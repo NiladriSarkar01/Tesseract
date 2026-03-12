@@ -234,19 +234,36 @@ const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
           }}
         >
           {/* Title */}
-          <h3
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: 21,
-              letterSpacing: "0.05em",
-              color: "#fff",
-              margin: 0,
-              lineHeight: 1.1,
-              textShadow: `0 0 20px ${pal.glow}`,
-            }}
-          >
-            {event.title}
-          </h3>
+
+          {event.id === 19 ? (
+            <h3
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 21,
+                letterSpacing: "0.05em",
+                color: "#fff",
+                margin: 0,
+                lineHeight: 1.1,
+                textShadow: `0 0 20px ${pal.glow}`,
+              }}
+            >
+              {event.title} <br /> (Treasure Hunt)
+            </h3>
+          ) : (
+            <h3
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 21,
+                letterSpacing: "0.05em",
+                color: "#fff",
+                margin: 0,
+                lineHeight: 1.1,
+                textShadow: `0 0 20px ${pal.glow}`,
+              }}
+            >
+              {event.title}
+            </h3>
+          )}
 
           {/* Meta */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>

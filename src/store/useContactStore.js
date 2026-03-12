@@ -12,11 +12,9 @@ export const useContactStore = create((set) => ({
   },
 
   getContacts: async (params) => {
-    console.log(params);
     const jsonString = JSON.stringify(params);
     const encodedJson = encodeURIComponent(jsonString);
     const url = `contact/get?data=${encodedJson}`;
-    console.log(url);
 
     set({ isContactsLoading: true });
     try {
@@ -37,7 +35,6 @@ export const useContactStore = create((set) => ({
   },
 
   createContact: async (data) => {
-    console.log(data);
     set({ isContactsLoading: true });
     try {
       const res = await axiosInstance.post("/contact/create", data);
@@ -62,12 +59,12 @@ export const useContactStore = create((set) => ({
     set({ isContactsLoading: true });
     try {
       const res = await axiosInstance.put(
-        `/contact/update/?contactId=${data.contactId}&status=${data.status}`
+        `/contact/update/?contactId=${data.contactId}&status=${data.status}`,
       );
       if (res.data.success) {
         set((state) => ({
           contacts: state.contacts.map((app) =>
-            app._id === data.contactId ? { ...app, status: data.status } : app
+            app._id === data.contactId ? { ...app, status: data.status } : app,
           ),
         }));
         console.log(res.data.message);

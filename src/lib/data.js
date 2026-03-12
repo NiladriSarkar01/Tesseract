@@ -146,53 +146,6 @@ export const EVENTS_DATA = [
     prizes: "",
   },
 
-  // Constructor()
-  {
-    id: 24,
-    title: "Constructor()",
-    category: "Coding",
-    date: "Mar 27, 2026",
-    time: "11:00 AM Onwards",
-    venue: "Gaming Lab 1",
-    whatsappLink: "demolink",
-    image:
-      "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
-    desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
-    participationMode: "team",
-    price: 0,
-    teamPrice: 200,
-    isTeamPriceFixed: false,
-    specialTeamPrice: {
-      members: 4,
-      price: 300,
-    },
-    minMembers: 2,
-    maxMembers: 4,
-    rules: [
-      "EACH TEAM MUST CONSIST OF 2 TO 4 MEMBERS.",
-      "TEAMS SHOULD IDEALLY INCLUDE A MIX OF SKILL SETS (E.G., BACKEND, FRONTEND, DESIGN, AND PRESENTATION).",
-      "TEAMS MUST BE FINALIZED AND REGISTERED BEFORE THE EVENT BEGINS. NO CHANGES TO THE ROSTER WILL BE PERMITTED AFTER REGISTRATION CLOSES.",
-      "BROAD 'HACKATHON TRACKS' (E.G., EDTECH, SUSTAINABILITY, SMART CAMPUS) WILL BE ANNOUNCED 48 HOURS",
-      "PRIOR TO THE EVENT TO ALLOW TEAMS TO SET UP THEIR DEVELOPMENT ENVIRONMENTS.",
-      "THE SPECIFIC PROBLEM STATEMENTS WILL BE REVEALED ON THE DAY OF THE EVENT.",
-      "TEAMS MUST DEVELOP A SOLUTION THAT DIRECTLY ADDRESSES ONE OF THE PROVIDED PROBLEM STATEMENTS.",
-      "OFF-TOPIC PROJECTS WILL BE DISQUALIFIED.",
-      "PARTICIPANTS MAY USE ANY PROGRAMMING LANGUAGE (E.G., JAVA, PYTHON, JAVASCRIPT ETC) OR FRAMEWORK THEY ARE COMFORTABLE WITH.",
-      "ALL PROJECT CODE MUST BE WRITTEN DURING THE HACKATHON. TEAMS ARE REQUIRED TO CREATE A NEW, PUBLIC GITHUB REPOSITORY AT THE START OF THE EVENT AND COMMIT THEIR PROGRESS REGULARLY.",
-      "AI TOOL POLICY: THE USE OF GENERATIVE AI (CHATGPT, GEMINI) OR AI CODING ASSISTANTS (GITHUB COPILOT) TO WRITE CORE BUSINESS LOGIC, GENERATE COMPONENTS, OR DESIGN ARCHITECTURES IS STRICTLY PROHIBITED. THE GOAL IS TO FOSTER CREATIVITY AND ORIGINALITY; WE ARE ENCOURAGING PARTICIPANTS TO BUILD FROM SCRATCH.",
-
-      "PITCHING SESSIONS ARE STRICTLY TIME-BOXED: TEAMS WILL HAVE 4 MINUTES TO PRESENT THEIR PITCH AND DEMONSTRATE THEIR PROTOTYPE, FOLLOWED BY A 2-MINUTE Q&A SESSION WITH THE JUDGES.",
-      `PRESENTATIONS WILL BE EVALUATED TRANSPARENTLY BASED ON THE FOLLOWING CRITERIA:
-        TECHNICAL IMPLEMENTATION (30%): FUNCTIONALITY OF THE PROTOTYPE, CLEAN CODE ARCHITECTURE, AND EFFECTIVE USE OF THE CHOSEN TECH STACK.
-        INNOVATION & ORIGINALITY (25%): CREATIVITY OF THE SOLUTION AND UNIQUENESS OF THE APPROACH.
-        REAL-WORLD IMPACT (25%): PRACTICAL FEASIBILITY, SCALABILITY, AND THE POTENTIAL VALUE OF THE PRODUCT.
-        PRESENTATION & UI/UX (20%): CLARITY OF THE PITCH, USER INTERFACE DESIGN, AND OVERALL USER EXPERIENCE.`,
-    ],
-    head: [],
-    coHead: [],
-    prizes: "",
-  },
-
   // 3 — Terranova
   {
     id: 3,
@@ -407,9 +360,55 @@ export const EVENTS_DATA = [
       {
         name: "Supriyo Mondal",
         mobile: "+91 9064457370",
-        email: "",
+        email: "supriyamondal10562@gmail.com",
       },
     ],
+    prizes: "",
+  },
+  // Constructor()
+  {
+    id: 24,
+    title: "Constructor()",
+    category: "Coding",
+    date: "Mar 27, 2026",
+    time: "11:00 AM Onwards",
+    venue: "Gaming Lab 1",
+    whatsappLink: "demolink",
+    image:
+      "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
+    desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 200,
+    isTeamPriceFixed: false,
+    specialTeamPrice: {
+      members: 4,
+      price: 300,
+    },
+    minMembers: 2,
+    maxMembers: 4,
+    rules: [
+      "EACH TEAM MUST CONSIST OF 2 TO 4 MEMBERS.",
+      "TEAMS SHOULD IDEALLY INCLUDE A MIX OF SKILL SETS (E.G., BACKEND, FRONTEND, DESIGN, AND PRESENTATION).",
+      "TEAMS MUST BE FINALIZED AND REGISTERED BEFORE THE EVENT BEGINS. NO CHANGES TO THE ROSTER WILL BE PERMITTED AFTER REGISTRATION CLOSES.",
+      "BROAD 'HACKATHON TRACKS' (E.G., EDTECH, SUSTAINABILITY, SMART CAMPUS) WILL BE ANNOUNCED 48 HOURS",
+      "PRIOR TO THE EVENT TO ALLOW TEAMS TO SET UP THEIR DEVELOPMENT ENVIRONMENTS.",
+      "THE SPECIFIC PROBLEM STATEMENTS WILL BE REVEALED ON THE DAY OF THE EVENT.",
+      "TEAMS MUST DEVELOP A SOLUTION THAT DIRECTLY ADDRESSES ONE OF THE PROVIDED PROBLEM STATEMENTS.",
+      "OFF-TOPIC PROJECTS WILL BE DISQUALIFIED.",
+      "PARTICIPANTS MAY USE ANY PROGRAMMING LANGUAGE (E.G., JAVA, PYTHON, JAVASCRIPT ETC) OR FRAMEWORK THEY ARE COMFORTABLE WITH.",
+      "ALL PROJECT CODE MUST BE WRITTEN DURING THE HACKATHON. TEAMS ARE REQUIRED TO CREATE A NEW, PUBLIC GITHUB REPOSITORY AT THE START OF THE EVENT AND COMMIT THEIR PROGRESS REGULARLY.",
+      "AI TOOL POLICY: THE USE OF GENERATIVE AI (CHATGPT, GEMINI) OR AI CODING ASSISTANTS (GITHUB COPILOT) TO WRITE CORE BUSINESS LOGIC, GENERATE COMPONENTS, OR DESIGN ARCHITECTURES IS STRICTLY PROHIBITED. THE GOAL IS TO FOSTER CREATIVITY AND ORIGINALITY; WE ARE ENCOURAGING PARTICIPANTS TO BUILD FROM SCRATCH.",
+
+      "PITCHING SESSIONS ARE STRICTLY TIME-BOXED: TEAMS WILL HAVE 4 MINUTES TO PRESENT THEIR PITCH AND DEMONSTRATE THEIR PROTOTYPE, FOLLOWED BY A 2-MINUTE Q&A SESSION WITH THE JUDGES.",
+      `PRESENTATIONS WILL BE EVALUATED TRANSPARENTLY BASED ON THE FOLLOWING CRITERIA:
+        TECHNICAL IMPLEMENTATION (30%): FUNCTIONALITY OF THE PROTOTYPE, CLEAN CODE ARCHITECTURE, AND EFFECTIVE USE OF THE CHOSEN TECH STACK.
+        INNOVATION & ORIGINALITY (25%): CREATIVITY OF THE SOLUTION AND UNIQUENESS OF THE APPROACH.
+        REAL-WORLD IMPACT (25%): PRACTICAL FEASIBILITY, SCALABILITY, AND THE POTENTIAL VALUE OF THE PRODUCT.
+        PRESENTATION & UI/UX (20%): CLARITY OF THE PITCH, USER INTERFACE DESIGN, AND OVERALL USER EXPERIENCE.`,
+    ],
+    head: [],
+    coHead: [],
     prizes: "",
   },
 
@@ -509,14 +508,14 @@ export const EVENTS_DATA = [
       {
         name: "Ujjal Bhattacharya",
         mobile: "+91 9641768354",
-        email: "",
+        email: "Ujjalbhattacharya525@gmail.com",
       },
     ],
     coHead: [
       {
         name: "Ujan Ghosh",
         mobile: "+91 9875510547",
-        email: "",
+        email: "ujanghosh3@gmail.com",
       },
     ],
     prizes: "",
@@ -609,6 +608,59 @@ export const EVENTS_DATA = [
         name: "Debjit Dwari",
         mobile: "+91 8240001874",
         email: "debjitdwari2018@gmail.com",
+      },
+    ],
+    prizes: "",
+  },
+  {
+    id: 6,
+    title: "FREE FIRE",
+    category: "Gaming",
+    date: "Mar 27, 2026",
+    time: "09:00 AM",
+    venue: "CSE Lab",
+    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    image:
+      "https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg",
+    desc: "The ultimate mobile battleground awaits, where players unite, strategize, and engage in epic battles for victory. Join now!",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 250,
+    isTeamPriceFixed: true,
+    minMembers: 1,
+    maxMembers: 4,
+    rules: [
+      "TEAM SHOULD CONSIST OF 4 MEMBERS. A MAXIMUM OF 2 SUBSTITUTE PLAYERS MAY BEREGISTERED AND USED ONLY IN CASE OF EMERGENCIES.",
+      "THE TOURNAMENT WILL BE CONDUCTED IN TWO FORMATS: SOLO AND SQUAD.",
+      "ONLY ONE MEMBER OF A TEAM HAS TO PAY THE ENTRY FEE AND FOR THE MATCH OR TOURNAMENTS.",
+      "IF YOU FAILED TO ATTEND MATCH IN TIME YOU WILL NOT GET ANY REFUND.",
+      "ROOM ID AND PASSWORD WOULD BE SHARED 10 MINUTES BEFORE MATCH. PLAYERS SHOULD BE IN LOBBY 5 MINUTES BEFORE STARTING THE MATCH.",
+      "THE LOBBY WILL NOT BE RESTARTED FOR PLAYER'S DISCONNECTIONS.",
+      "IN CASE OF ONLINE MATCH , PLAYERS SHOULD RECORD THEIR POV.",
+      "ALL MAPS SHOULD BE DOWNLOADED.",
+      "MAKE SURE YOUR Free Fire USERNAME MATCHES WITH REGISTERED Free Fire USERNAME.",
+      "PLAYERS CANNOT ENGAGE WITH OTHER PLAYERS IN A VERBAL MANNER (CUSS WORDS, RACISM, AND SEXISM).",
+      "SHARING ILLEGAL PROGRAMS AND ALL THIRD-PARTY PROGRAMS IS FORBIDDEN.",
+      "SPAMMING BOTH IN WRITING AND VERBALLY IS FORBIDDEN.",
+      "TEAMING WITH OPPOSING TEAMS IS FORBIDDEN.",
+      "NO EMULATOR PLAYER ARE ALLOWED. EXTERNAL TRIGGERS ARE ALSO.",
+      "EVERY PLAYER'S APP VERSION WILL BE CHECKED BY THE VOLUNTEERS BEFORE THEY ARE ABOUT TO ENTER THE ROOM.",
+      "MISBEHAVING WITH THE MANAGEMENT WILL LEAD TO DISQUALIFICATION.",
+      "EVENT HEAD DECISION WILL BE FINAL, FOR UNDER ANY CIRCUMSTANCES RULES CAN BE ALTERED IF NEEDED BY THE ORGANIZING AUTHORITY.",
+      "MANAGEMENT HAS THE RIGHT TO CHECK PLAYER DEVICES THROUGHOUT THE EVENT IN BETWEEN MATCHES AS WELL. IF WE FIND ANYTHING UNETHICAL YOU WILL BE DISQUALIFIED FROM THE EVENT",
+    ],
+    head: [
+      {
+        name: "Sahil Mallick",
+        mobile: "+91 8697004118",
+        email: "sahilmallick434@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Priyanshu Mandal",
+        mobile: "+91 7980604507",
+        email: "priyanshumondal927@gmail.com",
       },
     ],
     prizes: "",
@@ -933,59 +985,6 @@ export const EVENTS_DATA = [
   },
 
   // 9 — free fire
-  {
-    id: 6,
-    title: "FREE FIRE",
-    category: "Gaming",
-    date: "Mar 27, 2026",
-    time: "09:00 AM",
-    venue: "CSE Lab",
-    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
-    image:
-      "https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg",
-    desc: "The ultimate mobile battleground awaits, where players unite, strategize, and engage in epic battles for victory. Join now!",
-    participationMode: "team",
-    price: 0,
-    teamPrice: 250,
-    isTeamPriceFixed: true,
-    minMembers: 1,
-    maxMembers: 4,
-    rules: [
-      "TEAM SHOULD CONSIST OF 4 MEMBERS. A MAXIMUM OF 2 SUBSTITUTE PLAYERS MAY BEREGISTERED AND USED ONLY IN CASE OF EMERGENCIES.",
-      "THE TOURNAMENT WILL BE CONDUCTED IN TWO FORMATS: SOLO AND SQUAD.",
-      "ONLY ONE MEMBER OF A TEAM HAS TO PAY THE ENTRY FEE AND FOR THE MATCH OR TOURNAMENTS.",
-      "IF YOU FAILED TO ATTEND MATCH IN TIME YOU WILL NOT GET ANY REFUND.",
-      "ROOM ID AND PASSWORD WOULD BE SHARED 10 MINUTES BEFORE MATCH. PLAYERS SHOULD BE IN LOBBY 5 MINUTES BEFORE STARTING THE MATCH.",
-      "THE LOBBY WILL NOT BE RESTARTED FOR PLAYER'S DISCONNECTIONS.",
-      "IN CASE OF ONLINE MATCH , PLAYERS SHOULD RECORD THEIR POV.",
-      "ALL MAPS SHOULD BE DOWNLOADED.",
-      "MAKE SURE YOUR Free Fire USERNAME MATCHES WITH REGISTERED Free Fire USERNAME.",
-      "PLAYERS CANNOT ENGAGE WITH OTHER PLAYERS IN A VERBAL MANNER (CUSS WORDS, RACISM, AND SEXISM).",
-      "SHARING ILLEGAL PROGRAMS AND ALL THIRD-PARTY PROGRAMS IS FORBIDDEN.",
-      "SPAMMING BOTH IN WRITING AND VERBALLY IS FORBIDDEN.",
-      "TEAMING WITH OPPOSING TEAMS IS FORBIDDEN.",
-      "NO EMULATOR PLAYER ARE ALLOWED. EXTERNAL TRIGGERS ARE ALSO.",
-      "EVERY PLAYER'S APP VERSION WILL BE CHECKED BY THE VOLUNTEERS BEFORE THEY ARE ABOUT TO ENTER THE ROOM.",
-      "MISBEHAVING WITH THE MANAGEMENT WILL LEAD TO DISQUALIFICATION.",
-      "EVENT HEAD DECISION WILL BE FINAL, FOR UNDER ANY CIRCUMSTANCES RULES CAN BE ALTERED IF NEEDED BY THE ORGANIZING AUTHORITY.",
-      "MANAGEMENT HAS THE RIGHT TO CHECK PLAYER DEVICES THROUGHOUT THE EVENT IN BETWEEN MATCHES AS WELL. IF WE FIND ANYTHING UNETHICAL YOU WILL BE DISQUALIFIED FROM THE EVENT",
-    ],
-    head: [
-      {
-        name: "Sahil Mallick",
-        mobile: "+91 8697004118",
-        email: "sahilmallick434@gmail.com",
-      },
-    ],
-    coHead: [
-      {
-        name: "Priyanshu Mandal",
-        mobile: "+91 7980604507",
-        email: "priyanshumondal927@gmail.com",
-      },
-    ],
-    prizes: "",
-  },
 ];
 
 // --- EVENT CATEGORIES---
