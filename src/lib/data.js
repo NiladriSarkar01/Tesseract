@@ -147,51 +147,47 @@ export const EVENTS_DATA = [
   },
 
   // Constructor()
-  // {
-  //   id: 24,
-  //   title: "Constructor()",
-  //   category: "Robotics",
-  //   date: "Mar 27, 2026",
-  //   time: "11:00 AM Onwards",
-  //   venue: "Gaming Lab 1",
-  //   whatsappLink: "https://chat.whatsapp.com/CzqkqYAvg5j5O9mt2T8cw7?mode=gi_t",
-  //   image:
-  //     "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
-  //   desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
-  //   participationMode: "team",
-  //   price: 0,
-  //   teamPrice: 150,
-  //   isTeamPriceFixed: true,
-  //   minMembers: 1,
-  //   maxMembers: 5,
-  //   rules: [
-  //     "For each group, there should be a maximum of 5 participants and a minimum of 2 participants.",
-  //     "From each group 2 participants will be allowed to come forward and elaborate on the working and functioning of the model.",
-  //     "The team leader of each group will have to register with proper details, and no entries will be entertained without registration.",
-  //     "The judge's decision will be the final decision.",
-  //     "A proper uniform is mandatory for all team members.",
-  //     "Participants from GNIT should have their college ID cards with them.",
-  //     "Participants from other institutes or schools are requested to bring their institutional ID card.",
-  //     "Every team must carry their own personal socket/extension board for model setup and power requirements.",
-  //     "Registration will be done on the website and at the registration desk before the event.",
-  //     "The event head's decision will be final, for under any circumstance's rules can be altered if needed by the organizing authority.",
-  //   ],
-  //   head: [
-  //     {
-  //       name: "Manjeera Patra",
-  //       mobile: "+91 8597757846",
-  //       email: "manjeerapatra131602@gmail.com",
-  //     },
-  //   ],
-  //   coHead: [
-  //     {
-  //       name: "Manjistha Patra",
-  //       mobile: "+91 8597757874",
-  //       email: "manjisthapatra1045@gmail.com",
-  //     },
-  //   ],
-  //   prizes: "",
-  // },
+  {
+    id: 24,
+    title: "Constructor()",
+    category: "Coding",
+    date: "Mar 27, 2026",
+    time: "11:00 AM Onwards",
+    venue: "Gaming Lab 1",
+    whatsappLink: "demolink",
+    image:
+      "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
+    desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 150,
+    isTeamPriceFixed: true,
+    minMembers: 1,
+    maxMembers: 5,
+    rules: [
+      "EACH TEAM MUST CONSIST OF 2 TO 4 MEMBERS.",
+      "TEAMS SHOULD IDEALLY INCLUDE A MIX OF SKILL SETS (E.G., BACKEND, FRONTEND, DESIGN, AND PRESENTATION).",
+      "TEAMS MUST BE FINALIZED AND REGISTERED BEFORE THE EVENT BEGINS. NO CHANGES TO THE ROSTER WILL BE PERMITTED AFTER REGISTRATION CLOSES.",
+      "BROAD 'HACKATHON TRACKS' (E.G., EDTECH, SUSTAINABILITY, SMART CAMPUS) WILL BE ANNOUNCED 48 HOURS",
+      "PRIOR TO THE EVENT TO ALLOW TEAMS TO SET UP THEIR DEVELOPMENT ENVIRONMENTS.",
+      "THE SPECIFIC PROBLEM STATEMENTS WILL BE REVEALED ON THE DAY OF THE EVENT.",
+      "TEAMS MUST DEVELOP A SOLUTION THAT DIRECTLY ADDRESSES ONE OF THE PROVIDED PROBLEM STATEMENTS.",
+      "OFF-TOPIC PROJECTS WILL BE DISQUALIFIED.",
+      "PARTICIPANTS MAY USE ANY PROGRAMMING LANGUAGE (E.G., JAVA, PYTHON, JAVASCRIPT ETC) OR FRAMEWORK THEY ARE COMFORTABLE WITH.",
+      "ALL PROJECT CODE MUST BE WRITTEN DURING THE HACKATHON. TEAMS ARE REQUIRED TO CREATE A NEW, PUBLIC GITHUB REPOSITORY AT THE START OF THE EVENT AND COMMIT THEIR PROGRESS REGULARLY.",
+      "AI TOOL POLICY: THE USE OF GENERATIVE AI (CHATGPT, GEMINI) OR AI CODING ASSISTANTS (GITHUB COPILOT) TO WRITE CORE BUSINESS LOGIC, GENERATE COMPONENTS, OR DESIGN ARCHITECTURES IS STRICTLY PROHIBITED. THE GOAL IS TO FOSTER CREATIVITY AND ORIGINALITY; WE ARE ENCOURAGING PARTICIPANTS TO BUILD FROM SCRATCH.",
+
+      "PITCHING SESSIONS ARE STRICTLY TIME-BOXED: TEAMS WILL HAVE 4 MINUTES TO PRESENT THEIR PITCH AND DEMONSTRATE THEIR PROTOTYPE, FOLLOWED BY A 2-MINUTE Q&A SESSION WITH THE JUDGES.",
+      `PRESENTATIONS WILL BE EVALUATED TRANSPARENTLY BASED ON THE FOLLOWING CRITERIA:
+        TECHNICAL IMPLEMENTATION (30%): FUNCTIONALITY OF THE PROTOTYPE, CLEAN CODE ARCHITECTURE, AND EFFECTIVE USE OF THE CHOSEN TECH STACK.
+        INNOVATION & ORIGINALITY (25%): CREATIVITY OF THE SOLUTION AND UNIQUENESS OF THE APPROACH.
+        REAL-WORLD IMPACT (25%): PRACTICAL FEASIBILITY, SCALABILITY, AND THE POTENTIAL VALUE OF THE PRODUCT.
+        PRESENTATION & UI/UX (20%): CLARITY OF THE PITCH, USER INTERFACE DESIGN, AND OVERALL USER EXPERIENCE.`,
+    ],
+    head: [],
+    coHead: [],
+    prizes: "",
+  },
 
   // 3 — Terranova
   {
