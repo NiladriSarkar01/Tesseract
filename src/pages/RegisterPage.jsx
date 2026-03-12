@@ -50,6 +50,9 @@ const RegisterPage = () => {
   const [formError, setFormError] = useState("");
   const [turnstileToken, setTurnstileToken] = useState(null);
 
+  // FIX 1: Add a ref so we can call .reset() on the widget when needed
+  const turnstileRef = useRef(null);
+
   useEffect(() => {
     const now = new Date();
     if (now > REGISTRATION_DEADLINE) {
@@ -188,16 +191,21 @@ const RegisterPage = () => {
       event: selectedEvent.title.toUpperCase(),
     }));
 
+    // FIX 2: Consume the token then immediately clear it to prevent reuse
+    const tokenToSubmit = turnstileToken;
+    setTurnstileToken(null);
+
     const res = await createApplication({
       ...formData,
-      "cf-turnstile-response": turnstileToken,
+      "cf-turnstile-response": tokenToSubmit,
     });
     if (res.success) {
       setState("success");
       setSelectedApplication(res.data);
     } else {
       setState("fail");
-      setTurnstileToken(null);
+      // FIX 3: Reset the widget so a fresh token is generated when user retries
+      turnstileRef.current?.reset();
     }
   };
 
@@ -319,7 +327,12 @@ const RegisterPage = () => {
             Registration Failed!
           </h2>
           <button
-            onClick={() => setState("idle")}
+            onClick={() => {
+              setState("idle");
+              // FIX 4: Reset widget when user clicks "Try Again" so they get a
+              // fresh valid token — not the stale/consumed one from the failed attempt
+              turnstileRef.current?.reset();
+            }}
             className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-red-500/30 transition-all"
           >
             Try Again.
@@ -761,12 +774,27 @@ const RegisterPage = () => {
             </div>
 
             {/* Turnstile CAPTCHA */}
+            {/* FIX 5: Added ref, retry:"auto", retryInterval, refreshExpired:"auto"
+                so the widget silently recovers from load failures and auto-refreshes
+                expired tokens without any user action needed                        */}
             <Turnstile
+              ref={turnstileRef}
               siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
               onSuccess={(token) => setTurnstileToken(token)}
-              onExpire={() => setTurnstileToken(null)}
-              onError={() => setTurnstileToken(null)}
-              options={{ theme: "dark" }}
+              onExpire={() => {
+                setTurnstileToken(null);
+                turnstileRef.current?.reset();
+              }}
+              onError={() => {
+                setTurnstileToken(null);
+                setTimeout(() => turnstileRef.current?.reset(), 2000);
+              }}
+              options={{
+                theme: "dark",
+                retry: "auto",
+                retryInterval: 8000,
+                refreshExpired: "auto",
+              }}
             />
 
             <button
