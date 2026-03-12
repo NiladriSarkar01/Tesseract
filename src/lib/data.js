@@ -160,10 +160,14 @@ export const EVENTS_DATA = [
     desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
     participationMode: "team",
     price: 0,
-    teamPrice: 150,
-    isTeamPriceFixed: true,
-    minMembers: 1,
-    maxMembers: 5,
+    teamPrice: 200,
+    isTeamPriceFixed: false,
+    specialTeamPrice: {
+      members: 4,
+      price: 300,
+    },
+    minMembers: 2,
+    maxMembers: 4,
     rules: [
       "EACH TEAM MUST CONSIST OF 2 TO 4 MEMBERS.",
       "TEAMS SHOULD IDEALLY INCLUDE A MIX OF SKILL SETS (E.G., BACKEND, FRONTEND, DESIGN, AND PRESENTATION).",
