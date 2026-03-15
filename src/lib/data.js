@@ -46,7 +46,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "10:00 AM",
     venue: "Open Air Theatre",
-    whatsappLink: "https://chat.whatsapp.com/Bamds7udD57AgdSwS22Gi1?mode=gi_t",
+    whatsappLink: "https://chat.whatsapp.com/Bamds7udD57AgdSwS22Gi1",
     image:
       "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
     desc: "Build an 8 kg remote-controlled combat robot and battle it out in a tournament-style arena fight. Your goal — disable, immobilize, or outscore your opponent within 3 minutes to claim victory.",
@@ -100,7 +100,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "10:00 AM",
     venue: "Open Air Theatre",
-    whatsappLink: "https://chat.whatsapp.com/H4Nzuz8N8eL5k8e8VIDaqi?mode=gi_t",
+    whatsappLink: "https://chat.whatsapp.com/H4Nzuz8N8eL5k8e8VIDaqi",
     image:
       "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
     desc: "Build a 15 kg remote-controlled combat robot and compete in a high-stakes tournament-style arena battle. Immobilize, disable, or outscore your opponent within 3 minutes to advance and claim victory.",
@@ -373,7 +373,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "11:00 AM Onwards",
     venue: "Gaming Lab 1",
-    whatsappLink: "demolink",
+    whatsappLink: "https://chat.whatsapp.com/Em1DjaKHbFt81QJIJbAPMT",
     image:
       "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
     desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
@@ -420,7 +420,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    whatsappLink: "demolink",
+    whatsappLink: "https://chat.whatsapp.com/CefqfJJnxXuJ0UdeazmbSd",
     image:
       "https://plus.unsplash.com/premium_photo-1678566154673-a728037f3f00?q=80&w=702&auto=format&fit=crop",
     desc: "Code hard, break limits, and outsmart every problem thrown your way.",
@@ -465,7 +465,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    whatsappLink: "demolink",
+    whatsappLink: "https://chat.whatsapp.com/B7H3ymhTmhWGM9gtmYqaZo",
     image:
       "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "Cybersecurity challenge where participants exploit vulnerabilities and capture hidden flags.",
@@ -529,7 +529,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    whatsappLink: "demolink",
+    whatsappLink: "https://chat.whatsapp.com/LDLuMEnKbyX85IPGDgYvxS",
     image:
       "https://cdn1.epicgames.com/spt-assets/53ec4985296b4facbe3a8d8d019afba9/pubg-battlegrounds-19vwb.jpg?resize=1&w=780&h=438&quality=high",
     desc: "The ultimate mobile battleground awaits, where players unite, strategize, and engage in epic battles for victory. Join now!",
@@ -579,7 +579,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    whatsappLink: "demolink",
+    whatsappLink: "https://chat.whatsapp.com/CWWrc0pmItN32ARM1aAPu8",
     image:
       "https://images.unsplash.com/photo-1587368062478-e804f5e2a55a?q=80&w=1323&auto=format&fit=crop",
     desc: "Play smart, strike hard, and let your gameplay rewrite the scoreboard.",
@@ -619,7 +619,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    whatsappLink: "https://chat.whatsapp.com/K3x9exampleLink123",
+    whatsappLink: "https://chat.whatsapp.com/GxWUiKbQRUyLZ01dRbMxYw",
     image:
       "https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg",
     desc: "The ultimate mobile battleground awaits, where players unite, strategize, and engage in epic battles for victory. Join now!",
@@ -674,7 +674,7 @@ export const EVENTS_DATA = [
     date: "Mar 27, 2026",
     time: "09:00 AM",
     venue: "Game Room",
-    whatsappLink: "demolink",
+    whatsappLink: "https://chat.whatsapp.com/KHfJ0AKzYt7EsLRP77KOBm",
     image:
       "https://images.unsplash.com/photo-1620741211956-32977c8973be?q=80&w=880&auto=format&fit=crop",
     desc: "Carrom is a game of elegance, control, and sharp judgment. At Tesseract Carromact 2K26, the board becomes the battlefield where strategy meets precision and patience turns into victory. What starts as a simple break will evolve into a gripping contest of calculated moves, defensive play, and decisive strikes. Players will face high-pressure situations that demand focus, accuracy, and discipline. With exciting matches, intense moments, and pure competitive energy, Carromact 2K26 invites you to showcase your skills and experience the thrill of professional-level carrom. Get ready to aim, strike, and conquer the board.",
@@ -768,7 +768,7 @@ export const EVENTS_DATA = [
     coHead: [
       {
         name: "Sayak Banerjee",
-        mobile: "+91 9874308654",
+        mobile: "+91 94761 21116",
         email: "banerjeesayak377@gmail.com",
       },
     ],
@@ -783,7 +783,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
-    whatsappLink: "demolink",
+    whatsappLink: "https://chat.whatsapp.com/CV2TBtUrbsW1ikOaXXRKZA",
     image:
       "https://plus.unsplash.com/premium_photo-1698362818669-286ffb633a79?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "A platform where ideas transform into visual stories. Participants will showcase their ideas through a 3–5 minute poster presentation. Teams of 2–3 members can present one hand-drawn poster on chart paper based on a selected topic. participants are expected to follow the event guidelines.",
@@ -952,7 +952,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
-    whatsappLink: "demolink",
+    whatsappLink: "https://chat.whatsapp.com/CaE3AYPzRKZBcyVSy3rQRz",
     image:
       "https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?q=80&w=687&auto=format&fit=crop",
     desc: "Capture the moment, frame the story, and let your lens speak louder than words.",
