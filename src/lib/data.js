@@ -16,7 +16,7 @@ export const EVENTS = [
   "ROBO SOCCER",
 
   //coding
-  "SUPER CODER",
+  "SUPER CODERS",
   "CAPTURE THE FLAG",
 
   //gaming
