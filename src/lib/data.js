@@ -22,17 +22,17 @@ export const EVENTS = [
   //gaming
   "DIGITAL KICKOFF",
   "BGMI",
+  "FREE FIRE",
 
   //indoor game
   "TECH ARENA CHESS",
   "CARROMACT",
 
   //miscellaneous
-  "NARRATIVE LENS",
+  "CANVA FUSION",
   "THE NEXUS TRANSMUTATION",
   "QUIZZARACT",
   "FRAME WAR",
-  "FREE FIRE",
   "CONSTRUCTOR()",
 ];
 
