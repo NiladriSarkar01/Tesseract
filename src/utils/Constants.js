@@ -1,6 +1,6 @@
 export const random = Math.floor(Math.random() * 100000);
 
-export const targetDate = new Date(2026, 2, 26, 0, 0, 0);
+export const targetDate = new Date(2026, 2, 27, 0, 0, 0);
 
 export const NEXT_DROP_DATE = "2025-12-01T18:00:00";
 

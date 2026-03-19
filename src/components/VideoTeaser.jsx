@@ -542,7 +542,7 @@ const VideoTeaser = ({ onComplete }) => {
       <div className="relative border-y-4 border-blue-600 py-12 w-full text-center bg-blue-900/20 backdrop-blur-lg animate-in zoom-in duration-700">
         <div className="overflow-hidden mb-4">
           <p className="text-3xl md:text-5xl text-white font-black tracking-[0.2em] animate-in slide-in-from-bottom duration-1000 delay-100">
-            MARCH 27-28
+            MARCH 28-29
           </p>
         </div>
         <div className="overflow-hidden">
