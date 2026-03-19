@@ -422,14 +422,14 @@ export const EVENTS_DATA = [
   {
     id: 24,
     title: "Constructor()",
-    category: "Coding",
+    category: "hackathon",
     date: "Mar 28, 2026",
     time: "11:00 AM Onwards",
     venue: "Gaming Lab 1",
     whatsappLink: "https://chat.whatsapp.com/Em1DjaKHbFt81QJIJbAPMT",
     image:
-      "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
-    desc: "Welcome to Model Vision \u2014 where ideas come alive. Showcase your science, technology, engineering, and creative models that solve real-world problems. Let your innovation shine as you build, create, and inspire. Think beyond limits. Shape the future.",
+      "https://plus.unsplash.com/premium_photo-1723773736797-8d05f469c6df?q=80&w=1053&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    desc: "Welcome to Constructor() — a mini hackathon where innovation meets execution. Build creative, tech-driven solutions to real-world problems within a limited time. Collaborate, code, and compete as you transform ideas into impactful prototypes. Think beyond limits and shape the future.",
     participationMode: "team",
     price: 0,
     teamPrice: 200,
@@ -441,27 +441,36 @@ export const EVENTS_DATA = [
     minMembers: 2,
     maxMembers: 4,
     rules: [
-      "EACH TEAM MUST CONSIST OF 2 TO 4 MEMBERS.",
-      "TEAMS SHOULD IDEALLY INCLUDE A MIX OF SKILL SETS (E.G., BACKEND, FRONTEND, DESIGN, AND PRESENTATION).",
-      "TEAMS MUST BE FINALIZED AND REGISTERED BEFORE THE EVENT BEGINS. NO CHANGES TO THE ROSTER WILL BE PERMITTED AFTER REGISTRATION CLOSES.",
-      "BROAD 'HACKATHON TRACKS' (E.G., EDTECH, SUSTAINABILITY, SMART CAMPUS) WILL BE ANNOUNCED 48 HOURS",
-      "PRIOR TO THE EVENT TO ALLOW TEAMS TO SET UP THEIR DEVELOPMENT ENVIRONMENTS.",
-      "THE SPECIFIC PROBLEM STATEMENTS WILL BE REVEALED ON THE DAY OF THE EVENT.",
-      "TEAMS MUST DEVELOP A SOLUTION THAT DIRECTLY ADDRESSES ONE OF THE PROVIDED PROBLEM STATEMENTS.",
-      "OFF-TOPIC PROJECTS WILL BE DISQUALIFIED.",
-      "PARTICIPANTS MAY USE ANY PROGRAMMING LANGUAGE (E.G., JAVA, PYTHON, JAVASCRIPT ETC) OR FRAMEWORK THEY ARE COMFORTABLE WITH.",
-      "ALL PROJECT CODE MUST BE WRITTEN DURING THE HACKATHON. TEAMS ARE REQUIRED TO CREATE A NEW, PUBLIC GITHUB REPOSITORY AT THE START OF THE EVENT AND COMMIT THEIR PROGRESS REGULARLY.",
-      "AI TOOL POLICY: THE USE OF GENERATIVE AI (CHATGPT, GEMINI) OR AI CODING ASSISTANTS (GITHUB COPILOT) TO WRITE CORE BUSINESS LOGIC, GENERATE COMPONENTS, OR DESIGN ARCHITECTURES IS STRICTLY PROHIBITED. THE GOAL IS TO FOSTER CREATIVITY AND ORIGINALITY; WE ARE ENCOURAGING PARTICIPANTS TO BUILD FROM SCRATCH.",
-
-      "PITCHING SESSIONS ARE STRICTLY TIME-BOXED: TEAMS WILL HAVE 4 MINUTES TO PRESENT THEIR PITCH AND DEMONSTRATE THEIR PROTOTYPE, FOLLOWED BY A 2-MINUTE Q&A SESSION WITH THE JUDGES.",
-      `PRESENTATIONS WILL BE EVALUATED TRANSPARENTLY BASED ON THE FOLLOWING CRITERIA:
-        TECHNICAL IMPLEMENTATION (30%): FUNCTIONALITY OF THE PROTOTYPE, CLEAN CODE ARCHITECTURE, AND EFFECTIVE USE OF THE CHOSEN TECH STACK.
-        INNOVATION & ORIGINALITY (25%): CREATIVITY OF THE SOLUTION AND UNIQUENESS OF THE APPROACH.
-        REAL-WORLD IMPACT (25%): PRACTICAL FEASIBILITY, SCALABILITY, AND THE POTENTIAL VALUE OF THE PRODUCT.
-        PRESENTATION & UI/UX (20%): CLARITY OF THE PITCH, USER INTERFACE DESIGN, AND OVERALL USER EXPERIENCE.`,
+      "Each team must consist of 2 to 4 members.",
+      "Teams should ideally include a mix of skill sets (e.g., backend, frontend, design, and presentation).",
+      "Teams must be finalized and registered before the event begins. No changes to the roster will be allowed after registration closes.",
+      "Broad hackathon tracks (e.g., EdTech, Sustainability, Smart Campus) will be announced 48 hours prior to the event to help teams prepare their development environment.",
+      "Specific problem statements will be revealed on the day of the event.",
+      "Teams must develop a solution that directly addresses one of the provided problem statements. Off-topic projects will be disqualified.",
+      "Participants may use any programming language (e.g., Java, Python, JavaScript) or framework of their choice.",
+      "All project code must be written during the hackathon. Teams are required to create a new public GitHub repository at the start of the event and commit their progress regularly.",
+      "AI Tool Policy: The use of generative AI tools (such as ChatGPT, Gemini) or AI coding assistants (such as GitHub Copilot) for writing core business logic, generating components, or designing system architecture is strictly prohibited. The objective is to encourage originality and independent problem-solving.",
+      "Pitching sessions are time-bound. Each team will have 4 minutes to present their solution and demonstrate their prototype, followed by a 2-minute Q&A session with the judges.",
+      `Presentations will be evaluated based on the following criteria:
+- Technical Implementation (30%): Functionality, code quality, and effective use of the tech stack.
+- Innovation & Originality (25%): Creativity and uniqueness of the solution.
+- Real-world Impact (25%): Practical feasibility, scalability, and potential value.
+- Presentation & UI/UX (20%): Clarity of the pitch, interface design, and overall user experience.`,
     ],
-    head: [],
-    coHead: [],
+    head: [
+      {
+        name: "Ayush Singh",
+        mobile: "+91 9875488340",
+        email: "kayushsingh1@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Ishita Das",
+        mobile: "+91 9073856639",
+        email: "ishitadas.10.d.19@gmail.com",
+      },
+    ],
     prizes: "",
   },
 
@@ -1044,6 +1053,7 @@ export const EVENTS_DATA = [
 export const EVENT_CATEGORIES = [
   "ALL",
   "COMBO",
+  "HACKATHON",
   "CODING",
   "ROBOTICS",
   "GAMING",

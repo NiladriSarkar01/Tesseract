@@ -15,6 +15,9 @@ const PALETTE = {
   INDOORGAME: { accent: "#f97316", glow: "rgba(249,115,22,0.45)" },
   GAMING: { accent: "#22c55e", glow: "rgba(34,197,94,0.45)" },
   ROBOTICS: { accent: "#eab308", glow: "rgba(234,179,8,0.45)" },
+  COMBO: { accent: "#ef4444", glow: "rgba(239,68,68,0.45)" }, // strong/red (battle vibe)
+  HACKATHON: { accent: "#6366f1", glow: "rgba(99,102,241,0.45)" }, // tech/indigo vibe
+
   DEFAULT: { accent: "#06b6d4", glow: "rgba(6,182,212,0.45)" },
 };
 
