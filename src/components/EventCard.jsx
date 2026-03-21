@@ -83,6 +83,19 @@ const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
     handleMouseLeave();
   };
 
+  const badgeStyle = {
+    fontFamily: "'Share Tech Mono', monospace",
+    fontSize: 12,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    padding: "3px 6px",
+    border: `1px solid ${pal.accent}`,
+    color: pal.accent,
+    background: `#000000AA`,
+    borderRadius: 2,
+    whiteSpace: "nowrap", // 🔥 prevents breaking into 2 lines
+  };
+
   return (
     <>
       <style>{`
@@ -207,48 +220,27 @@ const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
             {event.category}
           </span>
 
-          {event.category === "COMBO" && (
-            <span
-              style={{
-                position: "absolute",
-                bottom: 10,
-                right: 10,
-                zIndex: 4,
-                fontFamily: "'Share Tech Mono', monospace",
-                fontSize: 10,
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                padding: "2px 8px",
-                border: `1px solid ${pal.accent}`,
-                color: pal.accent,
-                background: `${pal.accent}18`,
-                borderRadius: 1,
-              }}
-            >
-              LIMITED TIME OFFER.
-            </span>
-          )}
-          {event.id === 30 && (
-            <span
-              style={{
-                position: "absolute",
-                bottom: 10,
-                right: 10,
-                zIndex: 4,
-                fontFamily: "'Share Tech Mono', monospace",
-                fontSize: 10,
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                padding: "2px 8px",
-                border: `1px solid ${pal.accent}`,
-                color: pal.accent,
-                background: `${pal.accent}18`,
-                borderRadius: 1,
-              }}
-            >
-              Only open to school students.
-            </span>
-          )}
+          <div
+            style={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+              alignItems: "flex-end",
+              zIndex: 10,
+              maxWidth: "70%", // prevents overflow
+            }}
+          >
+            {event.category === "COMBO" && (
+              <span style={badgeStyle}>LIMITED TIME OFFER</span>
+            )}
+
+            {event.id === 30 && (
+              <span style={badgeStyle}>ONLY FOR SCHOOL STUDENTS</span>
+            )}
+          </div>
 
           {/* ID */}
           <span
