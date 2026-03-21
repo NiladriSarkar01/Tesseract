@@ -35,6 +35,7 @@ export const EVENTS = [
   "QUIZZARACT",
   "FRAME WAR",
   "CONSTRUCTOR()",
+  "NAVIN VIDYARTHI",
 ];
 
 // --- EVENT DATA ---
@@ -89,6 +90,10 @@ export const EVENTS_DATA = [
         email: "dhrubabiswas7777@gmail.com",
       },
     ],
+    prizes: [
+      "🏆 Total Prize Pool: ₹50,000",
+      "📜 Certificates for all participants",
+    ],
   },
 
   // 1 — Robo War (8 KG)
@@ -142,7 +147,10 @@ export const EVENTS_DATA = [
         email: "dhrubabiswas7777@gmail.com",
       },
     ],
-    prizes: "",
+    prizes: [
+      "🏆 Total Prize Pool: ₹20,000",
+      "📜 Certificates for all participants",
+    ],
   },
 
   // 2 — Robo War (15 KG)
@@ -196,7 +204,10 @@ export const EVENTS_DATA = [
         email: "dhrubabiswas7777@gmail.com",
       },
     ],
-    prizes: "",
+    prizes: [
+      "🏆 Total Prize Pool: ₹30,000",
+      "📜 Certificates for all participants",
+    ],
   },
 
   // 3 — Terranova
@@ -256,7 +267,10 @@ export const EVENTS_DATA = [
         email: "sudiptohwh2005@gmail.com",
       },
     ],
-    prizes: "",
+    prizes: [
+      "🏆 Total Prize Pool: ₹10,000",
+      "📜 Certificates for all participants",
+    ],
   },
 
   // 4 — Line Follower
@@ -307,7 +321,10 @@ export const EVENTS_DATA = [
         email: "ss4912817@gmail.com",
       },
     ],
-    prizes: "",
+    prizes: [
+      "🏆 Total Prize Pool: ₹6,000",
+      "📜 Certificates for all participants",
+    ],
   },
 
   // 5 — Model Vision
@@ -363,7 +380,7 @@ export const EVENTS_DATA = [
         email: "manjisthapatra1045@gmail.com",
       },
     ],
-    prizes: "",
+    prizes: [],
   },
 
   // 6 — Robo Soccer
@@ -416,8 +433,68 @@ export const EVENTS_DATA = [
         email: "supriyamondal10562@gmail.com",
       },
     ],
-    prizes: "",
+    prizes: [
+      "🏆 Total Prize Pool: ₹10,000",
+      "📜 Certificates for all participants",
+    ],
   },
+
+  {
+    id: 30,
+    title: "Navin Vidyarthi",
+    category: "Robotics",
+    date: "Mar 28, 2026",
+    time: "11:00 AM Onwards",
+    venue: "Gaming Lab 1",
+    whatsappLink: "https://chat.whatsapp.com/FPSmexTkuFxJumqAUKlcOY",
+    image:
+      "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
+    desc: "Welcome to Navin Vidyarthi — where ideas come to life through innovation. Participants are invited to showcase hardware, robotics, embedded systems, and IoT-based models designed to solve real-world problems. This event celebrates creativity, technical skills, and the ability to turn concepts into functional prototypes. Present your innovation, demonstrate its working, and inspire others with your ideas. Think beyond limits. Build the future.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 0,
+    isTeamPriceFixed: true,
+    minMembers: 1,
+    maxMembers: 5,
+    rules: [
+      "Only open to school students.",
+      "Each team must consist of minimum 1 and maximum 5 participants.",
+      "Two members from each team will be allowed to present and explain the working of the model.",
+
+      "The team leader must complete the registration with proper details.",
+      "No entries will be accepted without registration.",
+
+      "Participants from GNIT must carry their college ID cards.",
+      "Participants from other colleges must carry their institutional ID cards.",
+      "Proper uniform is mandatory for all team members.",
+      "Models should preferably be hardware, electronics, robotics, or IoT based working prototypes.",
+      "Teams should be prepared to explain the working principle, innovation, and real-world application of their model.",
+
+      "Each team must bring their own extension board or socket if required for powering their model.",
+      "Participants must complete model setup before the event begins.",
+
+      "Projects will be evaluated based on innovation, technical implementation, usefulness, and presentation.",
+      "The judge’s decision will be final.",
+      "Registration will be available online through the website and at the registration desk before the event.",
+      "The event head reserves the right to modify rules if necessary under any circumstances.",
+    ],
+    head: [
+      {
+        name: "Moulisha Roy",
+        mobile: "+91 8100514961",
+        email: "roymoulisha709@gmail.com",
+      },
+    ],
+    coHead: [
+      {
+        name: "Dhiman Barma",
+        mobile: "+91 8250324834",
+        email: "barmadhiman540@gmail.com",
+      },
+    ],
+    prizes: [],
+  },
+
   // Constructor()
   {
     id: 24,

@@ -797,6 +797,20 @@ const RegisterPage = () => {
               }}
             />
 
+            {!turnstileToken && (
+              <p className="text-xs text-yellow-400">
+                Completing security check...
+              </p>
+            )}
+
+            {formData.registrationType === "team" &&
+              selectedEvent &&
+              formData.teamMembers.length + 1 < selectedEvent.minMembers && (
+                <p className="text-xs text-red-400">
+                  Add at least {selectedEvent.minMembers - 1} team members
+                </p>
+              )}
+
             <button
               type="submit"
               disabled={

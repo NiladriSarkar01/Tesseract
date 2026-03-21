@@ -493,20 +493,24 @@ const AboutModal = ({ event, onClose }) => {
                   label="Bounties"
                   accent={pal.accent}
                 />
-                <div
-                  style={{
-                    padding: "14px 16px",
-                    background: `${pal.accent}10`,
-                    border: `1px solid ${pal.accent}25`,
-                    borderRadius: 2,
-                    fontFamily: "'Share Tech Mono', monospace",
-                    fontSize: 10,
-                    color: "rgba(255,255,255,0.45)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {event.prizes || "To be announced."}
-                </div>
+                {event.prizes && event.prizes.length > 0
+                  ? event.prizes.map((prize, index) => (
+                      <div
+                        style={{
+                          padding: "14px 16px",
+                          background: `${pal.accent}10`,
+                          border: `1px solid ${pal.accent}25`,
+                          borderRadius: 2,
+                          fontFamily: "'Share Tech Mono', monospace",
+                          fontSize: 10,
+                          color: "rgba(255,255,255,0.45)",
+                          lineHeight: 1.7,
+                        }}
+                      >
+                        {prize}
+                      </div>
+                    ))
+                  : "To be announced."}
               </div>
             </div>
 

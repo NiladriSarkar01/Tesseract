@@ -228,6 +228,27 @@ const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
               LIMITED TIME OFFER.
             </span>
           )}
+          {event.id === 30 && (
+            <span
+              style={{
+                position: "absolute",
+                bottom: 10,
+                right: 10,
+                zIndex: 4,
+                fontFamily: "'Share Tech Mono', monospace",
+                fontSize: 10,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                padding: "2px 8px",
+                border: `1px solid ${pal.accent}`,
+                color: pal.accent,
+                background: `${pal.accent}18`,
+                borderRadius: 1,
+              }}
+            >
+              Only open to school students.
+            </span>
+          )}
 
           {/* ID */}
           <span
