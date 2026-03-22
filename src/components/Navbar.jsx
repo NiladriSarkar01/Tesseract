@@ -8,7 +8,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Menu, X, Play, ChevronRight } from "lucide-react";
+import { Menu, X, Play, ChevronRight, FileText } from "lucide-react";
 import logo from "../assets/logo.png";
 
 // --- UTILITY: CN ---
@@ -16,7 +16,7 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-// --- CONFIGURATION: Navigation Items ---
+// --- CONFIGURATION ---
 const navItems = [
   { name: "Home", link: "/" },
   { name: "Events", link: "/events" },
@@ -25,7 +25,18 @@ const navItems = [
   { name: "Contact", link: "/contact" },
 ];
 
-// --- COMPONENTS ---
+const brochureItems = [
+  {
+    name: "All Events",
+    href: "https://drive.google.com/file/d/1HVuMMTnIFmtevNelrbLGhlWPbDwCbfsw/view?usp=drive_link",
+  },
+  {
+    name: "Robotics",
+    href: "https://www.canva.com/design/DAHEhHMWS4I/AS0970ZWeXaq8lTTQztvYQ/view?utm_content=DAHEhHMWS4I&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4384475d3d",
+  },
+];
+
+// --- HOOKS ---
 const useScramble = (text, speed = 40) => {
   const [displayText, setDisplayText] = useState(text);
   const [isHovered, setIsHovered] = useState(false);
@@ -46,9 +57,8 @@ const useScramble = (text, speed = 40) => {
             if (index < iteration) return text[index];
             return chars[Math.floor(Math.random() * chars.length)];
           })
-          .join("")
+          .join(""),
       );
-
       if (iteration >= text.length) clearInterval(interval);
       iteration += 1 / 3;
     }, speed);
@@ -58,6 +68,8 @@ const useScramble = (text, speed = 40) => {
 
   return { displayText, setIsHovered };
 };
+
+// --- COMPONENTS ---
 
 const AnimatedDropdownLink = ({ link, index, onClick }) => {
   const { displayText, setIsHovered } = useScramble(link.name);
@@ -70,8 +82,7 @@ const AnimatedDropdownLink = ({ link, index, onClick }) => {
       onMouseLeave={() => setIsHovered(false)}
       className="group relative flex items-center justify-between p-3 rounded-lg border border-transparent hover:border-cyan-500/30 bg-white/5 hover:bg-cyan-900/20 transition-all duration-300 overflow-hidden"
     >
-      {/* Hover Scan Sweep */}
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-transparent to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-transparent to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out pointer-events-none" />
 
       <div className="flex items-center gap-3 relative z-10">
         <div className="p-2 rounded-md bg-black/40 text-gray-500 group-hover:text-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-all duration-300">
@@ -87,7 +98,6 @@ const AnimatedDropdownLink = ({ link, index, onClick }) => {
         </div>
       </div>
 
-      {/* Animated Chevron */}
       <ChevronRight
         size={14}
         className="ml-auto text-gray-600 group-hover:text-cyan-400 opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all duration-300"
@@ -96,30 +106,73 @@ const AnimatedDropdownLink = ({ link, index, onClick }) => {
   );
 };
 
+// Desktop brochure dropdown
+const BrochureDropdown = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button className="relative px-4 py-2 text-neutral-300 transition-colors hover:text-white flex items-center gap-1">
+        <span className="relative z-20">Brochure</span>
+        <ChevronRight
+          size={12}
+          className={`transition-transform duration-200 ${open ? "rotate-90" : "rotate-0"}`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-44 rounded-xl bg-[#05050a]/95 border border-cyan-500/20 shadow-xl shadow-black/50 overflow-hidden backdrop-blur-xl"
+          >
+            {brochureItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2.5 text-xs text-neutral-400 hover:text-white hover:bg-cyan-900/30 transition-all font-mono tracking-widest uppercase"
+              >
+                <FileText size={10} className="text-cyan-500 shrink-0" />
+                {item.name}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 export const Navbar = ({ children, className }) => {
-  const { scrollY } = useScroll(); // Track window scroll, not element ref
+  const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // Optimization: Only update state if the value actually changes
     const isVisible = latest > 50;
-    if (isVisible !== visible) {
-      setVisible(isVisible);
-    }
+    if (isVisible !== visible) setVisible(isVisible);
   });
 
   return (
     <motion.div
       className={cn(
         "fixed inset-x-0 top-0 z-[100] w-full pointer-events-none",
-        className
+        className,
       )}
     >
       <div className="pointer-events-auto">
         {React.Children.map(children, (child) =>
           React.isValidElement(child)
             ? React.cloneElement(child, { visible })
-            : child
+            : child,
         )}
       </div>
     </motion.div>
@@ -141,18 +194,14 @@ export const NavBody = ({ children, className, visible }) => {
           ? "1px solid rgba(34, 211, 238, 0.15)"
           : "1px solid rgba(255, 255, 255, 0.05)",
         boxShadow: visible ? "0px 10px 40px -10px rgba(0,0,0,0.5)" : "none",
-        paddingLeft: visible ? "32px" : "32px",
-        paddingRight: visible ? "32px" : "32px",
+        paddingLeft: "32px",
+        paddingRight: "32px",
       }}
-      // Changed from spring to easeInOut for a predictable, smooth glide
-      transition={{
-        duration: 0.45,
-        ease: [0.25, 0.1, 0.25, 1], // smooth cubic-bezier
-      }}
+      transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
       style={{ willChange: "transform, backdrop-filter" }}
       className={cn(
         "relative z-[60] mx-auto mb-17 hidden w-full max-w-7xl flex-row items-center justify-between self-start px-8 py-4 lg:flex",
-        className
+        className,
       )}
     >
       {children}
@@ -168,7 +217,7 @@ export const NavItems = ({ items, className }) => {
       onMouseLeave={() => setHovered(null)}
       className={cn(
         "flex flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium lg:space-x-4",
-        className
+        className,
       )}
     >
       {items.map((item, idx) => (
@@ -182,12 +231,15 @@ export const NavItems = ({ items, className }) => {
             <motion.div
               layoutId="hovered"
               className="absolute inset-0 h-full w-full rounded-full bg-white/10"
-              transition={{ duration: 0.35, ease: "easeOut" }} // no jitter
+              transition={{ duration: 0.35, ease: "easeOut" }}
             />
           )}
           <span className="relative z-20">{item.name}</span>
         </Link>
       ))}
+
+      {/* Brochure dropdown — sits naturally among nav links */}
+      <BrochureDropdown />
     </motion.div>
   );
 };
@@ -198,9 +250,8 @@ export const NavbarLogo = () => {
       to="/"
       className="relative z-20 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-white"
     >
-      {/* Placeholder Logo Icon */}
       <div className="relative w-9 h-9 flex items-center justify-center bg-cyan-600/10 border border-cyan-500/50 rounded group-hover:bg-cyan-600/20 transition-all duration-300 overflow-hidden">
-        <div className="absolute inset-0 bg-cyan-500 blur-md opacity-20 group-hover:opacity-40 animate-pulse"></div>
+        <div className="absolute inset-0 bg-cyan-500 blur-md opacity-20 group-hover:opacity-40 animate-pulse" />
         <img
           src={logo}
           alt="Tesseract Logo"
@@ -212,7 +263,6 @@ export const NavbarLogo = () => {
   );
 };
 
-// Updated NavbarButton to support 'to' prop for Link
 export const NavbarButton = ({
   children,
   className,
@@ -228,7 +278,7 @@ export const NavbarButton = ({
       onClick={onClick}
       className={cn(
         "relative inline-flex h-9 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900",
-        className
+        className,
       )}
       {...props}
     >
@@ -240,21 +290,16 @@ export const NavbarButton = ({
   );
 };
 
-// New Teaser Button Component - Highlighted
 export const TeaserButton = ({ className }) => {
   return (
     <Link
       to="/teaser"
       className="group relative flex items-center gap-2 px-1.5 py-1.5 bg-black/40 backdrop-blur-md border border-cyan-500/30 rounded-full transition-all duration-500 hover:px-4 hover:border-cyan-500 hover:bg-cyan-900/20 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)]"
     >
-      <span className="absolute inset-0 rounded-full border border-cyan-500/50 opacity-0 group-hover:animate-ping"></span>
-
-      {/* Icon Container - Smaller for Navbar */}
+      <span className="absolute inset-0 rounded-full border border-cyan-500/50 opacity-0 group-hover:animate-ping" />
       <div className="relative w-7 h-7 flex items-center justify-center bg-cyan-600 rounded-full shadow-lg shadow-cyan-900/50 group-hover:scale-110 transition-transform duration-300">
         <Play size={12} className="text-white fill-current ml-0.5" />
-
-        {/* Spinning Border on Hover */}
-        <div className="absolute inset-0 rounded-full border-t-2 border-white opacity-0 group-hover:opacity-100 group-hover:animate-spin transition-opacity"></div>
+        <div className="absolute inset-0 rounded-full border-t-2 border-white opacity-0 group-hover:opacity-100 group-hover:animate-spin transition-opacity" />
       </div>
     </Link>
   );
@@ -277,15 +322,11 @@ export const MobileNav = ({ children, className, visible }) => {
           ? "1px solid rgba(34, 211, 238, 0.1)"
           : "1px solid rgba(255, 255, 255, 0.05)",
       }}
-      // Changed from spring to easeInOut
-      transition={{
-        duration: 0.45,
-        ease: [0.25, 0.1, 0.25, 1],
-      }}
+      transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
       style={{ willChange: "transform, backdrop-filter" }}
       className={cn(
         "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between py-4 lg:hidden",
-        className
+        className,
       )}
     >
       {children}
@@ -298,7 +339,7 @@ export const MobileNavHeader = ({ children, className }) => {
     <div
       className={cn(
         "flex w-full flex-row items-center justify-between",
-        className
+        className,
       )}
     >
       {children}
@@ -314,10 +355,7 @@ export const MobileNavMenu = ({ children, isOpen, onClose }) => {
           initial={{ opacity: 0, height: 0, y: -12 }}
           animate={{ opacity: 1, height: "auto", y: 0 }}
           exit={{ opacity: 0, height: 0, y: -12 }}
-          transition={{
-            duration: 0.35,
-            ease: [0.25, 0.1, 0.25, 1], // soft, silky animation
-          }}
+          transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
           className="absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-2xl bg-[#080808] border border-white/10 shadow-2xl"
         >
           {children}
@@ -332,8 +370,8 @@ export const MobileNavToggle = ({ isOpen, onClick }) => {
     <button onClick={onClick} className="p-2 text-white">
       <motion.div
         key={isOpen ? "open" : "closed"}
-        initial={{ rotate: 0, opacity: 0 }}
-        animate={{ rotate: isOpen ? 0 : 0, opacity: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
@@ -350,7 +388,7 @@ const ResizableNavbar = () => {
 
   return (
     <Navbar>
-      {/* DESKTOP VIEW */}
+      {/* DESKTOP */}
       <NavBody>
         <NavbarLogo />
         <NavItems items={navItems} />
@@ -360,7 +398,7 @@ const ResizableNavbar = () => {
         </div>
       </NavBody>
 
-      {/* MOBILE VIEW */}
+      {/* MOBILE */}
       <MobileNav>
         <MobileNavHeader>
           <NavbarLogo />
@@ -375,8 +413,8 @@ const ResizableNavbar = () => {
           onClose={() => setMobileMenuOpen(false)}
         >
           <div className="bg-[#081414]/95 w-full backdrop-blur-2xl border border-cyan-500/30 border-t-0 rounded-b-2xl shadow-2xl shadow-black overflow-hidden md:mx-0 relative">
-            {/* Decorative Background Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+            {/* Background Grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
 
             <div className="p-6 relative z-10 flex flex-col gap-1">
               <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
@@ -385,7 +423,7 @@ const ResizableNavbar = () => {
                 </p>
               </div>
 
-              {/* Navigation Links */}
+              {/* Nav Links */}
               <div className="flex flex-col gap-2">
                 {navItems.map((link, idx) => (
                   <AnimatedDropdownLink
@@ -397,9 +435,44 @@ const ResizableNavbar = () => {
                 ))}
               </div>
 
-              {/* Actions Section */}
+              {/* Brochure section */}
+              <div className="flex flex-col gap-2 pt-3 mt-1 border-t border-white/5">
+                <p className="text-[9px] font-mono text-cyan-500/50 uppercase tracking-widest px-1">
+                  Brochure
+                </p>
+                {brochureItems.map((item, idx) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="group relative flex items-center justify-between p-3 rounded-lg border border-transparent hover:border-cyan-500/30 bg-white/5 hover:bg-cyan-900/20 transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-transparent to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out pointer-events-none" />
+                    <div className="flex items-center gap-3 relative z-10">
+                      <div className="p-2 rounded-md bg-black/40 text-gray-500 group-hover:text-cyan-400 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-all duration-300">
+                        <FileText size={18} className="opacity-50" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-gray-300 group-hover:text-white tracking-widest transition-colors uppercase">
+                          {item.name}
+                        </span>
+                        <span className="text-[8px] font-mono text-gray-600 group-hover:text-cyan-500/70 transition-colors">
+                          COORD_0{navItems.length + idx + 1}
+                        </span>
+                      </div>
+                    </div>
+                    <ChevronRight
+                      size={14}
+                      className="ml-auto text-gray-600 group-hover:text-cyan-400 opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all duration-300"
+                    />
+                  </a>
+                ))}
+              </div>
+
+              {/* Actions */}
               <div className="mt-6 pt-6 border-t border-white/10 flex flex-col gap-3">
-                {/* Register Button - Now in Dropdown for both Mobile & Desktop */}
                 <Link
                   to="/register"
                   className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-center uppercase text-xs tracking-wider rounded transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40"
@@ -407,8 +480,6 @@ const ResizableNavbar = () => {
                 >
                   Initialize Registration
                 </Link>
-
-                {/* Teaser Button - Visible ONLY on Mobile (md:hidden) to avoid duplicate on Desktop */}
                 <Link
                   to="/teaser"
                   onClick={() => setMobileMenuOpen(false)}
@@ -419,10 +490,10 @@ const ResizableNavbar = () => {
               </div>
             </div>
 
-            {/* Footer Decor */}
+            {/* Footer */}
             <div className="bg-black/60 p-2 flex justify-center items-center border-t border-white/5">
               <div className="flex items-center gap-2 text-[8px] font-mono text-gray-600 uppercase tracking-widest">
-                <div className="w-1 h-1 bg-emerald-500 rounded-full animate-ping"></div>
+                <div className="w-1 h-1 bg-emerald-500 rounded-full animate-ping" />
                 Secure_Connection_Established
               </div>
             </div>

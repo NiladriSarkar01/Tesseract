@@ -9,35 +9,9 @@ import {
 } from "lucide-react";
 
 // ─── Category palette ────────────────────────────────────────────────────────
-const PALETTE = {
-  CODING: { accent: "#c40886", glow: "rgba(196,8,134,0.45)" },
-  MISCELLANEOUS: { accent: "#a855f7", glow: "rgba(168,85,247,0.45)" },
-  INDOORGAME: { accent: "#f97316", glow: "rgba(249,115,22,0.45)" },
-  GAMING: { accent: "#22c55e", glow: "rgba(34,197,94,0.45)" },
-  ROBOTICS: { accent: "#eab308", glow: "rgba(234,179,8,0.45)" },
-  COMBO: { accent: "#ef4444", glow: "rgba(239,68,68,0.45)" }, // strong/red (battle vibe)
-  HACKATHON: { accent: "#6366f1", glow: "rgba(99,102,241,0.45)" }, // tech/indigo vibe
+import { getPalette } from "../lib/data.js";
 
-  DEFAULT: { accent: "#06b6d4", glow: "rgba(6,182,212,0.45)" },
-};
-
-function getPalette(cat = "") {
-  const key = cat.toUpperCase().replace(/\s+/g, "");
-  return PALETTE[key] ?? PALETTE.DEFAULT;
-}
-
-function getPriceLabel(event) {
-  if (event.participationMode === "solo")
-    return event.price > 0 ? `₹${event.price}` : "Free";
-  if (event.participationMode === "team")
-    return event.teamPrice > 0 ? `₹${event.teamPrice} / team` : "Free";
-  if (event.participationMode === "both") {
-    if (event.price > 0 && event.teamPrice > 0)
-      return `₹${event.price} solo · ₹${event.teamPrice} team`;
-    return event.price > 0 ? `₹${event.price}` : "Free";
-  }
-  return "Free";
-}
+import { getPriceLabel } from "../lib/utils.js";
 
 // ─── Tilt hook ───────────────────────────────────────────────────────────────
 function useTilt(max = 10) {
@@ -71,7 +45,7 @@ function useTilt(max = 10) {
 }
 
 // ─── EventCard ───────────────────────────────────────────────────────────────
-const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
+export const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
   const pal = getPalette(event.category);
   const { ref, handleMouseMove, handleMouseLeave } = useTilt(10);
 
@@ -497,5 +471,3 @@ const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
     </>
   );
 };
-
-export default EventCard;

@@ -38,33 +38,79 @@ export const EVENTS = [
   "NAVIN VIDYARTHI",
 ];
 
+const PALETTE = {
+  CODING: { accent: "#c40886", glow: "rgba(196,8,134,0.45)" },
+  MISCELLANEOUS: { accent: "#a855f7", glow: "rgba(168,85,247,0.45)" },
+  INDOORGAME: { accent: "#f97316", glow: "rgba(249,115,22,0.45)" },
+  GAMING: { accent: "#22c55e", glow: "rgba(34,197,94,0.45)" },
+  ROBOTICS: { accent: "#eab308", glow: "rgba(234,179,8,0.45)" },
+  COMBO: { accent: "#ef4444", glow: "rgba(239,68,68,0.45)" }, // strong/red (battle vibe)
+  HACKATHON: { accent: "#6366f1", glow: "rgba(99,102,241,0.45)" }, // tech/indigo vibe
+
+  DEFAULT: { accent: "#06b6d4", glow: "rgba(6,182,212,0.45)" },
+};
+
+export function getPalette(cat = "") {
+  const key = cat.toUpperCase().replace(/\s+/g, "");
+  return PALETTE[key] ?? PALETTE.DEFAULT;
+}
+
+export const COMBO_END_DATE = new Date(2026, 2, 25, 0, 0, 0);
+
 // --- EVENT DATA ---
 export const EVENTS_DATA = [
+  // ─── COMBO EVENTS ─────────────────────────────────────────────────────────────
+
   {
-    id: 26,
-    title: "Robo War (8 KG + 15 KG)",
+    id: 201,
+    title: "Terranova + Robo Soccer + Line Follower",
+    category: "COMBO",
+    date: "Mar 28, 2026",
+    time: "10:00 AM",
+    venue: "Multiple Venues",
+    image: "https://images.pexels.com/photos/6779863/pexels-photo-6779863.jpeg",
+    desc: "Three robotics events, one unstoppable package — navigate the Hell Road, dominate the soccer arena, and follow the line to glory.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 700,
+    savings: 100,
+    isTeamPriceFixed: true,
+    minMembers: 2,
+    maxMembers: 5,
+    events: [
+      { title: "Terranova", category: "Robotics" },
+      { title: "Robo Soccer", category: "Robotics" },
+      { title: "Line Follower", category: "Robotics" },
+    ],
+    prizes: ["📜 Certificates for all participants"],
+    head: [],
+    coHead: [],
+  },
+
+  {
+    id: 101,
+    title: "Robo War (8 kg + 15 kg)",
     category: "COMBO",
     date: "Mar 28, 2026",
     time: "10:00 AM",
     venue: "Open Air Theatre",
-    whatsappLink: "https://chat.whatsapp.com/Bamds7udD57AgdSwS22Gi1",
     image:
       "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
-    desc: "Build and battle with your combat robots in both 8 kg and 15 kg categories. Teams can compete across weight classes in a tournament-style arena fight. Your goal — disable, immobilize, or outscore your opponent within 3 minutes to claim victory.",
+    desc: "Take on both weight classes in one unstoppable package — build and battle an 8 kg and a 15 kg combat robot in tournament-style arena fights. Double the metal, double the glory.",
     participationMode: "team",
     price: 0,
     teamPrice: 1500,
+    savings: 300,
     isTeamPriceFixed: true,
     minMembers: 2,
     maxMembers: 6,
-    rules: [
-      "Robots must fall under either 8 kg (100g tolerance) or 15 kg (150g tolerance); all power sources must be on-board.",
-      "Only wireless remote control is allowed with a minimum 4-channel frequency; a manual Emergency Stop (E-Stop) is mandatory.",
-      "Power must be electrical only (max 36V DC for 8 kg and 48V DC for 15 kg) using sealed batteries like LiPo, Li-ion, or NiMH.",
-      "Allowed weapons include Spinners, Flippers, Lifters, Hammers, and Cutters. No liquid projectiles, jammers, or entangling devices.",
-      "A robot loses if immobilized for 10 seconds, thrown out of the arena, or outscored on aggression, control, and damage.",
-      "A kill switch and weapon lock are mandatory; safety inspection is required before every match.",
-      "Teams using pneumatics or hydraulics must submit a safety authorization letter signed by faculty during registration.",
+    events: [
+      { title: "Robo War (8 kg)", category: "Robotics" },
+      { title: "Robo War (15 kg)", category: "Robotics" },
+    ],
+    prizes: [
+      "🏆 Combined Prize Pool: ₹50,000",
+      "📜 Certificates for all participants",
     ],
     head: [
       {
@@ -81,8 +127,8 @@ export const EVENTS_DATA = [
     coHead: [
       {
         name: "Soumodeep Guho",
-        mobile: "+91 8902478956",
-        email: "parnag125@gmail.com",
+        mobile: "+91 8967203175",
+        email: "soumyadeepguha69@gmail.com",
       },
       {
         name: "Dhruba Biswas",
@@ -90,10 +136,91 @@ export const EVENTS_DATA = [
         email: "dhrubabiswas7777@gmail.com",
       },
     ],
-    prizes: [
-      "🏆 Total Prize Pool: ₹50,000",
-      "📜 Certificates for all participants",
+  },
+
+  {
+    id: 202,
+    title: "Robo War 8kg + Terranova + Robo Soccer + Line Follower",
+    category: "COMBO",
+    date: "Mar 28, 2026",
+    time: "10:00 AM",
+    venue: "Multiple Venues",
+    image:
+      "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
+    desc: "Four events, one legend — combine the 8 kg arena brawl with obstacle navigation, robotic soccer, and line following in one power-packed combo.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 1400,
+    savings: 200,
+    isTeamPriceFixed: true,
+    minMembers: 2,
+    maxMembers: 6,
+    events: [
+      { title: "Robo War (8 kg)", category: "Robotics" },
+      { title: "Terranova", category: "Robotics" },
+      { title: "Robo Soccer", category: "Robotics" },
+      { title: "Line Follower", category: "Robotics" },
     ],
+    prizes: ["📜 Certificates for all participants"],
+    head: [],
+    coHead: [],
+  },
+
+  {
+    id: 203,
+    title: "Robo War 15kg + Terranova + Robo Soccer + Line Follower",
+    category: "COMBO",
+    date: "Mar 28, 2026",
+    time: "10:00 AM",
+    venue: "Multiple Venues",
+    image:
+      "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
+    desc: "Step up to the heavyweight division — pair the 15 kg war machine with obstacle racing, bot soccer, and precision line following in one fierce combo.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 1500,
+    savings: 300,
+    isTeamPriceFixed: true,
+    minMembers: 2,
+    maxMembers: 6,
+    events: [
+      { title: "Robo War (15 kg)", category: "Robotics" },
+      { title: "Terranova", category: "Robotics" },
+      { title: "Robo Soccer", category: "Robotics" },
+      { title: "Line Follower", category: "Robotics" },
+    ],
+    prizes: ["📜 Certificates for all participants"],
+    head: [],
+    coHead: [],
+  },
+
+  {
+    id: 204,
+    title: "All Robotics Events (5 Events Combo)",
+    category: "COMBO",
+    date: "Mar 28, 2026",
+    time: "10:00 AM",
+    venue: "Multiple Venues",
+    image:
+      "https://edu.ieee.org/in-amritaras/wp-content/uploads/sites/500/2025/02/image.png",
+    desc: "Go all-in on robotics — every single event under one roof. Two war machines, one obstacle course, a soccer arena, and a precision track. The ultimate combo for the ultimate team.",
+    participationMode: "team",
+    price: 0,
+    teamPrice: 2200,
+    savings: 400,
+    isTeamPriceFixed: true,
+    minMembers: 2,
+    maxMembers: 6,
+    events: [
+      { title: "Robo War (8 kg)", category: "Robotics" },
+      { title: "Robo War (15 kg)", category: "Robotics" },
+      { title: "Terranova", category: "Robotics" },
+      { title: "Robo Soccer", category: "Robotics" },
+      { title: "Line Follower", category: "Robotics" },
+    ],
+    prizes: ["📜 Certificates for all participants"],
+    head: [],
+    coHead: [],
   },
 
   // 1 — Robo War (8 KG)
