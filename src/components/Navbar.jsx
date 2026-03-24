@@ -356,7 +356,7 @@ export const MobileNavMenu = ({ children, isOpen, onClose }) => {
           animate={{ opacity: 1, height: "auto", y: 0 }}
           exit={{ opacity: 0, height: 0, y: -12 }}
           transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-          className="absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-2xl bg-[#080808] border border-white/10 shadow-2xl"
+          className="absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-2xl bg-[#080808] border border-white/10 shadow-2xl overflow-hidden max-h-[calc(100vh-64px)]"
         >
           {children}
         </motion.div>
@@ -412,7 +412,7 @@ const ResizableNavbar = () => {
           isOpen={mobileMenuOpen}
           onClose={() => setMobileMenuOpen(false)}
         >
-          <div className="bg-[#081414]/95 w-full backdrop-blur-2xl border border-cyan-500/30 border-t-0 rounded-b-2xl shadow-2xl shadow-black overflow-hidden md:mx-0 relative">
+          <div className="bg-[#081414]/95 w-full backdrop-blur-2xl border border-cyan-500/30 border-t-0 rounded-b-2xl shadow-2xl shadow-black md:mx-0 relative max-h-[calc(100vh-80px)] overflow-y-auto no-scrollbar">
             {/* Background Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
 
