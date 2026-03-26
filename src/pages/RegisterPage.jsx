@@ -50,7 +50,6 @@ const RegisterPage = () => {
   const [formError, setFormError] = useState("");
   const [turnstileToken, setTurnstileToken] = useState(null);
 
-  // FIX 1: Add a ref so we can call .reset() on the widget when needed
   const turnstileRef = useRef(null);
 
   useEffect(() => {
@@ -79,6 +78,10 @@ const RegisterPage = () => {
   const selectedEvent = EVENTS_DATA.find(
     (e) => String(e.id) === formData.eventId,
   );
+
+  // Treat as closed if global deadline passed OR the specific event is marked closed
+  const isEventClosed =
+    isRegistrationClosed || selectedEvent?.isClosed === true;
 
   useEffect(() => {
     if (selectedEvent) {
@@ -191,7 +194,6 @@ const RegisterPage = () => {
       event: selectedEvent.title.toUpperCase(),
     }));
 
-    // FIX 2: Consume the token then immediately clear it to prevent reuse
     const tokenToSubmit = turnstileToken;
     setTurnstileToken(null);
 
@@ -204,60 +206,59 @@ const RegisterPage = () => {
       setSelectedApplication(res.data);
     } else {
       setState("fail");
-      // FIX 3: Reset the widget so a fresh token is generated when user retries
       turnstileRef.current?.reset();
     }
   };
 
-  // --- VIEW: DEADLINE PASSED ---
-  if (isRegistrationClosed) {
-    return (
-      <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center register-fade-in">
-        <div className="bg-black/90 backdrop-blur-xl border border-cyan-500/30 p-8 md:p-12 rounded-3xl max-w-md w-full text-center relative overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.2)]">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
+  // ── Shared "closed" UI ──────────────────────────────────────────────────────
+  const ClosedView = () => (
+    <div className="container mx-auto px-4 min-h-[80vh] flex items-center justify-center register-fade-in">
+      <div className="bg-black/90 backdrop-blur-xl border border-cyan-500/30 p-8 md:p-12 rounded-3xl max-w-md w-full text-center relative overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.2)]">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
 
-          <div className="w-24 h-24 bg-cyan-900/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-cyan-500/20">
-            <Lock size={48} className="text-blue-500" />
-          </div>
-
-          <h2 className="text-3xl font-black text-white mb-3 uppercase tracking-tight">
-            Registration Closed
-          </h2>
-
-          <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-4 mb-8">
-            <div className="flex items-start gap-3">
-              <AlertCircle
-                size={20}
-                className="text-blue-500 shrink-0 mt-0.5"
-              />
-              <p className="text-gray-300 text-sm text-left">
-                The application deadline for{" "}
-                {selectedEvent ? (
-                  <span className="text-white font-bold">
-                    {selectedEvent.title}
-                  </span>
-                ) : (
-                  "this event"
-                )}{" "}
-                has passed. New entries are no longer being accepted.
-              </p>
-            </div>
-          </div>
-
-          <p className="text-gray-500 text-sm mb-8">
-            If you have already registered, please check your email for
-            confirmation details.
-          </p>
-
-          <button
-            onClick={() => window.history.back()}
-            className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all flex items-center justify-center gap-2"
-          >
-            <ArrowLeft size={18} /> Go Back
-          </button>
+        <div className="w-24 h-24 bg-cyan-900/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-cyan-500/20">
+          <Lock size={48} className="text-blue-500" />
         </div>
+
+        <h2 className="text-3xl font-black text-white mb-3 uppercase tracking-tight">
+          Registration Closed
+        </h2>
+
+        <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-4 mb-8">
+          <div className="flex items-start gap-3">
+            <AlertCircle size={20} className="text-blue-500 shrink-0 mt-0.5" />
+            <p className="text-gray-300 text-sm text-left">
+              The application deadline for{" "}
+              {selectedEvent ? (
+                <span className="text-white font-bold">
+                  {selectedEvent.title}
+                </span>
+              ) : (
+                "this event"
+              )}{" "}
+              has passed. New entries are no longer being accepted.
+            </p>
+          </div>
+        </div>
+
+        <p className="text-gray-500 text-sm mb-8">
+          If you have already registered, please check your email for
+          confirmation details.
+        </p>
+
+        <button
+          onClick={() => window.history.back()}
+          className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all flex items-center justify-center gap-2"
+        >
+          <ArrowLeft size={18} /> Go Back
+        </button>
       </div>
-    );
+    </div>
+  );
+
+  // --- VIEW: DEADLINE PASSED or EVENT CLOSED ---
+  if (isEventClosed) {
+    return <ClosedView />;
   }
 
   // --- VIEW: SUCCESS ---
@@ -329,8 +330,6 @@ const RegisterPage = () => {
           <button
             onClick={() => {
               setState("idle");
-              // FIX 4: Reset widget when user clicks "Try Again" so they get a
-              // fresh valid token — not the stale/consumed one from the failed attempt
               turnstileRef.current?.reset();
             }}
             className="w-full py-3 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-red-500/30 transition-all"
@@ -403,11 +402,27 @@ const RegisterPage = () => {
                       className="bg-black text-white"
                     >
                       {event.title}
+                      {event.isClosed ? " (Closed)" : ""}
                     </option>
                   ))}
                 </select>
               </div>
             </div>
+
+            {/* Per-event closed banner — shown inline if user picks a closed event
+                before the full-page redirect kicks in (edge case: no eventId on load) */}
+            {selectedEvent?.isClosed && (
+              <div className="flex items-start gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-xl register-fade-in">
+                <Lock size={18} className="text-red-400 shrink-0 mt-0.5" />
+                <p className="text-red-300 text-sm">
+                  Registration for{" "}
+                  <span className="font-bold text-white">
+                    {selectedEvent.title}
+                  </span>{" "}
+                  is closed. Please select a different event.
+                </p>
+              </div>
+            )}
 
             {/* Participation Type Toggle */}
             {selectedEvent && selectedEvent.participationMode === "both" && (
@@ -774,9 +789,6 @@ const RegisterPage = () => {
             </div>
 
             {/* Turnstile CAPTCHA */}
-            {/* FIX 5: Added ref, retry:"auto", retryInterval, refreshExpired:"auto"
-                so the widget silently recovers from load failures and auto-refreshes
-                expired tokens without any user action needed                        */}
             <Turnstile
               ref={turnstileRef}
               siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
@@ -817,6 +829,7 @@ const RegisterPage = () => {
                 isApplicationsLoading ||
                 !formData.eventId ||
                 !turnstileToken ||
+                selectedEvent?.isClosed ||
                 (formData.registrationType === "team" &&
                   selectedEvent &&
                   formData.teamMembers.length + 1 < selectedEvent.minMembers)

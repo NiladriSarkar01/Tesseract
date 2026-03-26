@@ -67,7 +67,7 @@ export const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
     color: pal.accent,
     background: `#000000AA`,
     borderRadius: 2,
-    whiteSpace: "nowrap", // 🔥 prevents breaking into 2 lines
+    whiteSpace: "nowrap",
   };
 
   return (
@@ -99,6 +99,53 @@ export const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
           cursor: "default",
         }}
       >
+        {/* ── Registration Closed Overlay ── */}
+        {event.isClosed && (
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 20,
+              pointerEvents: "none",
+              borderRadius: 2,
+              background: "rgba(7,9,15,0.72)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              backdropFilter: "blur(1.5px)",
+            }}
+          >
+            <div
+              style={{
+                width: "70%",
+                height: 1,
+                background: "rgba(255,60,60,0.5)",
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 22,
+                letterSpacing: "0.25em",
+                color: "rgba(255,80,80,0.92)",
+                textShadow: "0 0 18px rgba(255,60,60,0.6)",
+                textTransform: "uppercase",
+              }}
+            >
+              Registration Closed
+            </span>
+            <div
+              style={{
+                width: "70%",
+                height: 1,
+                background: "rgba(255,60,60,0.5)",
+              }}
+            />
+          </div>
+        )}
+
         {/* Glare */}
         <div
           className="ec-glare"
@@ -204,7 +251,7 @@ export const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
               gap: 4,
               alignItems: "flex-end",
               zIndex: 10,
-              maxWidth: "70%", // prevents overflow
+              maxWidth: "70%",
             }}
           >
             {event.category === "COMBO" && (
@@ -246,7 +293,6 @@ export const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
           }}
         >
           {/* Title */}
-
           {event.id === 19 ? (
             <h3
               style={{
@@ -406,7 +452,10 @@ export const EventCard = ({ event, onRegisterClick, onAboutClick }) => {
 
             <button
               className="ec-btn-solid"
-              onClick={() => onRegisterClick?.(event.id)}
+              onClick={() => {
+                if (event.isClosed) return;
+                onRegisterClick?.(event.id);
+              }}
               style={{
                 flex: 1.5,
                 display: "flex",

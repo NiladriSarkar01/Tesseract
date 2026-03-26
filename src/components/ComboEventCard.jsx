@@ -58,7 +58,6 @@ export const ComboEventCard = ({ combo, onRegisterClick, onAboutClick }) => {
   const displayFont = "'Bebas Neue', sans-serif";
 
   const onMouseEnter = (e) => {
-    // target the inner card, not the wrapper
     e.currentTarget.style.boxShadow = `0 0 0 1px ${pal.accent}, 0 8px 40px ${pal.glow}`;
   };
   const onMouseLeave = (e) => {
@@ -106,11 +105,6 @@ export const ComboEventCard = ({ combo, onRegisterClick, onAboutClick }) => {
         }
       `}</style>
 
-      {/*
-        Outer wrapper — contains the ghost layers as absolutely-positioned siblings.
-        paddingTop gives room for the two ghost cards to peek above without
-        affecting surrounding grid cells.
-      */}
       <div style={{ position: "relative", paddingTop: 12 }}>
         {/* Ghost layer 2 — furthest back */}
         <div
@@ -156,7 +150,7 @@ export const ComboEventCard = ({ combo, onRegisterClick, onAboutClick }) => {
             background: "#07090f",
             border: "1px solid rgba(255,255,255,0.07)",
             borderRadius: 2,
-            overflow: "hidden", // no bleed, no layout glitches
+            overflow: "hidden",
             display: "flex",
             flexDirection: "column",
             transformStyle: "preserve-3d",
@@ -165,6 +159,53 @@ export const ComboEventCard = ({ combo, onRegisterClick, onAboutClick }) => {
             cursor: "default",
           }}
         >
+          {/* ── Registration Closed Overlay ── */}
+          {combo.isClosed && (
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                zIndex: 30,
+                pointerEvents: "none",
+                borderRadius: 2,
+                background: "rgba(7,9,15,0.72)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                backdropFilter: "blur(1.5px)",
+              }}
+            >
+              <div
+                style={{
+                  width: "70%",
+                  height: 1,
+                  background: "rgba(255,60,60,0.5)",
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: 22,
+                  letterSpacing: "0.25em",
+                  color: "rgba(255,80,80,0.92)",
+                  textShadow: "0 0 18px rgba(255,60,60,0.6)",
+                  textTransform: "uppercase",
+                }}
+              >
+                Registration Closed
+              </span>
+              <div
+                style={{
+                  width: "70%",
+                  height: 1,
+                  background: "rgba(255,60,60,0.5)",
+                }}
+              />
+            </div>
+          )}
+
           {/* Glare — purely visual, never intercepts clicks */}
           <div
             className="combo-glare"
@@ -389,7 +430,7 @@ export const ComboEventCard = ({ combo, onRegisterClick, onAboutClick }) => {
             </span>
           </div>
 
-          {/* ══ BODY — zIndex 20 ensures it always sits above overlay divs ══ */}
+          {/* ══ BODY ══ */}
           <div
             style={{
               padding: "14px 16px",
@@ -656,7 +697,10 @@ export const ComboEventCard = ({ combo, onRegisterClick, onAboutClick }) => {
 
               <button
                 className="combo-btn-register"
-                onClick={() => onRegisterClick?.(combo.id)}
+                onClick={() => {
+                  if (combo.isClosed) return;
+                  onRegisterClick?.(combo.id);
+                }}
                 style={{
                   flex: 1.5,
                   display: "flex",

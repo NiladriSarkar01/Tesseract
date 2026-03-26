@@ -68,6 +68,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "10:00 AM",
     venue: "Multiple Venues",
+    isClosed: false,
     image: "https://images.pexels.com/photos/6779863/pexels-photo-6779863.jpeg",
     desc: "Three robotics events, one unstoppable package — navigate the Hell Road, dominate the soccer arena, and follow the line to glory.",
     participationMode: "team",
@@ -631,6 +632,7 @@ export const EVENTS_DATA = [
     time: "11:00 AM Onwards",
     venue: "Gaming Lab 1",
     whatsappLink: "https://chat.whatsapp.com/Em1DjaKHbFt81QJIJbAPMT",
+    isClosed: true,
     image:
       "https://plus.unsplash.com/premium_photo-1723773736797-8d05f469c6df?q=80&w=1053&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     desc: "Welcome to Constructor() — a mini hackathon where innovation meets execution. Build creative, tech-driven solutions to real-world problems within a limited time. Collaborate, code, and compete as you transform ideas into impactful prototypes. Think beyond limits and shape the future.",

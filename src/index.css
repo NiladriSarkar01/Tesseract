@@ -33,4 +33,11 @@ body {
   to {
     transform: translateY(100%);
   }
+}/* Hide scrollbar but keep scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
