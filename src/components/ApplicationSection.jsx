@@ -412,7 +412,9 @@ const ApplicationSection = () => {
             </button>
           ))}
           <button
-            onClick={() => downloadExcel(applications)}
+            onClick={() =>
+              downloadExcel(applications, params.event, statusFilter)
+            }
             className={`px-4 py-1.5 mx-5 text-xs font-bold uppercase tracking-wide rounded transition-all whitespace-nowrap ${"bg-orange-600 text-white shadow-[0_0_10px_rgba(220,38,38,0.5)]"}`}
           >
             <Download />
