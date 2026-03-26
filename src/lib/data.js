@@ -1106,6 +1106,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "GNIT",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/HzL2iRHW6USHXPUqkX2Yuw?mode=gi_t",
     image:
       "https://plus.unsplash.com/premium_photo-1661313651013-e1bee6b0e558?q=80&w=1170&auto=format&fit=crop",
