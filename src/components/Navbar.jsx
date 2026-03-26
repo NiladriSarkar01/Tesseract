@@ -28,7 +28,7 @@ const navItems = [
 const brochureItems = [
   {
     name: "All Events",
-    href: "https://drive.google.com/file/d/1HVuMMTnIFmtevNelrbLGhlWPbDwCbfsw/view?usp=drive_link",
+    href: "https://drive.google.com/file/d/1m2gOZ063BmNBNrOnnblpXG-7DUb7eOdo/view?usp=drive_link",
   },
   {
     name: "Robotics",
