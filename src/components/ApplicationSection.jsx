@@ -15,9 +15,9 @@ import {
   X,
 } from "lucide-react";
 import { useApplicationStore } from "../store/useApplicationStore";
-import { EVENTS } from "../lib/data";
 import { useAuthStore } from "../store/useAuthStore";
 import ConfirmDialog from "../components/ConfirmDialog";
+import { EVENTS_DATA } from "../lib/data";
 
 const RegistrationDetailsPopup = ({ isOpen, onClose, formData }) => {
   if (!isOpen) return null;
@@ -378,9 +378,9 @@ const ApplicationSection = () => {
               className="w-full bg-black border border-white/10 rounded pl-10 pr-8 py-2 text-sm text-white focus:outline-none focus:border-red-500 appearance-none cursor-pointer transition-colors"
             >
               <option value="All">All Events</option>
-              {EVENTS.map((event) => (
-                <option key={event} value={event}>
-                  {event}
+              {EVENTS_DATA.map((event) => (
+                <option key={event.id} value={event.title.toUpperCase()}>
+                  {event.title.toUpperCase()}
                 </option>
               ))}
             </select>
