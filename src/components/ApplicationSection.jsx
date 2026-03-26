@@ -18,6 +18,7 @@ import { useApplicationStore } from "../store/useApplicationStore";
 import { useAuthStore } from "../store/useAuthStore";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { EVENTS_DATA } from "../lib/data";
+import downloadExcel from "../lib/download_exel";
 
 const RegistrationDetailsPopup = ({ isOpen, onClose, formData }) => {
   if (!isOpen) return null;
@@ -245,6 +246,8 @@ const ApplicationSection = () => {
 
   const getHelper = async () => {
     const res = await getApplications(params);
+    console.log(applications[0]);
+
     if (!res.success) {
       console.log(res.message);
     }
@@ -408,6 +411,12 @@ const ApplicationSection = () => {
               {f}
             </button>
           ))}
+          <button
+            onClick={() => downloadExcel(applications)}
+            className={`px-4 py-1.5 mx-5 text-xs font-bold uppercase tracking-wide rounded transition-all whitespace-nowrap ${"bg-orange-600 text-white shadow-[0_0_10px_rgba(220,38,38,0.5)]"}`}
+          >
+            <Download />
+          </button>
         </div>
       </div>
 
