@@ -7,9 +7,7 @@ export const EVENTS = [
   // "LAP RACE",
   // "NAVIN VIDYARTHI",
 
-  //arghya
-  //niladri
-  //bhjfbvhdvb
+  
 
   //robotics
   "ROBO WAR (8 KG + 15 KG)",
