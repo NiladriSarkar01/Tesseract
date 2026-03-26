@@ -7,11 +7,6 @@ export const EVENTS = [
   // "LAP RACE",
   // "NAVIN VIDYARTHI",
 
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> 48a7859 (brouche updated.)
   //robotics
   "ROBO WAR (8 KG + 15 KG)",
   "ROBO WAR (8 KG)",
@@ -892,7 +887,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
-    isClosed:true,
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/GxWUiKbQRUyLZ01dRbMxYw",
     image:
       "https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg",
