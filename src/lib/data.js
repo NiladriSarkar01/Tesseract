@@ -889,6 +889,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
+    isClosed:true,
     whatsappLink: "https://chat.whatsapp.com/GxWUiKbQRUyLZ01dRbMxYw",
     image:
       "https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg",
