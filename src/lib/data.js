@@ -9,6 +9,7 @@ export const EVENTS = [
 
   //arghya
   //niladri
+  //bhjfbvhdvb
 
   //robotics
   "ROBO WAR (8 KG + 15 KG)",
