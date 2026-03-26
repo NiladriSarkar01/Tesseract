@@ -1173,6 +1173,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
+    isClosed: true,
     whatsappLink:
       "https://chat.whatsapp.com/B6tbdoUGaih8MCxNLjh6YB?mode=hqctsha",
     image:
