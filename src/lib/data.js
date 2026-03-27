@@ -573,6 +573,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "11:00 AM Onwards",
     venue: "Gaming Lab 1",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/FPSmexTkuFxJumqAUKlcOY",
     image:
       "https://images.unsplash.com/photo-1742239034927-0b4efe83ae5e?q=80&w=687&auto=format&fit=crop",
@@ -687,6 +688,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/CefqfJJnxXuJ0UdeazmbSd",
     image:
       "https://plus.unsplash.com/premium_photo-1678566154673-a728037f3f00?q=80&w=702&auto=format&fit=crop",
@@ -732,6 +734,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/B7H3ymhTmhWGM9gtmYqaZo",
     image:
       "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -944,6 +947,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "Game Room",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/KHfJ0AKzYt7EsLRP77KOBm",
     image:
       "https://images.unsplash.com/photo-1620741211956-32977c8973be?q=80&w=880&auto=format&fit=crop",
@@ -998,6 +1002,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "Game Room",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/GXvFCnGjO4l422BjTX8biQ?mode=gi_t",
     image:
       "https://images.unsplash.com/photo-1586165368502-1bad197a6461?q=80&w=1258&auto=format&fit=crop",
@@ -1053,6 +1058,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/CV2TBtUrbsW1ikOaXXRKZA",
     image:
       "https://plus.unsplash.com/premium_photo-1698362818669-286ffb633a79?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -1224,6 +1230,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "XY Room",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/CaE3AYPzRKZBcyVSy3rQRz",
     image:
       "https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?q=80&w=687&auto=format&fit=crop",
