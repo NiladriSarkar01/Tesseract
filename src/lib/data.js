@@ -797,6 +797,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/LDLuMEnKbyX85IPGDgYvxS",
     image:
       "https://cdn1.epicgames.com/spt-assets/53ec4985296b4facbe3a8d8d019afba9/pubg-battlegrounds-19vwb.jpg?resize=1&w=780&h=438&quality=high",
@@ -847,6 +848,7 @@ export const EVENTS_DATA = [
     date: "Mar 28, 2026",
     time: "09:00 AM",
     venue: "CSE Lab",
+    isClosed: true,
     whatsappLink: "https://chat.whatsapp.com/CWWrc0pmItN32ARM1aAPu8",
     image:
       "https://images.unsplash.com/photo-1587368062478-e804f5e2a55a?q=80&w=1323&auto=format&fit=crop",
