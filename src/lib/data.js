@@ -5,7 +5,6 @@ export const EVENTS = [
   // "DRONE",
   // "PAINTBALL",
   // "LAP RACE",
-  // "NAVIN VIDYARTHI",
 
   //robotics
   "ROBO WAR (8 KG + 15 KG)",
