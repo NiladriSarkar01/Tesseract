@@ -43,7 +43,7 @@ const RegisterPage = () => {
     setSelectedApplication,
   } = useApplicationStore();
 
-  const REGISTRATION_DEADLINE = new Date("2026-03-27T23:59:59");
+  const REGISTRATION_DEADLINE = new Date("2026-03-27T22:59:59");
 
   const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
   const [fileName, setFileName] = useState("");
